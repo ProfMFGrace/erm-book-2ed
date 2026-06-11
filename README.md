@@ -1,15 +1,10 @@
 # Enterprise Risk Management (ERM) — Second Edition
 
 Welcome to the repository for **Enterprise Risk Management, Second Edition** by **Martin F. Grace** (Professor of Finance &
-Clement T. and Sylvia H. Hanson Family Chair
-Faculty Director, Vaughan Institute
+Clement T. and Sylvia H. Hanson Family Chair,
+Faculty Director of the Vaughan Institute
  Tippie College of Business
-University of Iowa 
-mfgrace@uiowa
-
-And 
-
-Georgia Regents'Proessor Emeritus, Georgia State University). 
+University of Iowa. mfgrace@uiowa and Georgia Regents'Proessor Emeritus, Georgia State University). 
 
 This is a modern, undergraduate-focused textbook on Enterprise Risk Management designed for juniors and seniors in college. The text is written to focuse on corporate decision-making across diverse industries, connecting theory, regulation, management practice, and classroom discussions. It was outlined by the author and was written interactively with a large degree of help from Anthropic's Claude 4.6 and 5.
 
