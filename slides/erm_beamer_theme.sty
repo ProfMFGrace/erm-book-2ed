@@ -1,0 +1,113 @@
+% =======================================================================
+% ERM Beamer theme — matches erm_textbook_style (Iowa black/gold)
+% Usage: \usepackage{erm_beamer_theme} in a beamer document.
+% =======================================================================
+\ProvidesPackage{erm_beamer_theme}[2026/06/11 ERM lecture slide theme]
+
+\RequirePackage{lmodern}
+\RequirePackage[T1]{fontenc}
+\RequirePackage{booktabs}
+
+% --- Book palette ---
+\definecolor{ERMIowaBlack}{HTML}{000000}
+\definecolor{ERMIowaGold}{HTML}{FFCD00}
+\definecolor{ERMDarkGold}{HTML}{B38600}
+\definecolor{ERMDarkGray}{HTML}{3C3C3C}
+\definecolor{ERMMidGray}{HTML}{777777}
+\definecolor{ERMLightGray}{HTML}{E6E6E6}
+\definecolor{ERMBoxGold}{HTML}{FFF3BF}
+\definecolor{ERMBoxGray}{HTML}{F2F2F2}
+
+\useinnertheme{rectangles}
+\useoutertheme{default}
+\setbeamertemplate{navigation symbols}{}
+
+% --- Colors ---
+\setbeamercolor{structure}{fg=ERMDarkGold}
+\setbeamercolor{normal text}{fg=ERMDarkGray}
+\setbeamercolor{alerted text}{fg=ERMDarkGold}
+\setbeamercolor{frametitle}{bg=ERMIowaBlack, fg=ERMIowaGold}
+\setbeamercolor{title}{fg=ERMIowaGold}
+\setbeamercolor{subtitle}{fg=white}
+\setbeamercolor{author}{fg=white}
+\setbeamercolor{institute}{fg=ERMLightGray}
+\setbeamercolor{date}{fg=ERMLightGray}
+\setbeamercolor{block title}{bg=ERMIowaBlack, fg=ERMIowaGold}
+\setbeamercolor{block body}{bg=ERMBoxGray, fg=ERMDarkGray}
+\setbeamercolor{block title example}{bg=ERMDarkGold, fg=white}
+\setbeamercolor{block body example}{bg=ERMBoxGold, fg=ERMDarkGray}
+\setbeamercolor{itemize item}{fg=ERMDarkGold}
+\setbeamercolor{itemize subitem}{fg=ERMMidGray}
+\setbeamercolor{enumerate item}{fg=ERMDarkGold}
+\setbeamercolor{footline}{fg=ERMMidGray}
+\setbeamercolor{section in toc}{fg=ERMDarkGray}
+
+% --- Fonts ---
+\setbeamerfont{frametitle}{series=\bfseries, size=\large}
+\setbeamerfont{title}{series=\bfseries, size=\LARGE}
+\setbeamerfont{subtitle}{series=\mdseries, size=\large}
+\setbeamerfont{block title}{series=\bfseries, size=\normalsize}
+\setbeamerfont{footline}{size=\tiny}
+
+% --- Frame title: black bar with gold rule beneath ---
+\setbeamertemplate{frametitle}{%
+  \nointerlineskip
+  \begin{beamercolorbox}[wd=\paperwidth, sep=0.45em, leftskip=0.6em]{frametitle}%
+    \usebeamerfont{frametitle}\insertframetitle
+    \ifx\insertframesubtitle\empty\else
+      {\normalsize\mdseries\color{white}\;---\;\insertframesubtitle}%
+    \fi
+  \end{beamercolorbox}%
+  \vskip-0.15em
+  {\color{ERMIowaGold}\rule{\paperwidth}{1.6pt}}%
+  \vskip0.4em
+}
+
+% --- Footline: short title | section | frame number ---
+\setbeamertemplate{footline}{%
+  \begin{beamercolorbox}[wd=\paperwidth, sep=0.4em]{footline}%
+    \usebeamerfont{footline}%
+    \insertshorttitle\hfill\insertsection\hfill
+    \insertframenumber\,/\,\inserttotalframenumber
+  \end{beamercolorbox}%
+}
+
+% --- Title page on black, echoing the book cover ---
+\setbeamertemplate{title page}{%
+  \begin{tikzpicture}[remember picture, overlay]
+    \fill[ERMIowaBlack] (current page.south west) rectangle (current page.north east);
+    % Color/font set as node options: in multi-line tikz nodes, commands
+    % inside the node text only style the first line.
+    \node[anchor=north, align=center, text=ERMIowaGold,
+          font={\usebeamerfont{title}}]
+      at ([yshift=-0.16\paperheight]current page.north) {\inserttitle};
+    \draw[ERMIowaGold, line width=1.2pt]
+      ([yshift=-0.34\paperheight,xshift=0.3\paperwidth]current page.north west) --
+      ([yshift=-0.34\paperheight,xshift=-0.3\paperwidth]current page.north east);
+    \node[anchor=north, align=center, text=white,
+          font={\usebeamerfont{subtitle}}]
+      at ([yshift=-0.38\paperheight]current page.north) {\insertsubtitle};
+    \node[anchor=north, align=center, text=white,
+          font={\usebeamerfont{author}}]
+      at ([yshift=-0.58\paperheight]current page.north) {\insertauthor};
+    \node[anchor=north, align=center, text=ERMLightGray,
+          font={\usebeamerfont{institute}}]
+      at ([yshift=-0.68\paperheight]current page.north) {\insertinstitute};
+    \node[anchor=north, align=center, text=ERMLightGray,
+          font={\usebeamerfont{date}}]
+      at ([yshift=-0.87\paperheight]current page.north) {\insertdate};
+  \end{tikzpicture}%
+}
+
+% --- Section divider slides ---
+\AtBeginSection[]{%
+  \begin{frame}[plain]
+    \begin{tikzpicture}[remember picture, overlay]
+      \fill[ERMIowaBlack] (current page.south west) rectangle (current page.north east);
+      \node[align=center, text=ERMIowaGold] at (current page.center) {%
+        \LARGE\bfseries\insertsection};
+      \draw[ERMIowaGold, line width=1pt]
+        ([yshift=-0.6cm]current page.center) ++(-2.2cm,0) -- ++(4.4cm,0);
+    \end{tikzpicture}
+  \end{frame}
+}

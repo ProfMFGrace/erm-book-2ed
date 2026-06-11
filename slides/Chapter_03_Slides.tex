@@ -1,0 +1,263 @@
+% !TeX root = Chapter_03_Slides.tex
+% Chapter 3 lecture slides — Risk Identification: Categorizing and Discovering Enterprise Risks
+% Instructor-resource series.
+\documentclass[11pt, aspectratio=169]{beamer}
+\usepackage{tikz}
+\makeatletter
+\def\input@path{{./}{../slides/}}
+\makeatother
+\usepackage{erm_beamer_theme}
+\usepackage{amsmath,amssymb}
+
+\title[ERM Ch.\,3]{Risk Identification: Categorizing and Discovering Enterprise Risks}
+\subtitle{Enterprise Risk Management, Second Edition --- Chapter 3}
+\author{Martin F.\ Grace}
+\institute{University of Iowa\\[2pt] Tippie College of Business\\[2pt] Vaughan Institute of Risk Management}
+\date{June 2026}
+
+\begin{document}
+
+\begin{frame}[plain]
+\titlepage
+\end{frame}
+
+\begin{frame}{Learning Objectives}
+\begin{itemize}
+  \item Explain why \alert{risk identification} is the foundational step in ERM.
+  \item Distinguish among hazard, financial, operational, and strategic risks.
+  \item Explain why financial \emph{loss} is not the same as financial \emph{risk}, and classify business interruption correctly.
+  \item Describe how risks interact across quadrant boundaries and why siloed identification fails.
+  \item Apply internal and external identification methodologies to a real organization.
+  \item Read and critically evaluate the \alert{Risk Factors} section of an SEC Form~10-K.
+\end{itemize}
+\end{frame}
+
+\section{Opening Case: Netflix and the Red Envelope Problem}
+
+\begin{frame}{The Red Envelope Business}
+\begin{itemize}
+  \item Early 2000s: DVD-by-mail \emph{was} the business --- millions of subscribers, growing revenue, a sophisticated logistics operation.
+  \item Blockbuster's brick-and-mortar stores suddenly looked slow and expensive. Wall Street liked the story.
+  \item Inside the company, executives and engineers were tracking something with nothing to do with postal routes: \alert{broadband penetration} and rapidly improving video compression.
+  \item If movies could be delivered instantly over the internet, what happens to a business built on mailing plastic discs?
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Naming the Risk --- in Writing}
+\begin{itemize}
+  \item Netflix named the obsolescence of its own business model as a concrete, enterprise-level \alert{strategic risk} --- in board discussions and in the Risk Factors of its Form~10-K.
+  \item Disclosed uncertainties, stated \emph{while the DVD business still looked strong}:
+  \begin{itemize}
+    \item Broadband might spread slower than expected
+    \item Studios might restrict or overprice digital rights
+    \item Competitors with ``greater financial, marketing, and technical resources'' could win streaming
+    \item The physical-to-digital shift could alienate customers
+  \end{itemize}
+  \item Acting on it meant spending before the payoff was certain: streaming engineers, content licenses, ``Watch Instantly'' --- all funded by red-envelope cash flow.
+\end{itemize}
+\end{frame}
+
+\begin{frame}{The Lesson: Identification, Not Just Innovation}
+\begin{itemize}
+  \item The transition was messy --- the 2011 brand-split debacle tanked the stock. But the underlying risk assessment never changed.
+  \item A decade later: red envelopes gone, Blockbuster gone, Netflix a global streaming platform.
+  \item The most important risks don't always arrive as sudden crises. Some arrive as \alert{slow-moving shifts} that turn yesterday's strengths into tomorrow's vulnerabilities.
+\end{itemize}
+\medskip
+\begin{block}{The identification problem}
+Netflix saw that its successful business model contained built-in obsolescence risk --- and wrote it down before the old model had obviously failed. Why is that so hard? What would it take for \emph{your} organization to disclose that its core business is the risk?
+\end{block}
+\end{frame}
+
+\section{The Four Quadrants of Risk}
+
+\begin{frame}{Source, Not Consequence}
+\begin{itemize}
+  \item The taxonomy: \alert{hazard}, \alert{financial}, \alert{operational}, \alert{strategic}. Each quadrant has a distinct source, characteristic tools, and a different relationship to strategy.
+  \item Almost every risk ultimately produces financial consequences --- so consequence \emph{cannot} be the basis for classification.
+\end{itemize}
+\medskip
+\begin{block}{The classification question}
+Not ``does this cost money?'' but \alert{``what causes this uncertainty?''} A warehouse fire is hazard risk (physical peril); a euro drop is financial risk (market prices). Getting the source right determines which tools apply and who is responsible.
+\end{block}
+\end{frame}
+
+\begin{frame}{Hazard Risks: Pure Downside}
+\begin{itemize}
+  \item \alert{Pure risks}: loss or no loss --- no upside. The historical territory of corporate risk management.
+  \item \textbf{Property and natural disaster}: fire, flood, earthquake, windstorm; climate change is shifting frequency and severity faster than historical actuarial data can track.
+  \item \textbf{Liability}: product, general, professional, employment practices, D\&O, and --- fastest growing --- \alert{cyber liability} (nine or ten figures for large breaches).
+  \item Four management strategies, combined by cost and risk character:
+  \begin{itemize}
+    \item \textbf{Control} (sprinklers, training) --- \textbf{Insurance} (pooling makes these risks transferable) --- \textbf{Avoidance} (exit the activity) --- \textbf{Retention} (deductibles, uninsurable or uneconomic exposures)
+  \end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Financial Risks: Market Price Volatility}
+\begin{itemize}
+  \item Source: price movements in organized financial markets --- FX, interest rates, commodities, equities.
+  \item \alert{Financial risk $\neq$ any risk that loses money.} Confusing the two is the most common classification error in this chapter.
+\end{itemize}
+\medskip
+\begin{exampleblock}{Example: a 90-day euro payable}
+\begin{itemize}
+  \item U.S.\ manufacturer owes a euro-denominated payment in 90 days.
+  \item Dollar weakens from \$1.10 to \$1.20 per euro $\Rightarrow$ same obligation costs $\sim$9\% more dollars.
+  \item No physical damage, no process failure, no strategic misjudgment --- a loss purely from a market price movement. That is financial risk in its most transparent form.
+\end{itemize}
+\end{exampleblock}
+\end{frame}
+
+\begin{frame}{What Makes Financial Risks Different}
+\begin{itemize}
+  \item \textbf{Two-sided}: gains as well as losses --- so management involves a deliberate hedge-or-accept choice.
+  \item \textbf{Continuous}: the risk persists as long as the exposure exists, not as discrete events.
+  \item \textbf{Measurable with unusual precision}: observable volatility and correlations support VaR, stress testing, sensitivity analysis.
+  \item \textbf{Hedgeable}: liquid derivatives markets exist for currencies, rates, and many commodities.
+  \item First management step: separate \alert{inherent} exposures (airline buying jet fuel) from \alert{incidental} ones (that airline's pension equity portfolio) --- then decide what to hedge, how much, with what.
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Operational Risks: The Broadest Quadrant}
+\begin{itemize}
+  \item Basel definition: ``the risk of loss resulting from inadequate or failed internal processes, people and systems or from external events.''
+  \item Picture: the payment system crashes for six hours on a December Saturday. No asset damaged, no price moved --- but revenue disappears and customers defect.
+  \item \textbf{Process} risks (designs that fail at peak volume), \textbf{people} risks (error and fraud), \textbf{technology} risks (outages, defects, \alert{cyber}), and \textbf{external events} (a supplier's factory fire, a pandemic).
+  \item Generally \alert{not hedgeable} --- no derivative pays off when software fails. Tools: preventive/detective/corrective controls, business continuity planning, internal audit, and \alert{culture} --- psychological safety to raise concerns early.
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Business Interruption: Operational, Not Financial}
+\begin{itemize}
+  \item Fire shuts a plant for three months; revenue loss is real and material.
+  \item But no market variable moved: prices for the product are unchanged --- \alert{the company just can't produce it}. Source: physical peril and stopped operations.
+\end{itemize}
+\medskip
+\begin{block}{Why the category matters}
+Financial risks are hedged with derivatives; there is no derivative for a production shutdown. The right toolbox is hazard controls, continuity planning, \alert{business interruption insurance}, and operational redundancy. Wrong category $\Rightarrow$ shopping in markets that don't sell what you need.
+\end{block}
+\end{frame}
+
+\begin{frame}{Strategic Risks: Is the Strategy Itself Right?}
+\begin{itemize}
+  \item Fundamental uncertainty about markets, business model, positioning, and response to external change.
+  \item Cannot be transferred or controlled away --- managed through the \alert{quality of the strategy}, monitoring and adaptation, and governance scrutiny.
+  \item The hardest feature: strategic risk can originate in \emph{current strengths}. A dense store network was an advantage in 1995 and a liability a decade later. (Netflix again.)
+  \item Sources: competition and substitutes, technology trajectories (ICE vs.\ electrification), regulation and politics, and \alert{reputation}.
+  \item Two distinguishing traits: genuinely hard to quantify, and inseparable from strategy --- doing nothing is itself a strategic choice. The question is never \emph{whether} to accept strategic risk, but \emph{which}.
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Risks Cross the Quadrant Boundaries}
+\begin{itemize}
+  \item The taxonomy is a discipline for identification, not a filing system. The biggest enterprise risks span categories.
+  \item A \alert{cybersecurity breach}:
+  \begin{itemize}
+    \item Operational failure (controls, unpatched vulnerability, social engineering)
+    \item Hazard/liability exposure (customers, regulators seek compensation)
+    \item Regulatory and strategic risk (investigations; lost differentiation if security was a selling point)
+    \item Financial dimensions (investor confidence, credit standing)
+  \end{itemize}
+  \item Use the quadrants to ensure completeness --- then ask which risks \emph{interact}, and whether governance can see the whole picture.
+  \item The goal: \alert{one integrated view, not four tidy lists}.
+\end{itemize}
+\end{frame}
+
+\section{Risk Identification Methodologies}
+
+\begin{frame}{Internal Sources}
+\begin{itemize}
+  \item \textbf{Historical loss data}: incidents, near-misses, control failures --- best for hazard and operational risks. Limitation: the past. Novel risks appear in no database.
+  \item \textbf{Audit findings and operational metrics}: a weak control is a risk even before it's exploited; rising complaints, error rates, and turnover signal trouble early. \alert{KRIs} alongside KPIs make monitoring continuous.
+  \item \textbf{Workshops, interviews, surveys}: frontline employees know the workarounds and near-misses that never reach management; facilitated cross-functional workshops force different perspectives into one conversation.
+  \item \textbf{Management and expert judgment}: competitive, regulatory, and technical risks that general workshops will miss.
+\end{itemize}
+\end{frame}
+
+\begin{frame}{External Sources}
+\begin{itemize}
+  \item \textbf{Peer Risk Factors disclosures}: what comparable firms identify as material --- surfaces risks you face but haven't articulated.
+  \item \textbf{Industry loss data}: trade associations, insurers, data providers --- plausible magnitudes and peer benchmarks.
+  \item \textbf{Regulatory guidance and enforcement}: enforcement against peers is risk information someone else paid for.
+  \item \textbf{Environmental scanning}: technology, competition, regulation, macro, social trends --- with assigned responsibility for defined domains and periodic synthesis.
+\end{itemize}
+\medskip
+Netflix is the model: scanned the environment, named the trend as a strategic risk, and put it in investor-facing disclosure before the disruption was obvious.
+\end{frame}
+
+\begin{frame}{Structured Techniques}
+\begin{itemize}
+  \item \textbf{Scenario analysis} --- narratives of how adverse situations unfold (key customer defects, plant disabled, breach, executive departure). Best for risks with no historical record and complex multi-dimensional events.
+  \item \textbf{Process mapping} --- at each mapped step: what could go wrong, what controls exist, are they adequate? Productive in high-volume transaction environments.
+  \item \textbf{Root cause analysis} --- ask ``why?'' until you reach drivers, not symptoms.
+  \item \textbf{Bow-tie analysis} --- causes and preventive controls on one side, consequences and mitigating controls on the other; shows convergence and cascade around a single event.
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Making Identification Continuous}
+\begin{itemize}
+  \item Risk identification fails as an annual event --- risks don't wait for the workshop.
+  \item Embed it where decisions are made:
+  \begin{itemize}
+    \item \textbf{Strategic planning}: risks of each alternative; consistency with appetite
+    \item \textbf{Budgeting}: what could prevent planned performance
+    \item \textbf{Projects}: identification at inception, reassessment through execution
+    \item \textbf{M\&A due diligence}: strategic fit, culture, integration, target liabilities --- before capital commits
+  \end{itemize}
+  \item Quarterly senior-management and board risk reviews keep the \alert{risk register} reflecting current conditions, not last year's assessment.
+\end{itemize}
+\end{frame}
+
+\section{The SEC Form 10-K Risk Factors Disclosure}
+
+\begin{frame}{A Required, Structured Risk Inventory}
+\begin{itemize}
+  \item No other public document matches it: strategic, operational, financial, regulatory, and hazard risks in one organized section --- written by management, vetted by counsel, reviewed by the board, filed with a regulator.
+  \item Legal basis: Securities Acts of 1933/1934 set the disclosure framework; risk factor requirements grew from 1970s--80s offering rules; Regulation S-K Item~503(c) (2005), reorganized as \alert{Item~105} (2019).
+  \item Item 105 today: disclose \alert{material} factors that make the investment ``speculative or risky''; organize under headings; summarize if over 15 pages; no risks ``that could apply to any registrant.''
+  \item The 2019 amendments were a tacit admission that many disclosures had grown so long and generic they obscured more than they revealed.
+\end{itemize}
+\end{frame}
+
+\begin{frame}{What Good Disclosure Looks Like}
+\begin{itemize}
+  \item Typical structure: risks grouped by type, each factor headed by an adverse statement (``We depend on key suppliers, and disruption could adversely affect\ldots''), followed by why, how, and consequences.
+  \item Specific beats generic:
+  \begin{itemize}
+    \item \emph{Weak}: ``Customer concentration risk could adversely affect our business.''
+    \item \emph{Strong}: Top five customers = 45\% of revenue; one announced in-house production; a similar loss cost \$30M last year.
+  \end{itemize}
+  \item Content varies by industry: tech emphasizes cyber, talent, platform dependence; manufacturers emphasize supply chains and recalls; financials emphasize credit, liquidity, capital; healthcare emphasizes FDA and patents.
+  \item Reading across industries with the \alert{four-quadrant lens} is one of the best ways to build identification fluency.
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Using Risk Factors Analytically}
+\begin{itemize}
+  \item \textbf{Peer inventory}: consolidate risks disclosed across the industry; check applicability; find the gaps in your own register. Collective identification effort, free of charge.
+  \item \textbf{Cross-sectional comparison}: common risks define the industry (all airlines: fuel; all pharma: FDA); \alert{company-specific risks} signal particular vulnerabilities --- a concentration, a legacy platform, an investigation peers don't face.
+  \item \textbf{Year-over-year changes} --- underused: newly added or expanded factors signal management has identified a new or growing concern.
+  \item Caution: retrospective studies show firms often disclose risks prominently only \emph{after} they materialize. Absence from Risk Factors is not evidence of absence.
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Limitations: Read Critically}
+\begin{itemize}
+  \item \textbf{Boilerplate}: ``competition in our markets is intense and may increase'' tells you nothing company-specific.
+  \item \textbf{Legal incentives}: the PSLRA (1995) safe harbor protects forward-looking statements accompanied by cautionary language --- so firms disclose broadly for protection, not clarity.
+  \item \textbf{No quantification}: ``significant foreign exchange risk'' --- but what share of revenue, which currencies, what hedges, what rate move is material? Usually unstated.
+  \item Supplement Risk Factors with the MD\&A, footnotes, and market risk disclosures to prioritize rather than merely catalogue.
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Discussion Questions}
+\begin{enumerate}
+  \item A three-month plant shutdown after a fire costs \$40M in lost revenue. A classmate calls this a financial risk ``because the loss is financial.'' Correct them using the source-versus-consequence distinction --- and name the right management tools.
+  \item Netflix disclosed its own business model's obsolescence as a risk factor while the model was still profitable. What organizational and governance conditions make that kind of identification possible --- or impossible?
+  \item Pick a cybersecurity breach at a company you know. Trace its consequences through all four quadrants. Which function should ``own'' the risk, and what does your answer imply about the taxonomy's limits?
+  \item The PSLRA safe harbor rewards broad, cautious disclosure. Does that make Risk Factors more useful or less useful for risk identification? What would you change about Item~105 if you could?
+\end{enumerate}
+\end{frame}
+
+\end{document}

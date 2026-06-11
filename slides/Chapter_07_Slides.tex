@@ -1,0 +1,382 @@
+% !TeX root = Chapter_07_Slides.tex
+% Chapter 7 lecture slides — Loss Control and Risk Reduction
+% Instructor-resource series; modeled on the Chapter 1 pilot deck.
+\documentclass[11pt, aspectratio=169]{beamer}
+\usepackage{tikz}
+\makeatletter
+\def\input@path{{./}{../slides/}}
+\makeatother
+\usepackage{erm_beamer_theme}
+\usepackage{amsmath,amssymb}
+
+\title[ERM Ch.\,7]{Loss Control and Risk Reduction}
+\subtitle{Enterprise Risk Management, Second Edition --- Chapter 7}
+\author{Martin F.\ Grace}
+\institute{University of Iowa\\[2pt] Tippie College of Business\\[2pt] Vaughan Institute of Risk Management}
+\date{June 2026}
+
+\begin{document}
+
+\begin{frame}[plain]
+\titlepage
+\end{frame}
+
+\begin{frame}{Learning Objectives}
+\begin{itemize}
+  \item Explain the \alert{frequency--severity} framework and how loss control targets each component.
+  \item Calculate the ROI of loss control investments from pre- and post-control frequency and severity data.
+  \item Apply the NIOSH \alert{hierarchy of controls} (elimination $\rightarrow$ substitution $\rightarrow$ engineering $\rightarrow$ administrative $\rightarrow$ PPE) to workplace hazards.
+  \item Measure loss control effectiveness with TRIR, DART, and EMR.
+  \item Evaluate the trade-off between risk financing (insurance, retention) and risk reduction using total cost of risk.
+  \item Integrate loss control with the appetite and portfolio frameworks of Chapters 5--6.
+\end{itemize}
+\end{frame}
+
+\section{Opening Case: Crestline Mutual}
+
+\begin{frame}{The House That Didn't Burn}
+\begin{itemize}
+  \item Electrical fires in single-family homes: a stubborn line in Crestline Mutual's loss reports --- not the most frequent cause, but disproportionately \emph{severe}.
+  \item Traditional responses: higher rates for older homes, smoke-alarm discounts, occasional inspections.
+  \item A vendor's different pitch: a night-light-sized device that ``listens'' to the home's wiring, detecting arcing and failing connections \emph{before} visible signs appear.
+  \item The actuaries asked for data: in a multi-carrier pilot across 1M+ home-years, device homes had measurably fewer electrical-fire claims than a matched control group.
+\end{itemize}
+\end{frame}
+
+\begin{frame}{What the Data Showed}
+\begin{columns}[T]
+\column{0.48\textwidth}
+\textbf{One house}
+\begin{itemize}
+  \item October alert: repeated arcing on a garage circuit --- no flickering lights, no tripped breakers
+  \item Electrician finds a charred, back-stabbed outlet terminal: ``the kind of thing that smolders before it lights something up''
+  \item Repair: under an hour, a screwdriver, and a new outlet
+\end{itemize}
+\column{0.48\textwidth}
+\textbf{Thousands of houses}
+\begin{itemize}
+  \item Participating homes vs.\ control group: fewer electrical-fire claims (\alert{frequency})
+  \item Of fires that still occurred, more contained to a room or appliance (\alert{severity})
+  \item The \emph{shape of the loss distribution} changed --- not the policy form, the underlying risk
+\end{itemize}
+\end{columns}
+\end{frame}
+
+\begin{frame}{The Lesson}
+\begin{itemize}
+  \item Loss control changes the physical reality that generates losses --- it doesn't reprice or transfer them.
+  \item Crestline ran the chapter's core arithmetic across a portfolio: device and monitoring cost per home vs.\ reduced frequency, reduced severity, and avoided adjustment expense.
+  \item Its advantage: a portfolio large enough to make the reductions statistically visible. A single firm must lean on industry data and vendor studies instead.
+\end{itemize}
+\medskip
+\begin{block}{The decision problem}
+You run the actuarial team. The traditional toolkit --- price the risk, adjust the deductible --- is well understood. Prevention requires spending money on \emph{other people's houses} and waiting years for proof. What evidence would you require before funding it?
+\end{block}
+\end{frame}
+
+\section{From Identification to Reduction}
+
+\begin{frame}{The Fourth Response: Reduce}
+\begin{itemize}
+  \item The risk response menu: \textbf{avoid}, \textbf{reduce}, \textbf{transfer}, \textbf{accept}. Avoidance forgoes profit; transfer shifts financial consequences at a price; acceptance is for risks within appetite. This chapter is about \alert{reduction}.
+\end{itemize}
+\medskip
+\begin{block}{Loss control}
+All activities designed to reduce the \alert{frequency} (likelihood) of loss events or the \alert{severity} (magnitude) of losses when events occur --- changing the underlying physical and operational reality.
+\end{block}
+\medskip
+\begin{itemize}
+  \item Side benefits compound: lower premiums via experience rating, better efficiency, morale and retention, compliance, less litigation, reputation.
+  \item ERM tie-in: risks outside appetite demand controls regardless of ROI; risks that correlate with other exposures (Ch.~6) deserve priority --- preventing one factory fire avoids property, interruption, contract, and reputational losses at once.
+\end{itemize}
+\end{frame}
+
+\section{The Economics of Loss Control}
+
+\begin{frame}{Total Cost of Risk}
+\[
+\begin{aligned}
+\text{TCOR} ={}& \text{Direct Losses} + \text{Loss Control Costs} + \text{Risk Transfer Costs} \\
+&+ \text{Administrative Costs} + \text{Indirect Costs}
+\end{aligned}
+\]
+\begin{itemize}
+  \item Typically 1--5\% of revenue; higher in construction, transportation, manufacturing.
+  \item Loss control appears as a \emph{cost} --- but it simultaneously cuts direct losses, transfer costs (better experience rating), and indirect costs (fewer disruptions).
+\end{itemize}
+\medskip
+\begin{block}{The objective}
+Minimize \emph{total} cost of risk, not any single component --- the answer when a CFO asks why the safety budget is growing.
+\end{block}
+\end{frame}
+
+\begin{frame}{Loss Control ROI}
+\[
+\text{Expected Loss} = \text{Frequency} \times \text{Average Severity}
+\]
+\[
+\text{ROI} = \frac{\text{Annual Benefit} - \text{Annualized Control Cost}}{\text{Annualized Control Cost}}
+\qquad
+\text{Payback} = \frac{\text{Initial Investment}}{\text{Annual Benefit}}
+\]
+\begin{exampleblock}{Example: forklift--pedestrian collisions in a warehouse}
+\begin{itemize}
+  \item Pre-control: $8 \times \$12{,}000 = \$96{,}000$/yr. Controls (barriers, markings, proximity warnings): \$45{,}000 capital + \$3{,}000/yr training
+  \item Post-control: frequency $-75\%$, severity $-30\%$ $\Rightarrow$ $2 \times \$8{,}400 = \$16{,}800$/yr
+  \item Annualized cost \$7{,}500; savings \$79{,}200 $\Rightarrow$ \alert{ROI = 956\%, payback $\approx$ 7 months}
+\end{itemize}
+\end{exampleblock}
+\medskip
+Returns like this would be extraordinary anywhere else in the capital budget. In loss control, they are not unusual --- though marginal returns diminish as the obvious hazards get fixed.
+\end{frame}
+
+\section{Frequency vs.\ Severity}
+
+\begin{frame}{Frequency Reduction: Fewer Events}
+\begin{itemize}
+  \item Shifts the loss \emph{count} distribution leftward; most valuable for high-frequency, lower-severity risks.
+  \item \textbf{Engineering}: machine guarding (29 CFR 1910.212), interlocks and fail-safes, automatic systems, physical separation of pedestrians from forklifts.
+  \item \textbf{Administrative}: lockout/tagout (OSHA estimates $\sim$120 fatalities and 50{,}000 injuries prevented annually), hot-work and confined-space permits, job safety analysis, inspections and near-miss reporting.
+  \item \textbf{Training and culture}: hands-on competency, refreshers, leadership that treats safety as a value rather than compliance theater.
+  \item Crestline's alerts worked here: incipient fires became electrician visits --- events removed from the loss count entirely.
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Severity Control: Smaller Losses When Events Occur}
+\begin{itemize}
+  \item Accepts that some events happen; compresses the severity distribution --- average loss \emph{and} the tail.
+  \item \textbf{Property}: sprinklers cut average loss per fire 60--70\% and civilian fire deaths 87\% (NFPA); compartmentation; separating high-value assets across locations; secondary containment.
+  \item \textbf{Injury}: emergency response and AEDs; early return-to-work (claim durations $-30$ to $-50\%$); active claims management ($-20$ to $-30\%$ medical cost per claim); PPE as the last layer.
+  \item \textbf{Business interruption}: redundancy, tested continuity plans (2--3$\times$ faster recovery), supply chain diversification. Maersk's post-NotPetya segmentation is severity control --- it wouldn't prevent the next infection, but it would \emph{contain} it.
+\end{itemize}
+\end{frame}
+
+\section{The Hierarchy of Controls}
+
+\begin{frame}{The NIOSH Hierarchy}
+\begin{block}{Most effective $\rightarrow$ least effective}
+\alert{Elimination} $\rightarrow$ \alert{Substitution} $\rightarrow$ \alert{Engineering} $\rightarrow$ \alert{Administrative} $\rightarrow$ \alert{PPE}
+\end{block}
+\medskip
+\begin{itemize}
+  \item \textbf{Elimination}: remove the hazard (reformulate paint to drop hexavalent chromium). Absolute --- and often infeasible for core processes.
+  \item \textbf{Substitution}: water-based solvents for VOC solvents. Check the replacement doesn't import new hazards.
+  \item \textbf{Engineering}: guards, ventilation, automation --- works passively, no behavior change required.
+  \item \textbf{Administrative}: rotation, LOTO, permits --- depends on consistent human compliance.
+  \item \textbf{PPE}: last line of defense; doesn't reduce the hazard, depends entirely on proper individual use.
+\end{itemize}
+\medskip
+The ranking is about \emph{reliability}: how vulnerable is the control to human error?
+\end{frame}
+
+\begin{frame}{Applying the Hierarchy: A 95 dBA Stamping Press}
+\begin{itemize}
+  \item \textbf{Elimination}: stamping is essential --- infeasible.
+  \item \textbf{Substitution}: quieter hydraulic presses at the next equipment replacement cycle?
+  \item \textbf{Engineering}: sound enclosure, vibration damping, relocation --- below 85 dBA, the hazard is gone for most workers.
+  \item \textbf{Administrative}: job rotation to cap cumulative dose; schedule noisy work for low-occupancy hours.
+  \item \textbf{PPE}: hearing protection for the residual --- and as redundant backup even with engineering controls.
+\end{itemize}
+\medskip
+\begin{block}{Defense-in-depth}
+Real programs combine levels. Economics align with effectiveness: higher-hierarchy controls cost more upfront but less over the lifecycle --- and OSHA requires feasible engineering controls \emph{before} reliance on PPE.
+\end{block}
+\end{frame}
+
+\section{Loss Control Across Industries}
+
+\begin{frame}{Worked Example: Machine Guarding at Mercer Tool \& Stamping}
+\begin{exampleblock}{150-employee metal fabricator; 18 machine injuries in 3 years, \$627{,}000 total cost (\$209{,}000/yr)}
+\begin{itemize}
+  \item \$125{,}000 program: interlocked guards, light curtains, fixed guarding, training, inspections
+  \item Frequency: 6/yr $\rightarrow$ 1.2/yr ($-80\%$, conservative); severity: \$34{,}833 $\rightarrow$ \$20{,}900 ($-40\%$)
+  \item Post-control loss: $1.2 \times \$20{,}900 = \$25{,}080$; annual savings \$183{,}920
+  \item Annualized cost \$20{,}500 $\Rightarrow$ \alert{ROI = 797\%, payback $\approx$ 8 months}
+\end{itemize}
+\end{exampleblock}
+\medskip
+Three years on: one minor injury vs.\ 3.6 predicted; EMR 1.24 $\rightarrow$ 0.89, saving \$67{,}000/yr in premium --- a benefit not even counted in the original analysis.
+\end{frame}
+
+\begin{frame}{Four Industries, One Template}
+Baseline frequency and severity $\rightarrow$ design controls $\rightarrow$ post-control profile $\rightarrow$ compute the return.
+\medskip
+\begin{center}
+\small
+\begin{tabular}{llrrr}
+\toprule
+\textbf{Case} & \textbf{Hazard} & \textbf{Investment} & \textbf{ROI} & \textbf{Payback} \\
+\midrule
+Mercer Tool (mfg.) & Machine contact & \$125K & 797\% & 8 mo. \\
+Midtown Foods (retail) & Slip-and-fall & \$180K & 780\% & 6 mo. \\
+Summit Builders (constr.) & Falls from elevation & \$340K & 428\% & 9 mo. \\
+Community Regional (health) & Workplace violence & \$425K & 103\% & 2.3 yr. \\
+\bottomrule
+\end{tabular}
+\end{center}
+\medskip
+\begin{itemize}
+  \item Midtown's grape decision is \emph{elimination}; its matting is engineering; its checklists are administrative --- the hierarchy in a grocery store.
+  \item Even the weakest result (103\%) would be celebrated in most capital budgets --- and it excludes retention, reputation, and a safety-climate score that rose from 61\% to 84\%.
+\end{itemize}
+\end{frame}
+
+\section{Measuring Effectiveness}
+
+\begin{frame}{Lagging Indicators: TRIR and DART}
+\[
+\text{TRIR} = \frac{\text{Recordable Cases} \times 200{,}000}{\text{Total Hours Worked}}
+\]
+\begin{itemize}
+  \item The 200{,}000 constant normalizes to 100 full-time workers --- rates comparable across firm sizes.
+  \item \alert{DART} counts the serious subset: days away, restricted duty, or transfer. High DART relative to TRIR signals injuries trending severe.
+  \item 2022 benchmarks: all private industry TRIR 2.7; manufacturing 3.2; healthcare 4.5; construction 2.4.
+\end{itemize}
+\begin{exampleblock}{Example}
+450 employees, 900{,}000 hours, 18 recordables: TRIR $= (18 \times 200{,}000)/900{,}000 = 4.0$ --- above the 3.2 manufacturing average. Investigate.
+\end{exampleblock}
+\end{frame}
+
+\begin{frame}{EMR: Where Safety Meets the Premium}
+\begin{itemize}
+  \item \alert{Experience Modification Rate}: actual losses vs.\ expected losses for similar firms. EMR = 1.00 is average; below 1.00 earns discounts, above 1.00 pays surcharges.
+\end{itemize}
+\[
+\text{Premium} = \text{Manual Premium} \times \text{EMR} \times \text{Other Modifiers}
+\]
+\begin{exampleblock}{Example}
+Manual premium \$500{,}000; EMR falls 1.25 $\rightarrow$ 0.95 through loss control: savings $= \$500{,}000 \times 0.30 = \alert{\$150{,}000}$ per year.
+\end{exampleblock}
+\medskip
+\begin{itemize}
+  \item Timing matters: EMR uses a three-year experience window with a one-year lag --- premium benefits arrive in years 4--7, not year 1.
+  \item Frequency is weighted heavily in the formula: even small claims hurt the mod.
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Leading vs.\ Lagging Indicators}
+\begin{columns}[T]
+\column{0.48\textwidth}
+\textbf{Lagging (outcomes)}
+\begin{itemize}
+  \item TRIR, DART, lost workdays, EMR, claim costs
+  \item Necessary --- but backward-looking, and sparse data when injuries are rare
+  \item 18 injury-free months can mean safety, or accumulating undetected hazards
+\end{itemize}
+\column{0.48\textwidth}
+\textbf{Leading (proactive activities)}
+\begin{itemize}
+  \item Training currency, inspections completed, hazard-correction closure time
+  \item Near-miss reports (typically 10--30 per recordable --- a far richer dataset)
+  \item Observation counts, pre-task planning compliance, preventive maintenance on time
+\end{itemize}
+\end{columns}
+\medskip
+Crestline again: anomalies flagged and faults fixed were the \emph{leading} indicators; fire claims, months later, the lagging confirmation. Mature programs run a balanced scorecard of both.
+\end{frame}
+
+\section{Risk Financing vs.\ Risk Reduction}
+
+\begin{frame}{Control First, Then Retain}
+A retail chain weighs a deductible increase: \$25K $\rightarrow$ \$100K per claim, saving \$225{,}000 in premium. 32 claims/yr.
+\medskip
+\begin{center}
+\small
+\begin{tabular}{lrrrr}
+\toprule
+\textbf{Strategy} & \textbf{Premium} & \textbf{Retained} & \textbf{Control} & \textbf{Total} \\
+\midrule
+\$25K deductible, no control & \$850K & \$576K & --- & \$1{,}426K \\
+\$100K deductible alone & \$625K & \$1{,}156K & --- & \$1{,}781K \\
+\$100K deductible + loss control & \$625K & \$470K & \$40K & \alert{\$1{,}135K} \\
+\bottomrule
+\end{tabular}
+\end{center}
+\medskip
+\begin{itemize}
+  \item The deductible increase alone \emph{costs} \$355K/yr; bundled with slip-and-fall controls it \emph{saves} \$291K/yr.
+  \item Sequencing is the lesson: the higher retention becomes safe only after the underlying risk is reduced. Same logic drives the strong control incentives in self-insurance and captives --- there's no insurer to pass costs to.
+\end{itemize}
+\end{frame}
+
+\section{Capstone: Riverside Metal Products}
+
+\begin{frame}{Riverside: Reshaping the Whole Distribution}
+150-employee fabricator; three-year program targeting strains, lacerations, and slips.
+\medskip
+\begin{center}
+\small
+\begin{tabular}{lrr}
+\toprule
+ & \textbf{Pre-control} & \textbf{Post-control} \\
+\midrule
+Claims per year & 12.5 & 4.2 \\
+Average claim cost & \$12{,}400 & \$9{,}800 \\
+Expected annual loss & \$155{,}000 & \$41{,}160 \\
+95\% VaR & \$225{,}000 & \$78{,}000 \\
+TRIR (industry avg.\ 3.2) & 8.3 & 2.8 \\
+EMR & 1.42 & 0.87 \\
+\bottomrule
+\end{tabular}
+\end{center}
+\medskip
+Expected loss fell 73\% --- but the 95\% VaR fell 65\% too. The program compressed the \emph{tail}, not just the mean: the Crestline signature inside a single firm.
+\end{frame}
+
+\begin{frame}{Riverside: The Financial Case}
+\begin{exampleblock}{Investment: \$230{,}000 capital over 3 years + \$22{,}000/yr ongoing (total annual cost \$45{,}000)}
+\begin{itemize}
+  \item Direct loss reduction: $\$155{,}000 - \$41{,}160 = \$113{,}840$/yr
+  \item Premium savings (EMR 1.42 $\rightarrow$ 0.87): $\$285{,}000 - \$165{,}000 = \$120{,}000$/yr
+  \item Total benefit \$233{,}840 $\Rightarrow$ \alert{ROI = 420\%, payback $\approx$ 12 months}; five-year cumulative savings $\approx$ \$829{,}000
+\end{itemize}
+\end{exampleblock}
+\medskip
+\begin{itemize}
+  \item Premium savings roughly \emph{doubled} the benefit --- experience rating is half the business case.
+  \item Twelve-month payback competes with any capital project, yet safety investments routinely face more scrutiny than production investments with weaker returns.
+\end{itemize}
+\end{frame}
+
+\section{From ROI to NPV (Appendix 7A)}
+
+\begin{frame}{Loss Control as a Capital Investment}
+\begin{itemize}
+  \item The chapter's ROI model assumes no discounting, no taxes, static premiums. Appendix 7A relaxes each. The NPV criterion:
+\end{itemize}
+\[
+NPV = (\Delta L + \Delta P - C)(1-\tau) \times PVIFA(r,T) - I_0(1-\tau) \;>\; 0
+\]
+\begin{itemize}
+  \item Tax subtlety: losses are deductible, so \emph{preventing} a \$100K loss saves only \$75K after tax at $\tau = 0.25$ --- prevented losses are worth $(1-\tau)$ on the dollar.
+  \item Mercer Tool revisited: the 797\% simple ROI corresponds to an after-tax NPV $\approx$ \$792K; adding the (lagged) premium savings raises it to $\approx$ \$896K --- on a net after-tax outlay of \$93{,}750.
+  \item Discount rate: loss-prevention cash flows pay off in bad states --- arguments exist for rates below WACC. Using WACC is the conservative test.
+\end{itemize}
+\end{frame}
+
+\begin{frame}{When Expected Value Isn't Enough}
+\begin{exampleblock}{Example: a chemical plant's \$15M containment upgrade}
+\begin{itemize}
+  \item MFL \$500M, frequency 1/200 years; upgrade cuts MFL to \$150M
+  \item Expected-value NPV at 8\%, 10 years: about $-\$3.3$M --- \emph{negative}
+  \item But \$200M equity + \$300M debt: a \$500M loss means bankruptcy; \$150M is survivable
+  \item Valuing avoided distress costs at \$100M adds $\approx$ \$3.4M --- total NPV turns positive
+\end{itemize}
+\end{exampleblock}
+\medskip
+\begin{itemize}
+  \item Loss control that compresses the tail creates value through three channels: expected loss, VaR, and the probability of \alert{financial distress} --- the simplified model sees only the first.
+  \item Real-options footnote: Crestline waiting for multi-carrier pilot data before launching was deferral-option logic --- the pilot resolved effectiveness uncertainty cheaply.
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Discussion Questions}
+\begin{enumerate}
+  \item Distinguish frequency reduction from severity control with an example of each from different industries. When would you invest in severity control rather than attempting frequency reduction?
+  \item A shear is activated by foot pedal while workers' hands align the sheet near the blade path. Apply all five levels of the hierarchy of controls; assess feasibility and effectiveness at each level.
+  \item A manufacturer has a \$425{,}000 manual workers' compensation premium and EMR of 1.28. Compute the current premium, the premium if loss control brings EMR to 0.92, and the annual savings.
+  \item Your budget covers loss control for only some of: cyber, supply chain, product liability, workplace injuries. Using Chapter 6's portfolio logic, how do you prioritize --- and what beyond expected loss reduction belongs in the decision?
+\end{enumerate}
+\end{frame}
+
+\end{document}

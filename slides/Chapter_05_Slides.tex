@@ -1,0 +1,384 @@
+% !TeX root = Chapter_05_Slides.tex
+% Chapter 5 lecture slides — Risk Appetite and the ERM Process
+% Instructor-resource series.
+\documentclass[11pt, aspectratio=169]{beamer}
+\usepackage{tikz}
+\makeatletter
+\def\input@path{{./}{../slides/}}
+\makeatother
+\usepackage{erm_beamer_theme}
+\usepackage{amsmath,amssymb}
+
+\title[ERM Ch.\,5]{Risk Appetite and the ERM Process}
+\subtitle{Enterprise Risk Management, Second Edition --- Chapter 5}
+\author{Martin F.\ Grace}
+\institute{University of Iowa\\[2pt] Tippie College of Business\\[2pt] Vaughan Institute of Risk Management}
+\date{June 2026}
+
+\begin{document}
+
+\begin{frame}[plain]
+\titlepage
+\end{frame}
+
+\begin{frame}{Learning Objectives}
+\begin{itemize}
+  \item Define \alert{risk appetite} and distinguish it from risk capacity, risk tolerance, and risk limits.
+  \item Explain where appetite fits in the ERM cycle --- and why young programs often run the cycle in reverse.
+  \item Articulate appetite both qualitatively (narrative statements) and quantitatively (metrics, limits, thresholds).
+  \item Translate high-level appetite into cascading limits and key risk indicators.
+  \item Explain how governance, culture, and incentives determine whether \emph{stated} appetite matches \emph{revealed} appetite.
+  \item Identify common pitfalls in risk appetite frameworks and their role in notable corporate failures.
+\end{itemize}
+\end{frame}
+
+\section{Opening Case: adidas and Aggregate Exposure}
+
+\begin{frame}{Not a Crisis Year}
+\begin{itemize}
+  \item adidas, 2025: no scandal, no collapse --- which is what makes it interesting.
+  \item The environment: volatile consumer tastes, social-media amplification, sourcing bottlenecks, tariffs, geopolitics.
+  \item The annual report is blunt: to remain competitive, the company \emph{consciously takes risks} and continuously explores opportunities.
+  \item Proposals arrive from everywhere: faster regional expansion, bigger product pushes, supplier diversification, digital investment.
+  \item No idea looks reckless on its own. The question is what they look like \alert{in aggregate}.
+\end{itemize}
+\end{frame}
+
+\begin{frame}{adidas's Answer: Boundaries, Not Vibes}
+\begin{itemize}
+  \item \alert{Risk appetite}: the maximum risk the company is \emph{willing} to take --- linked to liquidity targets.
+  \item \alert{Risk capacity}: the maximum risk it can absorb before insolvency threatens.
+  \item ERM gathers risks from across the business; each is rated by impact and likelihood (minor/moderate/major), including reputational, brand, and people effects.
+  \item Aggregation via \alert{stochastic simulation}, with explicit rules:
+  \begin{itemize}
+    \item Appetite must not be exceeded with likelihood of at least \alert{95\%}.
+    \item Capacity must not be exceeded with likelihood of at least \alert{99\%}.
+  \end{itemize}
+  \item Authority is explicit too: major unmitigated risks can be accepted only by the \emph{entire} Executive Board.
+\end{itemize}
+\end{frame}
+
+\begin{frame}{The Lesson}
+\begin{itemize}
+  \item The story isn't a dramatic collapse --- it's discipline: staying bold without becoming careless.
+  \item Strategy answers to limits. One unit's enthusiasm is not enough.
+  \item Not everything fits a spreadsheet: compliance, culture, HR, and ESG risks are in the process even though they resist precise measurement.
+\end{itemize}
+\medskip
+\begin{block}{The decision problem}
+Each investment makes sense alone. At what point does healthy ambition become more exposure than the company should be carrying --- and \emph{who} gets to draw that line?
+\end{block}
+\end{frame}
+
+\section{Why Risk Appetite Matters}
+
+\begin{frame}{Risk Appetite Is a Strategic Choice}
+The ERM question is never \emph{whether} to take risk --- it's \alert{which risks, how much, under what conditions}.
+\medskip
+\begin{columns}[T]
+\column{0.48\textwidth}
+\textbf{Bank A}
+\begin{itemize}
+  \item Aggressive commercial real estate growth.
+  \item Higher credit risk for higher returns.
+  \item Shareholders accept volatility.
+\end{itemize}
+\column{0.48\textwidth}
+\textbf{Bank B}
+\begin{itemize}
+  \item Residential mortgages, strict underwriting.
+  \item Lower returns, stable earnings.
+  \item Shareholders prize predictability.
+\end{itemize}
+\end{columns}
+\medskip
+\begin{block}{Neither is wrong}
+What matters is that the appetite is chosen \emph{consciously}, communicated, translated into limits, and monitored. Trouble starts when revealed risk-taking diverges from the stated choice.
+\end{block}
+\end{frame}
+
+\begin{frame}{What Goes Wrong Without It}
+\begin{itemize}
+  \item \textbf{Paralysis or inconsistency}: employees delay decisions or freelance their own risk standards.
+  \item \textbf{Unintended concentration}: units within individual limits sum to enterprise exposure nobody chose --- the aggregation problem adidas's simulation targets.
+  \item \textbf{Capital misallocation}: familiar risks get over-managed; value-creating risks get starved.
+  \item \textbf{Reactive crisis management}: expensive remediation replaces cheap prevention.
+  \item \textbf{Regulatory exposure}: Basel III, Solvency II, and \alert{ORSA} (Own Risk and Solvency Assessment) explicitly require articulated risk appetite.
+\end{itemize}
+\end{frame}
+
+\section{The Hierarchy: Capacity, Appetite, Tolerance, Limits}
+
+\begin{frame}{Four Concepts, One Hierarchy}
+\begin{center}
+\begin{tabular}{ll}
+\textbf{Risk Capacity} & maximum boundary --- exceed it and viability is threatened \\[2pt]
+$\downarrow$ & \\[2pt]
+\textbf{Risk Appetite} & strategic willingness to accept risk in pursuit of objectives \\[2pt]
+$\downarrow$ & \\[2pt]
+\textbf{Risk Tolerance} & acceptable variation around specific objectives \\[2pt]
+$\downarrow$ & \\[2pt]
+\textbf{Risk Limits} & operational constraints on activities and portfolios \\
+\end{tabular}
+\end{center}
+\medskip
+\begin{block}{Why all four levels must be populated}
+``We have low appetite for reputational risk'' is strategic but operationally empty. It needs tolerances (acceptable variation in brand metrics) and limits (approval requirements, prohibitions) before it influences a single decision.
+\end{block}
+\end{frame}
+
+\begin{frame}{Appetite vs.\ Capacity: Mind the Gap}
+\begin{itemize}
+  \item Capacity constraints: capital (regulatory/rating floors), liquidity (surviving stress without running out of cash), strategic (damage that impairs execution).
+  \item \alert{Appetite should sit meaningfully below capacity.} Appetite $=$ capacity means zero safety margin --- any adverse outcome threatens viability.
+  \item A bank with \$200M of loss-absorbing capacity might set appetite at \$100M, holding the rest as buffer for surprises and correlated losses.
+  \item adidas made the gap explicit: 95\% confidence on appetite, 99\% on capacity --- two thresholds with intentional distance between them.
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Tolerance and Limits: Where Appetite Gets Operational}
+\begin{itemize}
+  \item \alert{Tolerance} = acceptable deviation from objectives: ``earnings may vary $\pm$15\% from budget''; ``defect rate may not exceed 0.5\%''; zero tolerance for fraud.
+  \item Tolerances vary \emph{within} a category: narrow for safety, wider for minor process errors.
+  \item \alert{Limits} = daily decision rules:
+  \begin{itemize}
+    \item Position limits --- maximum exposure to a risk factor.
+    \item Concentration limits --- maximum share per counterparty, industry, geography.
+    \item Stop-loss limits --- maximum loss before forced reduction.
+    \item Authorization limits --- who may approve what size of commitment.
+  \end{itemize}
+  \item Limits cascade so that even if every unit hits its maximum, aggregate risk stays within appetite.
+\end{itemize}
+\end{frame}
+
+\section{Risk Appetite in the ERM Cycle}
+
+\begin{frame}{Theory vs.\ Practice: The Sequencing Puzzle}
+\begin{itemize}
+  \item COSO's sequence: set strategy and appetite \emph{first}, then identify, assess, respond, monitor. Logical.
+  \item But a firm building ERM from scratch faces a chicken-and-egg problem: you can't set a numerical operational-risk appetite if you've \alert{never measured your operational losses}.
+  \item Early-stage reality: identify and quantify first; circle back to appetite with data, models, and vocabulary in hand.
+\end{itemize}
+\medskip
+\begin{block}{From slogan to statement}
+``Low appetite for product liability risk'' has no teeth. After three years of loss data: ``Expected product liability losses below 0.3\% of revenue; no product ships with estimated exposure over \$2M without executive review.'' \emph{That} is usable.
+\end{block}
+\end{frame}
+
+\begin{frame}{The Mature Cycle: Appetite Drives Everything}
+Once the infrastructure exists, the cycle runs as the textbooks describe --- annually, starting from appetite.
+\begin{itemize}
+  \item \textbf{Identification}: which risks are we \emph{seeking}, which are we \emph{inheriting}, and which fall \alert{outside appetite}? (The third question is the uncomfortable one --- especially when the activity is profitable.)
+  \item \textbf{Assessment}: analytical effort concentrates on risks near the boundary; evaluate not just expected loss but the probability of breaching appetite or capacity.
+  \item \textbf{Response}: appetite supplies the decision criterion.
+  \item \textbf{Monitoring}: KRIs tracked against limits; breaches investigated; appetite reviewed annually with strategy.
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Appetite Driving Risk Response}
+\begin{itemize}
+  \item \textbf{Avoid} --- risks outside appetite that can't be managed down.
+  \item \textbf{Reduce} --- risks that could exceed appetite in adverse scenarios: controls, process change.
+  \item \textbf{Transfer/share} --- within capacity but at the high end of appetite: insurance, hedging, outsourcing.
+  \item \textbf{Accept} --- risks well within appetite with attractive risk-adjusted returns.
+\end{itemize}
+\medskip
+\begin{block}{Don't strangle your own strategy}
+A tech firm with high product-development appetite that requires three approval layers per feature launch has converted appetite from strategic enabler into bureaucratic bottleneck.
+\end{block}
+\end{frame}
+
+\section{Translating Appetite: Cascading Limits and KRIs}
+
+\begin{frame}{The Cascade: Four Levels}
+\begin{itemize}
+  \item \textbf{Level 1 --- Board/CEO}: enterprise appetite. ``Tier 1 capital $\geq$ 10\% in all foreseeable scenarios; no risk that could cut annual earnings more than 20\%.''
+  \item \textbf{Level 2 --- CRO}: aggregate limits per risk category --- market VaR ceilings, credit concentration caps, operational loss budgets, capital allocation by unit.
+  \item \textbf{Level 3 --- Business units}: a \alert{risk budget} allocated across product lines, with policies and approval authorities.
+  \item \textbf{Level 4 --- Front line}: concrete rules. A lending officer approves up to \$2M for investment-grade borrowers; \$2--5M needs a supervisor; above \$5M, no authority.
+\end{itemize}
+\medskip
+Each level derives explicitly from the one above --- so the whole tower sums to enterprise appetite.
+\end{frame}
+
+\begin{frame}{Effective Limits and Key Risk Indicators}
+\begin{columns}[T]
+\column{0.48\textwidth}
+\textbf{Effective limits are}
+\begin{itemize}
+  \item Specific and measurable --- ``$\leq$ 2\% of capital per counterparty,'' not ``low credit appetite.''
+  \item Linked logically to higher-level appetite.
+  \item Balanced --- tight enough to bind, loose enough to permit business.
+  \item Backed by escalation procedures; reviewed regularly.
+\end{itemize}
+\column{0.48\textwidth}
+\textbf{KRIs: early warning}
+\begin{itemize}
+  \item \alert{Leading} indicators predict (declining origination quality, rising complaints, turnover).
+  \item \alert{Lagging} indicators record (actual losses, outages).
+  \item Green / yellow / red thresholds trigger graduated management action.
+  \item Emphasize leading indicators --- the point is acting \emph{before} losses.
+\end{itemize}
+\end{columns}
+\end{frame}
+
+\section{Articulating Appetite: Words and Numbers}
+
+\begin{frame}{What Narrative Statements Do That Numbers Can't}
+\begin{itemize}
+  \item Express values: ``We will not knowingly do business with counterparties engaged in human trafficking.''
+  \item Cover hard-to-quantify risks: reputation is multi-dimensional and context-dependent.
+  \item Give employees a framework for judgment where no rule applies.
+\end{itemize}
+\medskip
+\begin{columns}[T]
+\column{0.48\textwidth}
+\textbf{Conservative insurer}
+\begin{itemize}
+  \item ``Sustainable, long-term value through disciplined risk-taking; stability of earnings and capital preservation over aggressive growth.''
+\end{itemize}
+\column{0.48\textwidth}
+\textbf{Growth-stage tech}
+\begin{itemize}
+  \item ``We embrace uncertainty as inherent to innovation \ldots\ but do not compromise on ethics, operations, or customer trust.''
+\end{itemize}
+\end{columns}
+\medskip
+Good statements explain the \alert{why} --- the strategic rationale --- not just the level.
+\end{frame}
+
+\begin{frame}{Quantitative Expressions of Appetite}
+\begin{itemize}
+  \item \textbf{Capital}: ``Tier 1 $\geq$ 10\% (regulatory minimum $+$ 2 points); economic capital consumption $\leq$ 85\% of available.''
+  \item \textbf{Earnings}: ``Earnings volatility up to 15\% of mean; no single-year decline exceeding 25\%.''
+  \item \textbf{Liquidity}: ``Liquid assets $\geq$ 120\% of 90-day obligations; no funding source over 20\% of total.''
+  \item \textbf{Ratings}: ``Maintain A or better; take no action agencies indicate would trigger a downgrade below A$-$.''
+\end{itemize}
+\medskip
+\alert{Economic capital} ties these together: capital needed to stay solvent at a chosen confidence level given the \emph{actual} risk profile --- enabling risk-adjusted performance measurement and rational capital allocation.
+\end{frame}
+
+\begin{frame}{VaR-Style Appetite --- and Its Complements}
+\begin{itemize}
+  \item VaR limits are natural appetite instruments: a desk's daily VaR(99\%) cap of \$2M; a 1-in-250-year catastrophe loss capped at 25\% of capital.
+  \item adidas's 95\% appetite rule is enterprise-level VaR; the 99\% capacity rule is the complementary tail constraint.
+  \item VaR is silent beyond the threshold (Chapter 4) --- so complement it:
+  \begin{itemize}
+    \item \alert{Expected Shortfall} --- average loss given a breach.
+    \item \alert{Concentration limits} --- ``no counterparty over 5\% of capital'' --- diversification made enforceable.
+    \item \alert{Scenario analysis} --- ``no single scenario may cost more than 15\% of capital.''
+    \item \alert{Reverse stress testing} --- find the scenario that kills the firm; ask how plausible it is.
+  \end{itemize}
+\end{itemize}
+\end{frame}
+
+\section{Appetite by Firm Type}
+
+\begin{frame}{InnovateTech: Pre-IPO SaaS}
+500 employees, \$150M ARR, pre-profitability, IPO in 18--24 months.
+\medskip
+\begin{columns}[T]
+\column{0.48\textwidth}
+\textbf{High appetite}
+\begin{itemize}
+  \item Product development: a 40\% project success rate is acceptable.
+  \item Aggressive customer acquisition; equity dilution for AI talent.
+\end{itemize}
+\column{0.48\textwidth}
+\textbf{Zero or low appetite}
+\begin{itemize}
+  \item Data privacy/security --- non-negotiable, whatever the cost.
+  \item Regulatory and financial-reporting risk (IPO approaching).
+  \item IP loss --- trade secrets are the asset.
+\end{itemize}
+\end{columns}
+\medskip
+The translation mirrors the appetite: product teams experiment freely within budgets; cybersecurity is prescribed in technical detail. Deferring security upgrades to polish pre-IPO costs would violate the framework --- however real the savings.
+\end{frame}
+
+\begin{frame}{Midwest P\&C and PowerGrid: Different Worlds}
+\begin{columns}[T]
+\column{0.48\textwidth}
+\textbf{Midwest P\&C (insurer)}
+\begin{itemize}
+  \item Moderate underwriting appetite: combined ratio target 96\%, tolerance to 105\%.
+  \item Catastrophe retention capped by reinsurance at \$75M ($<$10\% of capital).
+  \item Buying expensive reinsurance \emph{is} the appetite working.
+\end{itemize}
+\column{0.48\textwidth}
+\textbf{PowerGrid (regulated utility)}
+\begin{itemize}
+  \item Zero appetite: safety, environmental, and license-threatening failures.
+  \item Very low: reliability --- grid hardening needs no ROI case.
+  \item Deferred maintenance: savings visible now, risk invisible until failure.
+\end{itemize}
+\end{columns}
+\medskip
+\begin{block}{No universal benchmark}
+InnovateTech's high development appetite and PowerGrid's zero safety tolerance are \emph{both} correct: coherent, explicit, linked to strategy --- not inherited by default.
+\end{block}
+\end{frame}
+
+\section{Governance, Culture, and Incentives}
+
+\begin{frame}{Who Owns the Appetite}
+\begin{itemize}
+  \item \textbf{Board}: formally approves appetite annually with strategic planning; receives quarterly exposure-vs-limit reporting; probes downside scenarios when strategy pushes toward the boundary.
+  \item \textbf{CEO}: aligns strategy with approved appetite; holds unit leaders to their risk budgets.
+  \item \textbf{CRO}: translates appetite into frameworks, runs the dashboard, and provides \alert{independent challenge}.
+\end{itemize}
+\medskip
+\begin{block}{Structure determines independence}
+A CRO reporting to the CFO with no board access is structurally unable to challenge business lines pushing toward the boundary. CRO positioning is not an administrative detail --- it decides whether independent challenge is possible.
+\end{block}
+\end{frame}
+
+\begin{frame}{Incentives and Culture: Where Appetite Lives or Dies}
+\begin{itemize}
+  \item Appetite is systematically ignored when pay rewards behavior inconsistent with it:
+  \begin{itemize}
+    \item Balance horizons --- deferred compensation, multi-year vesting.
+    \item Risk-adjust performance: 20\% ROE on enormous risk $\neq$ 15\% on moderate risk.
+    \item Claw-backs for results later revealed to be risk-financed; never pure volume pay for originators.
+    \item Reward \emph{escalation} --- if raising concerns is punished, risks accumulate silently.
+  \end{itemize}
+  \item \alert{Risk culture}: awareness, bad news travels up, accountability regardless of seniority, long-term thinking, compliance as floor not ceiling.
+  \item Red flags: leaders talk risk but reward pure results; limit breaches recur without consequence. At that point the problem is behavioral, not documentary.
+\end{itemize}
+\end{frame}
+
+\section{Pitfalls and Failures}
+
+\begin{frame}{Common Pitfalls --- All Predictable}
+\begin{itemize}
+  \item \textbf{Vagueness}: ``we are conservative'' means nothing without metrics.
+  \item \textbf{Internal inconsistency}: low stated appetite plus aggressive growth targets sends contradictory signals; if strategy can't be achieved within appetite, one of them must change.
+  \item \textbf{Disconnect from decisions}: board statements never cascaded into limits influence nothing.
+  \item \textbf{Failure to update}: a startup's year-two appetite is wrong at year ten.
+  \item \textbf{Single-metric overreliance}: comfortable VaR can coexist with extreme tail risk.
+  \item \textbf{Stated vs.\ revealed divergence}: the most damaging --- waived policies, unpunished breaches, marginalized dissenters.
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Case in Point: 2008}
+Many institutions claimed conservative risk management while loading up on subprime exposure. The appetite failures stack up:
+\begin{itemize}
+  \item Capital adequate on paper, far short of actual exposures.
+  \item VaR limits blind to correlation --- when markets moved together, losses exceeded limits by multiples.
+  \item Volume-based pay with no risk adjustment; boards lacking expertise to challenge structured products.
+  \item CROs without authority; stress tests that never imagined a 30\% national housing decline \emph{plus} frozen credit.
+\end{itemize}
+\medskip
+Post-crisis reforms --- Basel III capital, mandatory stress testing, required appetite statements --- aim to make appetite rigorous, explicit, and enforceable.
+\end{frame}
+
+\begin{frame}{Discussion Questions}
+\begin{enumerate}
+  \item Why should risk appetite be set meaningfully below risk capacity? What happens if they're equal?
+  \item A regional bank says ``We have moderate appetite for credit risk.'' Translate that into three specific, measurable limits a loan officer could use tomorrow.
+  \item The board approved a 10\%-of-revenue customer concentration limit; the largest customer is now 22\% and highly profitable. The CEO wants to waive the limit. How should the board respond?
+  \item Design a compensation structure for commercial lending officers that supports a conservative credit appetite without killing the motivation to grow the portfolio.
+\end{enumerate}
+\end{frame}
+
+\end{document}

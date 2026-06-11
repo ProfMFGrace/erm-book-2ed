@@ -1,0 +1,1694 @@
+% !TeX root = Chapter_04_Risk_Quantification_Qualification.tex
+% Chapter 4 — Risk Quantification and Qualification
+\documentclass[11pt,openany]{book}
+\usepackage{graphicx}
+\usepackage{amsmath,amssymb}
+\usepackage{hanging}
+\makeatletter
+\def\input@path{{second_ed/style/}{../style/}}
+\makeatother
+\usepackage{erm_textbook_style}
+\providecommand{\tightlist}{\setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\emergencystretch=2em
+
+% Simple display for Excel formulas and short code snippets.
+% Use \excelcode{formula} for inline formulas and the excelblock
+% environment for multi-line blocks (see style guide Section 18).
+\newcommand{\excelcode}[1]{{\small\ttfamily #1}}
+\newenvironment{excelblock}%
+  {\begin{quote}\small\ttfamily\setlength{\parskip}{2pt}}%
+  {\end{quote}}
+
+\begin{document}
+
+\setcounter{chapter}{3}
+\chapter{Risk Quantification and Qualification}
+\label{chap:risk-quantification}
+
+% -----------------------------------------------------------------------
+\begin{learningobjectives}
+  \item Distinguish between qualitative and quantitative approaches to risk
+        assessment and explain when each is most appropriate.
+  \item Explain why firms cannot rely solely on intuition to understand their
+        major risks and the value of systematic measurement.
+  \item Compute and interpret basic risk metrics including frequency, severity,
+        expected loss, variance, and standard deviation from sample data.
+  \item Describe how a retailer and a manufacturer might systematically
+        quantify their key operational and hazard risks.
+  \item Recognize and interpret normal versus skewed loss distributions,
+        including the concept of fat tails and tail risk.
+  \item Use Excel tools to estimate the probability and severity distribution
+        of losses and calculate a Value at Risk (VaR) measure.
+  \item Explain why VaR is useful but incomplete as a risk measure and why
+        qualitative judgment remains essential.
+  \item Integrate quantitative risk metrics with qualitative assessments to
+        support enterprise risk management decisions.
+\end{learningobjectives}
+
+% -----------------------------------------------------------------------
+\chapteroverview{%
+In Chapter~3, we learned how to identify and categorize risks using the
+four-quadrant framework and various risk identification techniques. Knowing
+that risks exist is essential, but it is only the beginning. Organizations
+must also assess the \emph{magnitude} of identified risks---how likely they
+are to occur and how severe their consequences might be. This chapter
+addresses risk assessment through both quantitative and qualitative
+approaches.
+
+Risk quantification uses numbers, statistical methods, and models to measure
+risk exposure. By analyzing historical data, organizations can estimate the
+frequency of adverse events, the distribution of loss severities, and
+aggregate risk exposure. Quantitative measures provide objectivity, enable
+comparison across different risks, support capital allocation decisions, and
+satisfy regulatory and stakeholder expectations for rigorous risk assessment.
+However, quantification has limitations: it relies on historical data that may
+not predict the future, it cannot easily capture rare catastrophic events, and
+it requires judgment about which models and assumptions to use.
+
+Risk qualification uses narrative descriptions, expert judgment, scenario
+analysis, and visual tools like risk matrices to assess risks. Qualitative
+approaches are valuable when historical data is limited, when risks are complex
+and difficult to model, when stakeholder perceptions matter, and when the
+organization needs to communicate about risks to non-technical audiences. This
+chapter develops skills in both approaches. We begin with the fundamental
+statistical concepts underlying risk measurement, work through two detailed
+cases---a regional retailer and a parts manufacturer---examine loss
+distributions with particular attention to skewed distributions and tail risk,
+and build a workers' compensation model in Excel to calculate Value at Risk.
+The chapter concludes by addressing the limits of quantitative methods and
+showing how to integrate quantitative and qualitative assessments into
+enterprise risk management.%
+}
+
+\clearpage
+
+% -----------------------------------------------------------------------
+% Opening Case 1: Long-Term Capital Management
+% -----------------------------------------------------------------------
+\begin{corporateexample}[When the Model Was the Risk: Long-Term Capital Management]
+
+In the mid-1990s, Long-Term Capital Management (LTCM)\index{Long-Term Capital Management (LTCM)} was the most admired
+hedge fund on Wall Street. Founded in 1994 by John Meriwether\index{Meriwether, John}, formerly of
+Salomon Brothers, the firm assembled a team that included two Nobel
+Prize-winning economists---Myron Scholes\index{Scholes, Myron} and Robert Merton\index{Merton, Robert}---along with some
+of the best fixed-income traders and quantitative analysts in the world.
+Investors lined up to get in. The fund charged high fees, limited withdrawals,
+and cultivated an aura of exclusivity.
+
+LTCM's strategy was ``relative-value arbitrage.'' Rather than betting on the
+overall direction of markets, it looked for tiny mispricings between similar
+securities---say, two government bonds with nearly identical cash flows that,
+in theory, should trade at nearly the same yield. The fund would buy the
+cheaper bond and short the more expensive one, expecting the spread to
+converge. The individual trades had small expected profits, but LTCM multiplied
+those profits through enormous leverage\index{leverage}: it borrowed heavily and used
+derivatives so that a dollar of investor capital controlled many dollars of
+positions.
+
+Quantification was central to the strategy. LTCM's models used historical data
+to estimate how volatile different spreads were, how correlated they were with
+one another, and how likely it was that many positions would move against the
+fund simultaneously. Using techniques that would later be popularized as value
+at risk (VaR)\index{Value at Risk (VaR)}, the firm calculated measures like ``on 99 out of 100 days, our
+losses should not exceed \$X'' or ``the probability of losing more than \$Y in
+a month is less than 1 in 10,000.'' These numbers reassured investors and
+justified the high leverage. If the worst-case loss was extremely unlikely, why
+not borrow more to scale up the small arbitrage profits?
+
+For a few years, the models seemed to work. Between 1994 and 1997, LTCM
+generated very high returns with remarkably low reported volatility. Its VaR
+numbers suggested the firm was taking far less risk than most funds holding
+equities. Regulators and counterparties took comfort from the sophisticated
+math and the distinguished people running it. On paper, this looked like a
+textbook case of quantification done right.
+
+In 1998, the real world refused to cooperate.
+
+That summer, Russia defaulted on its government debt and devalued the ruble.
+Investors panicked. Instead of behaving independently, prices across many
+different securities moved together in a ``flight to quality'': riskier assets
+were sold indiscriminately and the safest government bonds attracted all the
+demand. The spreads LTCM had bet would converge suddenly blew out. Positions
+that were supposed to offset one another all lost value at the same time.
+Liquidity dried up; the fund could not exit its positions without pushing
+prices even further against itself.
+
+The losses escalated quickly. Over a few months in 1998, LTCM lost about
+\$4.6~billion---roughly 90~percent of its capital. Trades that the models said
+should almost never produce large losses did exactly that. Correlations that
+had been low or negative in the historical data spiked toward one. The
+``six-sigma'' or ``ten-sigma'' scenarios treated as virtually impossible turned
+out to be quite possible in a crisis.
+
+The problem was not that LTCM failed to quantify risk. It quantified risk
+extensively. The failure lay in what exactly was being quantified and what
+assumptions were embedded in the numbers. The VaR models assumed that the past
+was a reasonable guide to the future, that return distributions were fairly
+stable, and that diversification across many trades would protect the fund
+because not everything would go wrong at once. They also largely ignored
+liquidity risk\index{liquidity risk}---the possibility that in a stressed market, LTCM would be
+unable to exit positions without enormous price impact. When those assumptions
+broke down, the reassuring numbers became dangerous. High leverage magnified
+the error: a position sized to be ``safe'' given a 99~percent VaR can be
+catastrophic if the true distribution has fatter tails than the model allows.
+LTCM's near-failure was large enough, and its links to major banks so
+extensive, that the Federal Reserve Bank of New York\index{Federal Reserve Bank of New York} convened a group of large
+financial institutions to organize a private rescue and avoid broader market
+disruption.
+
+For students of risk quantification, LTCM offers several lessons. Sophisticated
+models do not eliminate risk; they transform model risk\index{model risk} into a central risk
+factor. Quantifying risk with historical data is most fragile in exactly the
+tail events that matter most. Leverage interacts dangerously with overconfident
+quantification: if you size positions based on optimistic estimates of
+volatility and correlation, you are effectively betting your firm on the model
+being right. The LTCM episode illustrates why enterprise risk management\index{enterprise risk management (ERM)} must
+ask not only ``What does the VaR say?'' but also ``What assumptions does this
+number rest on, and how might they fail under stress?''
+
+\source{Lowenstein, R. (2000). \emph{When genius failed: The rise and fall of
+Long-Term Capital Management.} Random House.}
+
+\end{corporateexample}
+
+% -----------------------------------------------------------------------
+% Opening Case 2: Moneyball
+% -----------------------------------------------------------------------
+\begin{corporateexample}[Moneyball: Quantification as Competitive Advantage]
+
+\begin{quote}
+\textit{``This is a very simple game. You throw the ball, you catch the ball,
+you hit the ball. Sometimes you win, sometimes you lose, sometimes it rains.''}\\[2pt]
+\hfill ---Ebby Calvin ``Nuke'' LaLoosh, \textit{Bull Durham} (1988)
+\end{quote}
+
+\medskip
+Wouldn't it be nice to reduce some of that uncertainty?
+
+At the start of the 2002 Major League Baseball season, the Oakland Athletics\index{Oakland Athletics}
+had a problem. They had just lost three star players---Jason Giambi, Johnny
+Damon, and Jason Isringhausen---to richer teams in free agency. The New York
+Yankees, Boston Red Sox, and other big-market clubs could afford to pay top
+dollar for proven talent. The A's could not. Their payroll was less than a
+third of the Yankees', and there was no salary cap to level the playing field.
+
+Traditional baseball wisdom said that without stars, a small-market team had
+little chance. Scouts and executives judged players with a mix of experience,
+intuition, and conventional statistics like batting average, runs batted in
+(RBIs), and pitcher wins. These measures were familiar, but they were also
+noisy and sometimes misleading. A player might have a high batting average
+because of a hot streak or lucky singles; a pitcher might accumulate wins
+because his team scored a lot of runs, not because he actually prevented runs
+better than others.
+
+Oakland's general manager, Billy Beane\index{Beane, Billy}, and his assistant Paul DePodesta\index{DePodesta, Paul} took
+a different approach. Influenced by sabermetric research\index{sabermetrics}---most famously the
+work of Bill James\index{James, Bill}---they set out to quantify what actually led to wins, and to
+measure players accordingly. They treated the problem like an applied
+risk-quantification exercise: given limited resources, how could they buy as
+much expected run production and run prevention as possible, while managing the
+risk that their measurements were wrong?
+
+Their analysis reached several conclusions that contradicted conventional
+wisdom. One of the most important was that on-base percentage
+(OBP)\index{on-base percentage (OBP)}---how often a player reached base by any means, including
+walks---was far more valuable than teams were paying for. Walks, which scouts
+often dismissed as signs of passivity, turned out to correlate strongly with
+run scoring. Another finding was that certain types of players---older hitters
+with high OBP but unconventional bodies or ``ugly'' swings---were
+systematically undervalued in the market.
+
+In Moneyball\index{Moneyball} terms, the A's quantified ``player risk'' differently. Instead of
+asking ``Does this player look like a star?'' they built simple models
+estimating how many runs and wins a player was likely to add, given his
+underlying statistics. They also considered variance: a slugger with a lot of
+strikeouts might have more volatile performance than a high-OBP player, even if
+both were projected to contribute similar runs. For a low-budget team, that
+volatility was itself a risk---there was little room to absorb a prolonged
+slump from an expensive acquisition.
+
+Armed with these quantifications, the A's made unconventional choices. They
+signed players like Scott Hatteberg, a catcher with arm problems whom they
+converted to first base, largely because he reached base at a high rate but
+other teams viewed him as damaged goods. They avoided paying for traditional
+statistics the market overvalued, such as RBIs, which depend heavily on context
+rather than individual skill.
+
+The results were striking. In 2002, despite their low payroll, the A's won 103
+games---matching the Yankees---and reached the playoffs. They did it not by
+outspending rivals, but by re-pricing risk. Players the market treated as risky
+or marginal were, by the A's calculations, bargains with relatively predictable
+on-base skills. Conversely, many high-priced free agents were overpriced
+lottery tickets.
+
+The A's models were not perfect. Some bets failed. Injuries and random
+variation still mattered. Over time, other teams copied the approach, eroding
+Oakland's advantage. But the Moneyball story illustrates something that applies
+well beyond baseball: better quantification of risk and value changes which
+opportunities you see and which you ignore. If you measure only traditional
+metrics, you may systematically overpay for familiar ``stars'' and underinvest
+in boring but reliably productive alternatives. Quantification is most powerful
+when paired with constraints---the A's did not try to eliminate risk but tried
+to choose the mix of players that maximized expected wins per dollar under a
+strict budget, much like a firm optimizing a portfolio of investments under
+capital limits.
+
+\source{Lewis, M. (2003). \emph{Moneyball: The art of winning an unfair game.}
+W.\,W.\ Norton \& Company.}
+
+\end{corporateexample}
+
+% -----------------------------------------------------------------------
+\section{Why Quantify and Qualify Risk?}
+\label{sec:why-quantify}
+% -----------------------------------------------------------------------
+
+Risk assessment\index{risk assessment} is the bridge between risk identification (Chapter~3) and risk
+response (future chapters). Once an organization knows what risks it faces, it
+must evaluate how significant those risks are. Which risks deserve the most
+management attention? Which require substantial resources for mitigation or
+transfer? Which fall within the organization's risk appetite, and which exceed
+acceptable levels? These questions demand systematic assessment, not mere
+intuition.
+
+\subsection{The Limitations of Intuition and Informal Assessment}
+\label{subsec:intuition-limits}
+
+Many managers have strong intuitions about risks based on experience, industry
+knowledge, and pattern recognition. These intuitions are valuable---experienced
+managers often detect risks that purely statistical approaches miss. But
+relying solely on intuition creates several problems.
+
+First, \textbf{human judgment is subject to systematic biases.} Psychological
+research shows that people tend to overestimate the likelihood of vivid, recent,
+or emotionally salient events while underestimating risks that are abstract or
+unfamiliar. A manager who recently experienced a cybersecurity incident may
+overestimate cyber risk while underestimating equally significant but less
+visible risks. People also exhibit overconfidence\index{overconfidence}, believing their judgments are
+more accurate than they actually are, and anchoring bias\index{anchoring bias}, being influenced by
+initial estimates even when subsequent information suggests different
+conclusions.
+
+Second, \textbf{informal assessment makes comparison and prioritization
+difficult.} If one manager says a particular risk is ``high'' while another
+says a different risk is ``moderate,'' how should the organization allocate
+resources between them? Without common metrics and systematic measurement,
+resources may flow to whichever risks are advocated most forcefully by
+influential managers rather than to risks that are objectively most
+significant.
+
+Third, \textbf{stakeholders increasingly expect rigorous, data-driven risk
+assessment.} Boards of directors, regulators, rating agencies, investors, and
+lenders want evidence that management understands its risk exposures
+quantitatively. Regulatory frameworks for banks and insurers mandate
+quantitative risk measurement and minimum capital based on risk models. Rating
+agencies assess the sophistication of risk quantification when assigning credit
+ratings. Informal, intuitive risk assessment no longer satisfies these
+expectations.
+
+\subsection{The Value of Quantitative Risk Measurement}
+\label{subsec:quantitative-value}
+
+Quantitative risk measurement\index{risk quantification} addresses these limitations by bringing
+discipline, objectivity, and comparability to risk assessment. Several specific
+benefits warrant the effort.
+
+\textbf{Capital allocation and risk appetite.} Organizations have finite capital
+and must decide how much to allocate to different business units, products, or
+activities partly based on their riskiness. Risk-adjusted performance
+measurement---comparing returns earned relative to risks taken---requires
+quantifying risk. A business unit generating 15~percent return on capital might
+appear attractive until risk measurement reveals it also involves high
+volatility or potential for large losses. Defining risk appetite\index{risk appetite} also requires
+quantification: statements like ``We will not accept risks that could reduce
+annual earnings by more than 10~percent'' or ``We will maintain capital
+sufficient to survive a 1-in-100-year loss event'' require measuring what those
+thresholds mean numerically.
+
+\textbf{Pricing and reserving.} Insurance companies must price policies based on
+expected losses plus expenses and profit margin. Without quantifying expected
+claim frequency and severity, insurers cannot price rationally. Similarly,
+manufacturers must set warranty reserves based on expected warranty claim costs,
+and retailers must establish loss prevention budgets based on expected
+shrinkage. Any business decision that involves absorbing risk requires
+estimating the expected cost of that risk.
+
+\textbf{Risk transfer and insurance purchasing.} Organizations deciding how much
+insurance to buy and what deductibles or retentions to accept need to understand
+their loss distributions quantitatively. An organization might rationally choose
+to retain small, frequent losses---because insurance for such losses is
+expensive relative to expected losses---while transferring large, infrequent
+losses where insurance provides genuine value. Making this decision requires
+quantifying the frequency and severity of different loss scenarios.
+
+\textbf{Regulatory compliance.} Banks must calculate risk-weighted assets and
+maintain minimum capital ratios under Basel~III\index{Basel III}. These calculations require
+quantitative models for credit risk, market risk, and operational risk
+(Basel Committee on Banking Supervision, 2011). Insurers face similar requirements under risk-based capital
+regulations. Even non-financial firms face regulatory expectations for risk
+quantification in areas like environmental liability estimation, pension
+liability measurement, and asset impairment testing.
+
+\textbf{Performance monitoring and early warning.} Once risks are quantified,
+organizations can establish key risk indicators (KRIs)\index{key risk indicator (KRI)}---metrics that signal
+when risk exposure is increasing. If historical analysis shows that workplace
+accidents increase when overtime hours exceed certain thresholds, overtime can
+serve as a leading indicator of accident risk. Quantitative monitoring enables
+proactive risk management rather than reactive response after losses occur.
+
+\subsection{Quantification Beyond Finance: Non-Financial Companies}
+\label{subsec:quantification-nonfinancial}
+
+The examples in Section~\ref{subsec:quantitative-value} draw heavily from
+banking and insurance, because those industries have faced the most regulatory
+pressure to formalize risk measurement. But the underlying logic---measure what
+you can, track it consistently, compare against benchmarks---applies just as
+well to hospitals, manufacturers, retailers, sports franchises, and virtually
+any organization that faces repeated, partially predictable losses.
+
+The Moneyball story illustrates this clearly. Baseball teams had long relied on
+intuition and traditional metrics to evaluate players. When the Oakland A's
+began asking which statistics actually predicted run scoring---and measured
+those statistics rigorously---they found systematic mispricings that the rest
+of the market had missed. Their ``risk management'' was simply disciplined
+measurement of what mattered, combined with a willingness to act on the numbers
+when conventional wisdom pointed elsewhere.
+
+Hospitals offer a less glamorous but equally instructive example. A hospital's
+most significant operational risks include hospital-acquired infections (HAIs)\index{hospital-acquired infections},
+medication errors, and preventable readmissions---all of which cause patient
+harm and generate substantial financial costs. For decades, these were managed
+largely through clinical intuition and periodic audits. Beginning in the 2000s,
+hospitals began systematically quantifying them. The CDC's National Healthcare
+Safety Network (NHSN) tracks central line-associated bloodstream infection
+(CLABSI) rates expressed as infections per 1,000 catheter-days, adjusted for
+patient acuity, and publishes national benchmarks. A hospital can compare its
+rate against the national median, identify which units or procedures drive
+excess infections, and set measurable improvement targets. The federal
+government made this consequential: under the Affordable Care Act\index{Affordable Care Act}, hospitals
+with excess readmission rates for conditions like heart failure and pneumonia
+face direct reductions in Medicare reimbursement. A hospital that quantifies
+its 30-day readmission rate at 22~percent against a national average of
+15~percent for heart failure patients is no longer managing a vague quality
+problem---it is managing a measurable financial exposure with identifiable
+drivers (inadequate discharge planning, poor patient education, lack of
+post-discharge follow-up) that can be addressed with targeted interventions.
+
+The same logic extends to other industries. Airlines track dispatch
+reliability---the percentage of flights that depart on schedule without a
+mechanical delay or cancellation---as a direct operational risk indicator,
+measured per 1,000 departures and compared against industry benchmarks. A
+carrier discovering that one aircraft type shows dispatch reliability of
+96.8~percent versus a peer average of 98.5~percent knows quantitatively where
+it is underperforming and by how much. That number drives maintenance
+investment decisions, fleet scheduling, and reserve aircraft positioning in a
+way that ``our fleet seems unreliable this year'' simply cannot. What unifies
+these examples---baseball, hospitals, airlines---is not analytical
+sophistication. None required derivatives pricing or Monte Carlo simulation.
+They required identifying a relevant exposure base, consistently measuring
+events against that base, tracking severity or impact when events occurred, and
+comparing against a benchmark. That discipline, applied consistently, changes
+decisions. Without it, organizations tend to respond to the most recent vivid
+incident rather than the underlying pattern---exactly the behavioral bias that
+systematic quantification is designed to correct.
+
+\subsection{The Continuing Role of Qualitative Assessment}
+\label{subsec:qualitative-role}
+
+Despite the value of quantification, qualitative assessment\index{risk qualification} remains essential.
+Numbers alone do not provide complete understanding, and some risks resist
+quantification entirely.
+
+\textbf{Limited data for low-frequency, high-severity events.} Many significant
+risks occur rarely, providing limited historical data. A manufacturer may have
+operated for 20~years without experiencing a catastrophic equipment failure, but
+that is not evidence the risk is negligible---it may simply mean the rare event
+has not yet occurred. Quantifying such risks requires judgment about worst-case
+scenarios, not just statistical analysis of historical losses.
+
+\textbf{Emerging and changing risks.} Quantification relies on historical data,
+but the future may differ from the past. New technologies create new risks
+(cybersecurity risk evolved dramatically as information systems changed).
+Regulatory changes create new compliance risks. Strategic risks often involve
+unique circumstances without historical precedent. For these risks, qualitative
+scenario analysis and expert judgment supplement limited quantitative data.
+
+\textbf{Risk interdependencies and correlations.} Quantifying how different
+risks interact---how a natural disaster might simultaneously disrupt supply
+chains, damage facilities, and harm employees---requires assumptions about
+correlations that are hard to estimate from data. Qualitative analysis through
+scenario exercises and stress testing reveals interactions that purely
+statistical approaches might miss.
+
+\textbf{Communication and stakeholder engagement.} Most business leaders and
+board members are not statisticians. Risk matrices, heat maps\index{heat map}, and narrative
+scenario descriptions often communicate more effectively with non-technical
+audiences than quantitative models. Moreover, stakeholder perceptions of risk
+matter even when they diverge from statistical assessments---a risk that
+stakeholders find unacceptable may require attention even if quantitative
+analysis suggests it is modest. The goal is informed risk assessment, not
+mathematical precision for its own sake.
+
+% -----------------------------------------------------------------------
+\section{Basic Statistical Tools for Risk Measurement}
+\label{sec:statistical-tools}
+% -----------------------------------------------------------------------
+
+Risk quantification builds on fundamental concepts from statistics. This
+section reviews the essential tools for measuring risk, assuming you have had
+an introductory statistics course but may need a refresher. The emphasis is on
+intuitive understanding and practical application, not mathematical derivation.
+
+\subsection{Frequency, Severity, and Expected Loss}
+\label{subsec:frequency-severity}
+
+The most basic framework for quantifying risk involves three concepts\index{frequency-severity analysis}:
+frequency, severity, and expected loss.
+
+\textbf{Frequency}\index{frequency} refers to how often an adverse event occurs, typically
+expressed as the number of events per unit of exposure over a defined time
+period. For example:
+
+\begin{itemize}
+  \item Workplace accidents per 100 employees per year
+  \item Customer slip-and-fall incidents per store per year
+  \item Product defects per 10,000 units manufactured
+  \item Data breach attempts per month
+\end{itemize}
+
+Frequency is estimated from historical data by counting events and dividing by
+the exposure base. If a retailer with 50 stores experienced 15 slip-and-fall
+incidents over the past year, the estimated frequency is
+\(15 / 50 = 0.30\) incidents per store per year.
+
+\textbf{Severity}\index{severity} refers to the magnitude of loss when an event occurs,
+measured in dollars, time, or other relevant units. Severity analysis examines
+the distribution of loss sizes: how severe is the typical loss? What is the
+range from smallest to largest? Are there occasional very large losses that
+dominate total losses even though they are infrequent?
+
+\textbf{Expected loss}\index{expected loss} combines frequency and severity to estimate the average
+total loss over a defined period:
+
+\[
+  \text{Expected Loss} = \text{Frequency} \times \text{Average Severity}
+\]
+
+For example, if a retailer expects 0.30 slip-and-fall incidents per store per
+year and the average incident costs \$10,000, the expected loss per store per
+year is \(0.30 \times \$10{,}000 = \$3{,}000\). For 50 stores, expected annual
+loss is \$150,000. Expected loss represents the central tendency---what you
+would expect on average over many years. In any single year, actual losses will
+differ due to random variation. Expected loss provides the baseline for
+budgeting, setting loss reserves, and determining appropriate insurance
+coverage.
+
+\subsection{Descriptive Statistics: Mean, Median, Variance, and Standard Deviation}
+\label{subsec:descriptive-stats}
+
+Beyond expected loss, several statistical measures help characterize risk
+distributions.
+
+\textbf{Mean (average)}\index{mean} is the arithmetic average of observed values. Mean
+severity is the average loss size across all events. Means are intuitive and
+widely used but can be heavily influenced by outliers---a few very large losses
+can pull the mean upward even when most losses are small.
+
+\textbf{Median}\index{median} is the middle value when observations are arranged in order.
+Half of observations fall below the median; half above. Median severity is
+often considerably lower than mean severity for loss distributions because most
+losses are small while a few large losses pull up the mean. If a manufacturer
+experiences 100 warranty claims ranging from \$50 to \$50,000, the median might
+be \$800 while the mean might be \$2,000, pulled up by a few very large claims.
+
+\textbf{Minimum and maximum} establish the range of historical experience. The
+maximum historical loss should not be assumed to be the maximum possible loss:
+larger losses than have been experienced historically can and do occur.
+
+\textbf{Variance}\index{variance} measures dispersion around the mean. It is the average squared
+deviation from the mean:
+
+\[
+  \text{Variance} = \frac{\sum_{i=1}^{n}(x_i - \bar{x})^2}{n}
+\]
+
+Variance is expressed in squared units, which is not intuitive, so it is rarely
+reported directly. However, it is important conceptually because it quantifies
+uncertainty---distributions with higher variance are more uncertain and risky.
+
+\textbf{Standard deviation}\index{standard deviation} is the square root of variance, expressed in the
+same units as the original data. For normally distributed data, approximately
+68~percent of observations fall within one standard deviation of the mean,
+95~percent within two standard deviations, and 99.7~percent within three
+standard deviations. If expected annual loss is \$100,000 with standard
+deviation \$30,000, actual annual losses will fall between \$70,000 and
+\$130,000 in roughly 68~percent of years---assuming approximately normal
+distribution. Many risk distributions are not normal, so the standard normal
+percentages do not always apply, but standard deviation remains useful as a
+general measure of variability.
+
+\subsection{Correlation and Risk Aggregation}
+\label{subsec:correlation}
+
+Most organizations face multiple risks simultaneously. Total risk depends not
+only on the magnitude of individual risks but also on how those risks relate to
+each other---whether they tend to occur together or independently.
+
+\textbf{Correlation}\index{correlation} measures the degree to which two variables move together,
+ranging from \(-1\) to \(+1\). Positive correlation (between 0 and \(+1\))
+means when one variable increases, the other tends to increase as well.
+Workplace accidents and equipment breakdowns might be positively correlated if
+both increase during periods of rushed production and inadequate maintenance.
+Negative correlation (between 0 and \(-1\)) means when one variable increases,
+the other tends to decrease. Heating costs and cooling costs are negatively
+correlated---high in winter, low in summer, or vice versa. Zero correlation
+means the variables move independently.
+
+Correlation matters for risk aggregation. Consider an organization facing two
+risks, each with expected loss of \$1~million and standard deviation of
+\$500,000. Total expected loss is always the sum of individual expected losses:
+\(\$1\text{M} + \$1\text{M} = \$2\text{M}\), regardless of correlation. Total
+standard deviation depends on correlation:
+
+\begin{itemize}
+  \item If perfectly positively correlated: \(\$500{,}000 + \$500{,}000 = \$1{,}000{,}000\)
+  \item If independent (correlation \(= 0\)):
+        \(\sqrt{\$500{,}000^2 + \$500{,}000^2} \approx \$707{,}000\)
+  \item If perfectly negatively correlated:
+        \(\$500{,}000 - \$500{,}000 = \$0\)
+\end{itemize}
+
+This is the principle of \textbf{diversification}\index{diversification}: combining uncorrelated or
+negatively correlated risks reduces aggregate volatility below the sum of
+individual volatilities. Insurers rely on this principle---pooling many
+independent risks allows them to predict aggregate losses more reliably than
+individual losses. However, correlations are difficult to estimate accurately
+and may change during stress periods. As the LTCM case illustrates, risks that
+appear uncorrelated in normal times may become highly correlated during
+crises---and that is precisely when the stakes are highest.
+
+\subsection{Probability Distributions and Loss Distributions}
+\label{subsec:loss-distributions}
+
+A \textbf{probability distribution}\index{probability distribution} describes the likelihood of different
+possible outcomes. For risk management, loss distributions\index{loss distribution} describe the
+probabilities of different loss amounts. Loss distributions can be
+\emph{discrete}---taking on specific distinct values, like the number of
+workplace accidents in a year (0, 1, 2, 3, \ldots)---or
+\emph{continuous}---taking any value within a range, like the dollar amount of
+property damage or a liability settlement.
+
+The \textbf{shape} of the loss distribution is critical for risk management.
+\emph{Symmetric distributions} are balanced around the mean, with equal
+probability of values above and below the mean by similar amounts. The normal
+distribution (bell curve) is the most familiar example. \emph{Right-skewed
+(positively skewed) distributions} have an asymmetric long tail extending toward
+larger values. Most losses are relatively small, but occasional large losses
+create that long right tail. The mean exceeds the median because rare large
+values pull the mean upward.
+
+Right-skewed distributions characterize many insurable risks: most workplace
+accidents result in minor injuries with modest costs, but occasional serious
+injuries create very large claims. Most property damage incidents are minor, but
+occasional fires or natural disasters create catastrophic losses. Understanding
+whether a loss distribution is symmetric or skewed is essential for risk
+management. If you assume losses are normally distributed when they are actually
+right-skewed, you will underestimate the probability and magnitude of large
+losses---a dangerous mistake, and one that contributed materially to LTCM's
+failure.
+
+% -----------------------------------------------------------------------
+\section{Case Study: Quantifying Risk at Midtown Outfitters (Retailer)}
+\label{sec:midtown-outfitters}
+% -----------------------------------------------------------------------
+
+To make these statistical concepts concrete, we work through a detailed case
+of risk quantification for a regional retailer. This case demonstrates how an
+organization gathers data, computes basic risk metrics, and interprets the
+results to inform risk management decisions.
+
+\subsection{Company Background and Risk Landscape}
+\label{subsec:midtown-background}
+
+Midtown Outfitters\index{Midtown Outfitters} is a regional chain of 45 retail clothing stores located
+across three states in the Midwest. The company operates mall-based stores,
+stand-alone locations, and an e-commerce platform. Annual revenues are
+approximately \$180~million with 1,200 employees (800 full-time, 400
+part-time). Like all retailers, Midtown Outfitters faces multiple risk
+categories identified using the four-quadrant framework from Chapter~3.
+
+\textbf{Hazard risks} include property damage to stores, inventory, and
+fixtures from fire, weather, water damage, or vandalism; general liability from
+customer slip-and-fall accidents or product liability claims; employee workplace
+injuries; and vehicle accidents involving company-owned delivery vehicles.
+
+\textbf{Operational risks} include inventory shrinkage from shoplifting,
+employee theft, or administrative errors; supply chain disruptions affecting
+product availability; point-of-sale system failures; and employee turnover and
+training costs.
+
+\textbf{Financial risks} include credit card processing fees and chargebacks;
+currency exposure from imported merchandise; and interest rate risk on
+variable-rate debt.
+
+\textbf{Strategic risks} include e-commerce competition from larger national
+retailers, changing consumer preferences, lease costs and commitments for mall
+locations, and seasonal demand variability.
+
+For this case study, we focus on quantifying several hazard and operational
+risks where Midtown Outfitters has historical loss data: customer slip-and-fall
+incidents, inventory shrinkage, and minor property damage.
+
+\subsection{Data Collection and Organization}
+\label{subsec:midtown-data}
+
+Midtown Outfitters' risk manager begins by gathering internal data from multiple
+sources. Incident reports from a centralized database record all reported
+incidents---customer accidents, employee injuries, property damage events, and
+security incidents---with date, location, description, immediate costs, and
+whether a claim was filed. The company's insurance broker provides detailed
+loss runs\index{loss runs} (historical claims data) for general liability, property, workers'
+compensation, and other coverages. Loss runs include claim date, description,
+status (open or closed), paid amounts, and reserves for open claims. Accounting
+systems track inventory purchases, sales, and physical inventory counts, from
+which shrinkage is calculated. Industry associations and insurance providers
+publish benchmark statistics for retail loss frequencies and severities,
+providing context for evaluating the company's experience relative to peers.
+The risk manager organizes five years of data to ensure a reasonably large
+sample while remaining recent enough to reflect current operations.
+
+\subsection{Quantifying Slip-and-Fall Incidents}
+\label{subsec:midtown-slipfall}
+
+Customer slip-and-fall incidents represent Midtown Outfitters' most frequent
+general liability exposure. The risk manager follows four analytical steps.
+
+\textbf{Step~1: Calculate Frequency.} Over five years, Midtown Outfitters
+experienced 68 slip-and-fall incidents across all stores: 12 incidents in
+Year~1 (40 stores operating), 15 in Year~2 (42 stores), 14 in Year~3
+(44 stores), 13 in Year~4 (45 stores), and 14 in Year~5 (45 stores). Total
+exposure is 215 store-years (40\,+\,42\,+\,44\,+\,45\,+\,45).
+
+\[
+  \text{Frequency} = \frac{68 \text{ incidents}}{215 \text{ store-years}}
+  = 0.316 \text{ incidents per store per year}
+\]
+
+Each store experiences roughly one incident every three years. For the current
+45 stores, expected annual incidents \(= 45 \times 0.316 = 14.2\).
+
+\textbf{Step~2: Analyze Severity Distribution.} Of the 68 incidents: 52
+incidents (76\%) resulted in no claim, with average cost \$300 per incident
+for administrative time and minor accommodation; 12 incidents (18\%) resulted
+in small claims averaging \$4,500 each; and 4 incidents (6\%) resulted in
+larger claims costing \$15,000, \$22,000, \$35,000, and \$48,000 respectively.
+
+\begin{align*}
+  \text{Total costs} &= (52 \times \$300) + (12 \times \$4{,}500)
+                       + (\$15{,}000 + \$22{,}000 + \$35{,}000 + \$48{,}000)\\
+                     &= \$15{,}600 + \$54{,}000 + \$120{,}000 = \$189{,}600
+\end{align*}
+
+Average severity \(= \$189{,}600 / 68 = \$2{,}788\) per incident. Average
+severity is pulled up by the four large claims even though most incidents
+(76\%) cost only \$300. The median severity is \$300, illustrating the
+right-skewed nature of the loss distribution.
+
+\textbf{Step~3: Calculate Expected Loss.}
+\[
+  \text{Expected annual loss} = 0.316 \times \$2{,}788 = \$881 \text{ per store per year}
+\]
+For 45 stores: \(45 \times \$881 = \$39{,}645\) expected annual loss from
+slip-and-fall incidents.
+
+\textbf{Step~4: Assess Variability.} Historical annual total costs varied
+considerably: Year~1 \$35,000 (including one \$22,000 claim), Year~2 \$42,000,
+Year~3 \$18,000 (mostly minor incidents), Year~4 \$62,000 (including a \$35,000
+claim), and Year~5 \$32,600. Mean annual loss is \$37,920 with standard
+deviation approximately \$16,000. The high standard deviation relative to the
+mean reflects significant year-to-year variability driven by whether any large
+claims occur in a given year.
+
+\subsection{Quantifying Inventory Shrinkage}
+\label{subsec:midtown-shrinkage}
+
+Inventory shrinkage\index{inventory shrinkage}---the difference between book inventory and physical
+inventory---represents ongoing operational loss from shoplifting, employee
+theft, vendor fraud, and administrative errors. Midtown Outfitters conducts
+annual physical inventory counts at each store. Historical shrinkage as a
+percentage of sales was: Year~1 2.1\%, Year~2 1.8\%, Year~3 2.3\%, Year~4
+1.9\%, and Year~5 2.0\%, yielding an average rate of 2.02\%. With annual sales
+of \$180~million, expected annual shrinkage is \(\$180\text{M} \times 2.02\% =
+\$3.64\text{M}\).
+
+Shrinkage is relatively predictable---the standard deviation of the five annual
+percentages is only 0.19 percentage points---because it accumulates through
+many small incidents rather than clustering in rare large events. Unlike
+slip-and-fall claims, where a single large settlement can dominate a given year,
+shrinkage aggregates gradually. That said, shrinkage varies considerably across
+stores, and high-shrinkage locations can be identified for enhanced security,
+employee training, or store design modifications.
+
+\subsection{Quantifying Property Damage}
+\label{subsec:midtown-property}
+
+Minor property damage---vandalism, broken windows, roof leaks, fixture
+damage---occurs periodically. Major losses are rare but potentially
+catastrophic, creating a right-skewed distribution. Over five years, Midtown
+Outfitters experienced 85 minor incidents (average cost \$1,200 each), 8
+moderate incidents (average cost \$8,500 each), and 1 major incident---a store
+damaged by a tornado---costing \$180,000. Total incidents were 94 over 215
+store-years.
+
+\begin{align*}
+  \text{Frequency} &= 94 / 215 = 0.437 \text{ per store per year}\\
+  \text{Total costs} &= (85 \times \$1{,}200) + (8 \times \$8{,}500) + \$180{,}000\\
+                     &= \$102{,}000 + \$68{,}000 + \$180{,}000 = \$350{,}000\\
+  \text{Average severity} &= \$350{,}000 / 94 = \$3{,}723\\
+  \text{Expected annual loss} &= 0.437 \times \$3{,}723 = \$1{,}627 \text{ per store}
+                                 = \$73{,}215 \text{ for 45 stores}
+\end{align*}
+
+This distribution is heavily right-skewed. Excluding the tornado, the 93 other
+incidents averaged only \$1,828 in severity. The single tornado caused more
+damage than all other incidents combined over five years. Most of the time,
+property losses are minor and manageable; rare severe events can dominate total
+losses over any multi-year period.
+
+\subsection{Risk Matrix and Prioritization}
+\label{subsec:midtown-matrix}
+
+To integrate quantitative analysis with qualitative assessment, Midtown
+Outfitters creates a \(3 \times 3\) risk matrix\index{risk matrix} plotting risks based on
+likelihood (frequency) and impact (severity). Likelihood categories are high
+(more than 5 incidents per year across all stores), medium (1--5 per year), and
+low (fewer than 1 per year). Impact categories are high (potential single-event
+loss exceeding \$100,000), medium (\$10,000--\$100,000), and low (typically
+under \$10,000).
+
+Based on the quantitative analysis: slip-and-fall incidents fall into the
+Medium-Medium cell (14 expected incidents per year, most claims under \$50,000
+but potential for larger); inventory shrinkage falls into the High-Low cell
+(occurs continuously, each incident small, but aggregate annual impact of
+\$3.64~million demands attention); minor and moderate property damage falls in
+the High-Low cell; and catastrophic property events fall in the Low-High cell
+(a tornado once in five years, costing \$180,000 or more). Risks in
+Medium-Medium and Low-High cells warrant particular attention. Medium-Medium
+risks accumulate substantial aggregate losses. Low-High risks, while rare, can
+create severe financial stress if uninsured.
+
+\subsection{Management Interpretation and Decisions}
+\label{subsec:midtown-decisions}
+
+The quantitative analysis informs several management decisions. For
+\textbf{insurance purchasing}, expected annual losses from slip-and-fall
+(\$39,645) and typical property damage (\$73,215) are modest relative to
+revenues, suggesting these risks can be largely retained through deductibles.
+However, catastrophic losses and large liability claims justify insurance for
+severe events. Management decides to maintain general liability insurance with a
+\$25,000 per-occurrence retention and property insurance with a \$10,000
+per-occurrence deductible---retaining most frequent losses while transferring
+tail risk.
+
+For \textbf{loss prevention}, the \$3.64~million annual shrinkage represents
+2\% of sales and a meaningful profit impact. Even modest reduction---from
+2.02\% to 1.75\%---would save approximately \$500,000 annually, justifying
+substantial investment in electronic article surveillance, employee training,
+and store design modifications.
+
+For \textbf{slip-and-fall prevention}, analysis shows frequency spikes during
+winter months (ice and snow tracked into stores) and on rainy days (wet
+floors). Management implements protocols for prompt floor drying, warning signs,
+and enhanced entrance matting during adverse weather. Management also
+establishes quarterly monitoring of shrinkage rates, incident frequencies, and
+claims severity; deviations from expected levels trigger investigation. This
+case illustrates the cycle of risk quantification: gather data, calculate
+frequency and severity, compute expected losses and variability, use risk
+matrices to prioritize, and translate analysis into management decisions.
+
+% -----------------------------------------------------------------------
+\section{Case Study: Quantifying Risk at Precision Parts Inc.\ (Manufacturer)}
+\label{sec:precision-parts}
+% -----------------------------------------------------------------------
+
+Manufacturing companies face different risk profiles than retailers, with
+emphasis on equipment reliability, product quality, workplace safety, and
+supply chain continuity. This second case demonstrates risk quantification in a
+manufacturing context.
+
+\subsection{Company Background}
+\label{subsec:precision-background}
+
+Precision Parts Inc.\index{Precision Parts Inc.}\ manufactures metal components for the automotive and
+aerospace industries. The company operates two production facilities (Michigan
+and Ohio) employing 650 workers. Annual revenues are approximately
+\$120~million. Production involves machining, stamping, welding, and finishing
+operations using specialized equipment. Key risks include equipment breakdown
+and unplanned production downtime; product defects leading to customer returns,
+warranty claims, or recalls; workplace injuries in production environments; and
+supply chain disruptions for raw materials (primarily specialty steel and
+aluminum).
+
+\subsection{Quantifying Equipment Breakdown and Downtime}
+\label{subsec:precision-equipment}
+
+Equipment reliability directly affects production capacity, customer deliveries,
+and profitability. Precision Parts maintains detailed maintenance logs for all
+equipment failures, repair times, and costs. Analysis of three years of data
+for critical production equipment (CNC machines, stamping presses, welding
+robots) shows 72 total failures (24, 21, and 27 in years 1--3), averaging 24
+per year. Failure categories are minor failures (48 of 72, 67\%), averaging
+4~hours of downtime and repaired by maintenance staff; moderate failures (18 of
+72, 25\%), averaging 16~hours and requiring replacement parts; and major
+failures (6 of 72, 8\%), averaging 72~hours and requiring extensive repair or
+equipment replacement.
+
+\[
+  \text{Average downtime per failure}
+  = \frac{(48 \times 4) + (18 \times 16) + (6 \times 72)}{72}
+  = \frac{192 + 288 + 432}{72}
+  = 12.67 \text{ hours}
+\]
+
+Expected annual downtime \(= 24 \times 12.67 = 304\) hours. Downtime costs
+include lost contribution margin, idled labor, rush charges, and potential late
+delivery penalties. Precision Parts estimates \$1,200 per hour of downtime,
+yielding expected annual downtime cost of \(304 \times \$1{,}200 = \$364{,}800\).
+The timing of downtime matters, however: downtime during peak demand periods
+costs more than downtime during slack periods, and downtime affecting equipment
+with no backup is more costly than downtime on equipment with redundancy.
+
+\subsection{Quantifying Product Defects and Warranty Claims}
+\label{subsec:precision-defects}
+
+Product quality failures create direct costs (scrap, rework, customer returns)
+and potential liability if defective parts cause customer production problems or
+safety issues. Precision Parts tracks defect rates at three stages: internal
+detection before shipment, customer returns after shipment, and warranty claims
+after customer installation.
+
+Over three years and 14.5~million parts produced, quality control rejected
+87,000 units (0.60\% internal defect rate), yielding scrap cost of
+\(0.60\% \times \$120\text{M} = \$720{,}000\) per year. Of 14.413~million
+parts shipped, 5,760 were returned by customers (0.04\% return rate), with
+average returns of 1,920 per year at \$180 per return (\$345,600 per year).
+Of 84 warranty claims over three years (28 per year average): 64 claims (76\%)
+were minor part replacements averaging \$2,500; 16 claims (19\%) were moderate
+failures causing customer downtime averaging \$12,000; and 4 claims (5\%) were
+major failures causing customer production disruption averaging \$45,000.
+
+\[
+  \text{Annual warranty cost}
+  = \frac{(64 \times \$2{,}500) + (16 \times \$12{,}000) + (4 \times \$45{,}000)}{3}
+  = \frac{\$532{,}000}{3}
+  = \$177{,}333
+\]
+
+Total quality-related costs sum to approximately \$1.24~million per year
+(about 1.0\% of sales). The four major warranty claims at \$45,000 each
+represent only 5\% of claim frequency but 34\% of total warranty costs---a
+right-skewed distribution mirroring the pattern observed in slip-and-fall claims
+and property damage.
+
+\subsection{Quantifying Workplace Injury Risk}
+\label{subsec:precision-injuries}
+
+Over three years, Precision Parts recorded 48 recordable workplace injuries
+from 3.9 million total work hours. The OSHA\index{OSHA} injury rate is
+\((48 / 3{,}900{,}000) \times 200{,}000 = 2.46\) per 200,000 work hours,
+favorably below the manufacturing industry average of approximately 3.5,
+suggesting Precision Parts' safety program is effective. Injury severity
+distribution shows 32 minor injuries (67\%) averaging \$2,800 each, 12
+moderate injuries (25\%) averaging \$18,000 each, and 4 serious injuries (8\%)
+averaging \$62,000 each. Average annual direct injury cost is
+\(\$553{,}600 / 3 = \$184{,}533\). Indirect costs---lost productivity, training
+replacements, incident investigation, potential OSHA penalties---approximately
+double total costs, suggesting true annual workplace injury cost around
+\$370,000.
+
+\subsection{Risk Correlations and Compounding Effects}
+\label{subsec:precision-correlations}
+
+The risk manager recognizes that manufacturing risks can be correlated\index{correlation}. During
+periods of rushed production to meet delivery deadlines, equipment operates at
+higher speeds and longer hours (increasing breakdown frequency), quality
+pressure increases error rates, and overtime fatigue increases accident rates.
+Statistical analysis reveals positive correlation between equipment breakdowns
+and defect rates (correlation coefficient approximately \(+0.35\)), suggesting
+common causes---rushed production and inadequate maintenance---affect both
+simultaneously.
+
+Simply adding the individual risk measures (\$364,800 + \$1,242,933 + \$184,533
+\(= \$1{,}792{,}266\)) understates total risk because it ignores that bad
+outcomes tend to cluster. During stress periods, equipment failures cause missed
+deliveries, pressure to catch up increases defect rates, and rushed work
+increases injuries. This insight leads to process improvements targeting root
+causes: preventive maintenance schedules that reduce rush periods, capacity
+buffers that allow normal-paced production even when demand peaks, and quality
+gates that halt production if defect rates exceed thresholds.
+
+\subsection{Qualitative Risk Assessment for Manufacturing}
+\label{subsec:precision-qualitative}
+
+Beyond quantitative analysis, Precision Parts uses qualitative tools to assess
+risks that are difficult to quantify. \textbf{Scenario analysis}\index{scenario analysis} for supply
+chain disruption has managers develop scenarios for supply interruptions
+(supplier bankruptcy, natural disaster at a supplier facility, trade
+restrictions) and estimate potential duration, workarounds available, customer
+impacts, and revenue loss. The exercise reveals that critical steel supplier
+concentration creates substantial risk: loss of this supplier could halt
+production for weeks. \textbf{Expert elicitation}\index{expert elicitation} for catastrophic equipment
+failure has maintenance engineers estimate a 2--5\% annual probability of
+complete failure of the firm's custom stamping press, with potential impact of
+\$2--3~million in lost contribution margin during extended downtime. This
+qualitative assessment justifies maintaining spare critical components despite
+high inventory costs. A \textbf{risk matrix} displays both quantitative and
+qualitative assessments visually, helping senior management prioritize attention
+across diverse risks. Precision Parts' experience shows that effective risk
+assessment combines quantitative analysis where data exists with qualitative
+judgment for low-frequency, high-consequence events and emerging risks that
+lack historical data.
+
+% -----------------------------------------------------------------------
+\section{Loss Distributions and Skewness}
+\label{sec:loss-distributions}
+% -----------------------------------------------------------------------
+
+Understanding the shape of loss distributions---not just the mean and standard
+deviation---is crucial for risk management. This section explores normal versus
+skewed distributions and explains why skewness matters.
+
+\subsection{The Normal Distribution}
+\label{subsec:normal-distribution}
+
+The normal distribution\index{normal distribution} (bell curve) is symmetric around its mean. Values are
+equally likely to fall above or below the mean by similar amounts, and the
+distribution is characterized by mean = median = mode; 68~percent of values
+within one standard deviation of the mean; 95~percent within two standard
+deviations; and 99.7~percent within three standard deviations. Many natural
+phenomena follow approximately normal distributions due to the central limit
+theorem\index{central limit theorem}: when many independent small factors combine to determine an outcome,
+the distribution tends toward normal. For risk management, normal distributions
+are relatively ``well-behaved.'' Extreme outcomes are rare and become
+exponentially less likely as you move further from the mean. A normal
+distribution with mean \$100,000 and standard deviation \$20,000 has only
+0.13~percent probability of exceeding \$160,000 (three standard deviations).
+
+\subsection{Right-Skewed Distributions and Tail Risk}
+\label{subsec:right-skewed}
+
+Many insurable losses follow right-skewed distributions\index{right-skewed distribution}. Most loss events are
+small, but occasional large losses create a long right tail. Key characteristics
+include: mean exceeds median (rare large values pull mean upward); substantial
+probability mass in the right tail; and the maximum observed loss does
+\emph{not} bound future possibilities.
+
+Consider the property damage distribution from Midtown Outfitters in
+Section~\ref{subsec:midtown-property}: 85 minor incidents averaging \$1,200,
+8 moderate incidents averaging \$8,500, and 1 catastrophic incident costing
+\$180,000. The median severity is \$1,200, but mean severity is \$3,723. The
+single tornado caused more than half of all property damage costs over five
+years. Right-skewed distributions are common for property damage (most events
+minor; occasional fires or catastrophes), liability claims (most claims modest;
+occasional million-dollar judgments), product recalls (most quality issues
+minor; occasional large-scale recalls), and operational losses (most errors
+immaterial; occasional major frauds or systems failures).
+
+\subsection{Why Skewness Matters for Risk Management}
+\label{subsec:skewness-matters}
+
+\textbf{Underestimating large loss potential.} If you assume losses follow a
+normal distribution when they are actually right-skewed, you will severely
+underestimate the probability of large losses. This is precisely what happened
+at LTCM: models calibrated to historical volatility treated extreme events as
+nearly impossible when they were, in fact, quite possible. The ``six-sigma''
+events that LTCM's models dismissed as absurdly unlikely occurred because the
+true distribution had fatter tails than the historical data suggested.
+
+\textbf{Mean understates typical experience.} In right-skewed distributions,
+the mean exceeds the median, so ``typical'' years experience losses below the
+mean. The mean is pulled upward by occasional years with very large losses.
+Budgeting based on mean losses may provide inadequate reserves in bad years.
+
+\textbf{Tail events dominate total losses.}\index{tail risk} For highly skewed distributions, a
+small percentage of events may account for most total losses. In Midtown
+Outfitters' property damage experience, the single tornado (1\% of incidents)
+caused 51\% of total losses. Risk management must focus on preventing or
+mitigating tail events, not just managing typical losses.
+
+\textbf{Insurance value is concentrated in tail protection.} If an organization
+can absorb typical losses but not catastrophic losses, insurance provides
+greatest value by covering the tail. A deductible that retains small and
+moderate losses while transferring large losses aligns with this logic:
+self-insure the predictable part, transfer the catastrophic risk.
+
+\subsection{Measuring and Describing Skewness}
+\label{subsec:measuring-skewness}
+
+Statisticians measure skewness\index{skewness} formally, but qualitative assessment often
+suffices for risk management. \emph{Positive skewness} (right-skewed) is
+characterized by mean exceeding median and a long right tail; it is
+characteristic of most insurable losses. \emph{Negative skewness} is
+characterized by mean below median and a long left tail; it is less common for
+losses but occurs for some financial returns. \emph{Zero skewness} (symmetric)
+has mean equal to median; the normal distribution has zero skewness. Beyond
+skewness, \textbf{kurtosis}\index{kurtosis} measures the fatness of tails. Distributions with
+high kurtosis (leptokurtic distributions) have fatter tails than the normal
+distribution---extreme events occur more frequently than a normal distribution
+would predict. Many financial market returns exhibit fat tails\index{fat tails}, meaning crashes
+and booms occur more often than the normal model suggests. LTCM's losses
+illustrated this at an extraordinary scale.
+
+% -----------------------------------------------------------------------
+\section{Excel-Based Workers' Compensation Case: Estimating Value at Risk}
+\label{sec:northland-var}
+% -----------------------------------------------------------------------
+
+This section presents a detailed teaching case suitable for Excel analysis.
+The case demonstrates how to build an empirical loss distribution from
+historical data and estimate Value at Risk (VaR)---a widely used summary risk
+measure.
+
+\subsection{Company Background: Northland Manufacturing}
+\label{subsec:northland-background}
+
+Northland Manufacturing\index{Northland Manufacturing} operates a metal fabrication facility employing
+400 workers in production, maintenance, and administrative roles. The company
+has maintained detailed workplace injury records for ten years as required by
+OSHA. Management wants to quantify workers' compensation\index{workers' compensation} risk to inform
+insurance purchasing decisions, retained loss budgeting, and safety program
+prioritization.
+
+\subsection{Data Description}
+\label{subsec:northland-data}
+
+Northland experienced 138 recordable workplace injuries over ten years. For
+each injury, data includes year of occurrence, lost workdays (if any), medical
+costs, indemnity costs (wage replacement for lost time), and total claim cost.
+Table~\ref{tab:northland-annual} summarizes annual experience.
+
+\begin{ermtable}{Annual Workers' Compensation Experience, Northland Manufacturing}[tab:northland-annual]
+  \begin{tabularx}{\linewidth}{cYYcc}
+    \toprule
+    Year & Employees & Work Hours & Injuries & Total Cost \\
+    \midrule
+    1  & 380 & 760,000 & 18 & \$187,500 \\
+    2  & 390 & 780,000 & 12 & \$142,800 \\
+    3  & 395 & 790,000 & 15 & \$256,400 \\
+    4  & 400 & 800,000 & 11 & \$128,900 \\
+    5  & 400 & 800,000 & 16 & \$198,600 \\
+    6  & 410 & 820,000 & 14 & \$172,300 \\
+    7  & 405 & 810,000 & 13 & \$283,700 \\
+    8  & 400 & 800,000 & 10 & \$115,800 \\
+    9  & 395 & 790,000 & 15 & \$224,500 \\
+    10 & 400 & 800,000 & 14 & \$189,200 \\
+    \midrule
+    \textbf{Total} & \textit{3{,}975 avg.} & 7{,}950{,}000 & 138 & \$1{,}899{,}700 \\
+    \bottomrule
+  \end{tabularx}
+  \tablenote{Data are hypothetical and intended for instructional purposes.}
+\end{ermtable}
+
+The individual claim distribution shows 98 claims (71\%) as minor injuries,
+medical-only with no lost time, ranging from \$800 to \$5,000 with mean
+\$2,400; 32 claims (23\%) as moderate injuries with some lost time, ranging
+from \$6,000 to \$20,000 with mean \$11,500; and 8 claims (6\%) as serious
+injuries with extended lost time, ranging from \$25,000 to \$75,000 with mean
+\$42,000.
+
+\subsection{Step-by-Step Excel Analysis}
+\label{subsec:northland-excel}
+
+\textbf{Step~1: Calculate Frequency Rate.}
+
+\[
+  \text{Rate per 200{,}000 hours}
+  = \frac{138}{7{,}950{,}000} \times 200{,}000 = 3.47 \text{ injuries per 200,000 hours}
+\]
+
+Per employee per year: \(138 / (3{,}975 \times 10) \approx 0.00347\), or
+3.47 per 1,000 employees per year. For the current workforce of 400 employees,
+expected annual injuries \(= 400 \times 0.00347 \approx 14\), consistent with
+the historical average.
+
+\begin{excelblock}
+=COUNT(injuries)/SUM(work\_hours)       \% frequency per hour\\
+=Current\_employees * Frequency * 2000  \% expected annual injuries
+\end{excelblock}
+
+\textbf{Step~2: Build Severity Distribution.} Average severity across all 138
+claims is \(\$1{,}899{,}700 / 138 = \$13{,}765\). Median severity is
+approximately \$2,800 (71\% of claims fall below \$5,000). The mean
+(\$13,765) exceeds the median (\$2,800) by nearly 5$\times$, confirming
+right-skewed distribution.
+
+\begin{excelblock}
+=AVERAGE(claim\_amounts)  \% mean severity\\
+=MEDIAN(claim\_amounts)   \% median severity
+\end{excelblock}
+
+\textbf{Step~3: Estimate Expected Annual Loss.}
+
+\[
+  \text{Expected annual loss} = 14 \text{ injuries} \times \$13{,}765
+  = \$192{,}710
+\]
+
+Historical annual losses ranged from \$115,800 (Year~8) to \$283,700 (Year~7),
+with mean \$189,970 and standard deviation approximately \$53,000. The expected
+loss of \$192,710 aligns closely with the historical mean, as expected.
+
+\textbf{Step~4: Simulate Annual Loss Distribution.} Two approaches exist.
+The \emph{historical simulation approach}\index{historical simulation} uses the historical annual losses
+directly. Sorted from smallest to largest: \$115,800; \$128,900; \$142,800;
+\$172,300; \$187,500; \$189,200; \$198,600; \$224,500; \$256,400; \$283,700.
+The \emph{Monte Carlo simulation approach}\index{Monte Carlo simulation} simulates many possible years by
+randomly drawing the number of injuries (using a Poisson distribution\index{Poisson distribution} calibrated
+to historical frequency) and then randomly drawing a severity for each injury
+from the historical severity distribution, repeating 10,000 times to build a
+full distribution of possible annual losses.
+
+\begin{excelblock}
+Column A: Simulation number (1 to 10,000)\\
+Column B: Random injuries: =POISSON.DIST(14,RAND(),FALSE)\\
+Column C: For each injury, random severity via lookup table\\
+Column D: Total annual loss: =SUM(injury severities for that year)\\
+\medskip
+90th percentile: =PERCENTILE(Column\_D, 0.90)\\
+95th percentile: =PERCENTILE(Column\_D, 0.95)
+\end{excelblock}
+
+\subsection{Calculating Value at Risk}
+\label{subsec:northland-var-calc}
+
+\textbf{Value at Risk (VaR)}\index{Value at Risk (VaR)} answers the question: how bad could losses be in
+a bad year? Specifically, VaR at a given confidence level (say, 95\%) is the
+threshold that losses will exceed with only 5\% probability.
+
+\textbf{VaR at 90\% confidence:} The loss level exceeded in only 10\% of
+years. From the sorted historical data, approximately \$256,400 (the ninth
+largest loss in ten years).
+
+\begin{excelblock}
+=PERCENTILE.INC(annual\_losses, 0.90)  \% returns approximately \$256,400
+\end{excelblock}
+
+\emph{Interpretation:} With 90\% confidence, annual workers' compensation
+losses will not exceed \$256,400, assuming future resembles past.
+
+\textbf{VaR at 95\% confidence:} With only ten data points, interpolation is
+required.
+
+\begin{excelblock}
+=PERCENTILE.INC(annual\_losses, 0.95)  \% returns approximately \$270,000
+\end{excelblock}
+
+\textbf{VaR at 99\% confidence:} With only ten years of data, we have not
+observed a 1-in-100-year event, so estimation requires distributional
+assumptions. Using a fitted lognormal\index{lognormal distribution} or gamma distribution calibrated to our
+data, we might estimate the 99\% VaR at \$400,000--\$500,000.
+
+\subsection{Interpreting and Using VaR}
+\label{subsec:northland-interpretation}
+
+\textbf{Risk budgeting and capital planning.} To be 95\% confident of having
+sufficient reserves, Northland should maintain approximately \$270,000 in
+reserves or insurance coverage beyond expected losses. This does not mean the
+company will spend \$270,000---in most years it will spend considerably less.
+It means setting aside enough to handle a bad-but-not-catastrophic year.
+
+\textbf{Insurance deductible selection.} If Northland retains losses up to
+\$150,000 (below the 90\% VaR), it will be able to cover losses from its own
+resources in more than 90\% of years. Losses exceeding \$150,000---occurring
+perhaps once every 6--10 years---would be covered by insurance. This structure
+balances the cost of retaining predictable frequency against the protection
+value of transferring tail severity.
+
+\textbf{Comparative risk assessment.} VaR enables comparing different risks on
+a common basis. If workplace injury VaR (95\%) is \$270,000 while property
+damage VaR (95\%) is \$150,000, workplace injury represents the greater tail
+risk and may warrant more management attention and resources.
+
+% -----------------------------------------------------------------------
+\section{Value at Risk: Usefulness and Limitations}
+\label{sec:var-limitations}
+% -----------------------------------------------------------------------
+
+VaR has become the most widely used summary risk measure in finance and
+increasingly in enterprise risk management. Understanding both its value and
+its limitations is essential for proper use.
+
+\subsection{Why VaR Is Appealing}
+\label{subsec:var-appeal}
+
+\textbf{Simplicity and clarity.} VaR condenses a complex distribution into a
+single number that is easy to communicate: ``Losses will not exceed \$X with
+probability Y\%.'' This simplicity makes VaR understandable to senior
+management and boards without statistical training.
+
+\textbf{Common risk language.} VaR provides a standardized metric for
+comparing different risks across the enterprise, over time, and across
+companies. A bank can compare market risk VaR, credit risk VaR, and operational
+risk VaR on common terms. A non-financial firm can compare workers' compensation
+VaR against property VaR using the same methodology.
+
+\textbf{Forward-looking downside focus.} Unlike average losses (which describe
+central tendency), VaR focuses on adverse outcomes---how bad things might be.
+This aligns with risk management's purpose of preparing for adverse scenarios
+rather than simply describing historical experience.
+
+\textbf{Regulatory acceptance.} Basel banking regulations require VaR
+calculations for market risk. Insurance solvency regulations use similar tail
+risk measures. Regulatory acceptance has driven widespread adoption and
+standardization across industries.
+
+\subsection{Limitations of VaR}
+\label{subsec:var-limits}
+
+Despite these advantages, VaR has significant limitations\index{Value at Risk (VaR)!limitations}. The LTCM story in
+the opening case illustrates what can go wrong.
+
+\textbf{VaR says nothing about losses beyond the threshold.} VaR at 95\%
+confidence tells you the threshold exceeded 5\% of the time, but it does not
+tell you \emph{how much} losses might exceed that threshold. Consider two
+portfolios: Portfolio~A has 95\% VaR of \$1~million and losses ranging from
+\$1~million to \$1.2~million in the worst 5\% of years; Portfolio~B has the
+same 95\% VaR but losses ranging from \$1~million to \$10~million in the worst
+5\% of years. Both portfolios have identical VaR. Portfolio~B is far riskier.
+VaR alone does not distinguish these cases.
+
+\textbf{Model and assumption dependence.} VaR estimates depend heavily on
+which model and assumptions are used. Historical simulation VaR assumes the
+future resembles the past. Parametric VaR assumes losses follow a particular
+distribution. Different methods can yield substantially different estimates for
+the same underlying risk. LTCM's models assumed stable correlations; when
+correlations spiked in 1998, the models were badly wrong and the firm was
+catastrophically leveraged against that error.
+
+\textbf{Data limitations.} VaR estimates are unreliable when historical data is
+limited, particularly when estimating high-confidence VaR (99\% or higher) that
+requires predicting rare events. With only ten years of data, estimating 99\%
+VaR requires extreme extrapolation.
+
+\textbf{Stress correlations.} VaR models typically estimate correlations from
+normal market conditions. During crises, correlations increase as multiple
+problems emerge simultaneously. VaR models may systematically underestimate
+aggregate risk during stress periods---precisely when accurate risk measurement
+matters most.
+
+\textbf{Incentive effects.} Because VaR is a threshold measure, traders or
+managers might structure positions that minimize VaR while taking substantial
+risk just beyond the threshold---satisfying risk limits while actually
+increasing danger.
+
+\subsection{Complementary Risk Measures}
+\label{subsec:complementary-measures}
+
+\textbf{Expected Shortfall (Conditional VaR or CVaR)}\index{Expected Shortfall (ES)} is the average loss given
+that losses exceed VaR. It answers: if we have a bad year (losses exceeding
+VaR), how bad will it be on average? For Northland Manufacturing, VaR (90\%) is
+\$256,400. Expected Shortfall (90\%) = average of losses exceeding \$256,400 =
+\((\$256{,}400 + \$283{,}700) / 2 = \$270{,}050\). When annual losses exceed
+the 90\% threshold, they average \$270,000---not drastically more severe than
+the threshold, suggesting the tail is not extremely fat for this dataset.
+
+\textbf{Stress testing and scenario analysis}\index{stress testing}\index{scenario analysis} develop specific adverse scenarios
+(``What if a major fire destroys our primary facility?'' or ``What if our
+largest customer declares bankruptcy?'') and assess impacts. Scenarios
+complement VaR by exploring specific threats that might not appear likely based
+on historical data but represent genuine vulnerabilities.
+
+\textbf{Sensitivity analysis}\index{sensitivity analysis} tests how risk measures change if key assumptions
+change. If VaR estimates are highly sensitive to assumed distribution or
+correlation assumptions, this reveals model uncertainty requiring caution in
+relying on the point estimate.
+
+\subsection{Integrating VaR into Risk Management}
+\label{subsec:var-integration}
+
+\textbf{Use VaR for relative comparisons and trends.} Track how VaR changes
+over time as risk exposure evolves. Compare VaR across different business units
+or risk types. VaR is more reliable for these comparative purposes than for
+precise absolute risk quantification.
+
+\textbf{Supplement with stress testing.} Develop worst-case scenarios beyond
+VaR thresholds. If VaR (99\%) is \$500,000, ask: what is our maximum possible
+loss if everything goes wrong simultaneously? This is the question LTCM's
+management failed to take seriously enough.
+
+\textbf{Back-test VaR estimates.}\index{back-testing} Compare actual losses to VaR predictions. If
+VaR (95\%) should be exceeded 5\% of the time but is actually exceeded 15\% of
+the time, the model is mis-calibrated and requires adjustment.
+
+\textbf{Maintain qualitative judgment.} VaR should inform decisions, not make
+them automatically. Quantitative measures discipline thinking but do not
+replace it. A model that says the loss threshold is \$270,000 does not tell you
+what to do about it---that requires judgment about the firm's financial
+capacity, strategic priorities, and risk appetite.
+
+% -----------------------------------------------------------------------
+\section{Limits of Quantitative Measures and the Role of Qualitative Assessment}
+\label{sec:qual-quant-integration}
+% -----------------------------------------------------------------------
+
+\subsection{When Quantification Is Most Valuable}
+\label{subsec:when-quantification}
+
+Quantification works best when sufficient historical data exists---frequent,
+relatively homogeneous events such as workplace accidents, warranty claims, and
+minor property damage generate data amenable to statistical analysis; when the
+future resembles the past---stable processes and environments mean historical
+patterns will likely continue; when risks are measurable in common units so
+losses can be expressed in dollars, enabling aggregation and comparison; and
+when stakeholders expect quantification, as when regulators, boards, or
+investors require numerical risk assessments.
+
+\subsection{When Qualitative Assessment Is Essential}
+\label{subsec:when-qualitative}
+
+\textbf{Rare, unprecedented, or emerging risks.} Catastrophic equipment
+failures, novel cybersecurity threats, strategic disruptions from new
+competitors, or regulatory changes may have little or no historical precedent.
+Quantifying these risks requires expert judgment, scenario analysis, and
+structured discussion rather than statistical modeling.
+
+\textbf{Complex, interconnected risks.} When multiple risks interact in ways
+that are difficult to model quantitatively, scenario workshops where diverse
+experts explore ``what if'' questions can reveal vulnerabilities that
+statistical models miss.
+
+\textbf{Reputational and intangible risks.} Damage to brand reputation, loss
+of customer trust, or erosion of company culture create real consequences but
+resist precise measurement. Qualitative assessment through stakeholder
+interviews, sentiment analysis, and narrative scenario development provides
+insight that numbers alone cannot.
+
+\textbf{Black swan events.}\index{black swan events} Extremely rare, catastrophic events that have never
+occurred---or occurred so rarely that statistical analysis provides little
+guidance---require qualitative scenario thinking rather than extrapolation from
+historical data. Climate change creating unprecedented weather patterns,
+pandemics, geopolitical shocks, and financial market crashes all fall in this
+category. LTCM's management did not adequately ask what would happen if
+liquidity evaporated across all markets simultaneously---a scenario without
+close historical precedent.
+
+\subsection{Integrating Quantitative and Qualitative Assessment}
+\label{subsec:qq-integration}
+
+The most effective risk assessment uses both approaches systematically.
+\textbf{Use quantitative analysis as foundation}: for risks with adequate data,
+compute frequency, severity, expected loss, and variability. This provides
+objective baseline assessment and enables tracking changes over time.
+\textbf{Overlay qualitative judgment}: subject matter experts adjust
+quantitative estimates based on factors not captured in historical data---changes
+in operations, new controls, emerging threats, or risk correlations. Expert
+judgment refines rather than replaces statistical analysis.
+\textbf{Communicate with both numbers and narratives}: present risk assessment
+to decision-makers using quantitative metrics and qualitative descriptions.
+Different audiences respond differently, and narratives make the numbers
+interpretable. \textbf{Use risk matrices and heat maps}\index{risk matrix}\index{heat map} to plot risks on axes
+of likelihood and impact, enabling prioritization and a portfolio view of all
+organizational risks. \textbf{Review and update regularly}: as new data
+accumulates, update quantitative models; as the business environment changes,
+update qualitative assessments.
+
+\subsection{The Art and Science of Risk Assessment}
+\label{subsec:art-science}
+
+Risk assessment is both art and science. The science involves rigorous data
+analysis, statistical methods, and systematic processes. The art involves
+judgment about assumptions, interpretation of results, assessment of factors
+not captured quantitatively, and communication that drives action. Effective
+risk managers develop both capabilities: the technical skills to conduct
+quantitative analysis properly and the judgment to recognize when quantification
+misleads, when assumptions are questionable, and when qualitative insight should
+override quantitative models. The Moneyball analogy is apt here: the Oakland
+A's did not stop using scouts. They used quantitative metrics to discipline what
+the scouts were looking for, and they maintained qualitative judgment about fit,
+character, and factors their models could not capture. The best risk managers
+do the same.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+% -----------------------------------------------------------------------
+\begin{keytakeaways}
+\item
+  \textbf{Risk Quantification vs.\ Risk Qualification}: Quantification uses
+  data and statistics to measure risk objectively; qualification uses judgment,
+  scenarios, and narrative assessment. Both are necessary; neither is
+  sufficient alone.
+\item
+  \textbf{Frequency, Severity, and Expected Loss}: How often adverse events
+  occur (frequency) and how costly each event is (severity) combine to
+  determine expected loss. Standard deviation measures variability around that
+  expectation; higher standard deviation means greater uncertainty.
+\item
+  \textbf{Quantification Applies Broadly}: The frequency-severity framework is
+  not limited to financial institutions. Hospitals, airlines, manufacturers,
+  and sports franchises have all improved resource allocation by measuring
+  adverse events rigorously against a relevant exposure base and comparing
+  against benchmarks.
+\item
+  \textbf{Correlations Shape Aggregate Risk}: Uncorrelated risks diversify,
+  reducing aggregate volatility below the sum of individual volatilities.
+  Correlated risks compound, especially in stress periods---as LTCM
+  discovered. Historical correlations may not hold during crises.
+\item
+  \textbf{Skewed Distributions and Tail Risk}: Many insurable losses follow
+  right-skewed distributions. Mean severity exceeds median severity; tail
+  events can dominate total losses despite being rare. Assuming normality when
+  distributions are skewed leads to systematic underestimation of catastrophic
+  loss potential.
+\item
+  \textbf{Value at Risk (VaR)}: VaR estimates a threshold that losses will
+  exceed with only small probability (e.g., 5\%). It is useful for capital
+  planning, insurance purchasing, and stakeholder communication. But VaR
+  ignores losses beyond the threshold, depends heavily on models and
+  assumptions, and fails most conspicuously when it matters most.
+\item
+  \textbf{LTCM as a Cautionary Model}: Sophisticated quantification at LTCM
+  transformed model risk into the central risk factor. The assumptions that
+  made the VaR numbers reassuring---stable distributions, low cross-asset
+  correlations, liquid exit markets---all failed simultaneously in 1998. Sizing
+  positions based on optimistic model estimates under high leverage is
+  effectively betting the firm on the model being right.
+\item
+  \textbf{Qualitative Judgment Remains Essential}: Rare events, emerging risks,
+  and complex interdependencies resist quantification. Stress testing, scenario
+  analysis, and expert elicitation address what historical data cannot. The
+  goal is informed risk assessment, not mathematical precision for its own
+  sake.
+\end{keytakeaways}
+
+% -----------------------------------------------------------------------
+\begin{keyterms}
+  \item[\keyterm{Expected loss}]
+    The average loss anticipated over a specified period, calculated as
+    frequency \(\times\) average severity.
+  \item[\keyterm{Expected Shortfall (ES)}]
+    The average loss given that losses exceed the VaR threshold; also called
+    Conditional VaR (CVaR).
+  \item[\keyterm{Frequency}]
+    The rate at which loss events occur, typically expressed as number of
+    events per unit of exposure per time period.
+  \item[\keyterm{Key risk indicator (KRI)}]
+    A metric that signals changes in risk exposure, enabling proactive
+    monitoring rather than reactive response after losses occur.
+  \item[\keyterm{Kurtosis}]
+    A statistical measure of the fatness of distribution tails; high kurtosis
+    indicates more frequent extreme events than the normal distribution
+    predicts.
+  \item[\keyterm{Loss distribution}]
+    The probability distribution describing the likelihood of different loss
+    amounts.
+  \item[\keyterm{Mean}]
+    The arithmetic average of a set of values.
+  \item[\keyterm{Median}]
+    The middle value when observations are arranged in order; half fall below
+    and half above.
+  \item[\keyterm{Monte Carlo simulation}]
+    A computational technique using random sampling to simulate many possible
+    outcomes and estimate probability distributions.
+  \item[\keyterm{Normal distribution}]
+    A symmetric, bell-shaped probability distribution characterized by mean
+    and standard deviation; also called the Gaussian distribution.
+  \item[\keyterm{Right-skewed distribution}]
+    An asymmetric distribution with a long tail extending toward larger values;
+    mean exceeds median.
+  \item[\keyterm{Risk qualification}]
+    Risk assessment using narrative descriptions, expert judgment, scenarios,
+    and categorical ratings rather than numerical measurements.
+  \item[\keyterm{Risk quantification}]
+    Risk assessment using numerical data, statistical methods, and mathematical
+    models to measure risk exposure.
+  \item[\keyterm{Severity}]
+    The magnitude of loss when an adverse event occurs, typically measured in
+    dollars.
+  \item[\keyterm{Skewness}]
+    A statistical measure of the asymmetry of a probability distribution.
+  \item[\keyterm{Standard deviation}]
+    A measure of dispersion around the mean; the square root of variance,
+    expressed in the same units as the data.
+  \item[\keyterm{Stress testing}]
+    Analysis of how risk exposures and outcomes would change under specified
+    adverse scenarios.
+  \item[\keyterm{Tail risk}]
+    The risk of extreme losses occurring in the tails of a distribution,
+    particularly the right tail for loss distributions.
+  \item[\keyterm{Value at Risk (VaR)}]
+    The maximum loss expected with a given confidence level over a specified
+    time period; the threshold that losses will exceed with only small
+    probability.
+  \item[\keyterm{Variance}]
+    A measure of dispersion around the mean, calculated as the average squared
+    deviation from the mean.
+\end{keyterms}
+
+% -----------------------------------------------------------------------
+\begin{shortanswerquestions}
+\item A company experiences an average of 12 workplace accidents per year among
+  300 employees, and each accident costs \$8,500 on average. Calculate:
+  (a) frequency per employee per year; (b) expected annual loss; and
+  (c) expected cost per employee per year.
+
+\item An organization faces two risks: Risk~A has expected loss \$200,000 with
+  standard deviation \$50,000; Risk~B has expected loss \$300,000 with standard
+  deviation \$80,000. If the risks are independent (uncorrelated), what is the
+  expected total loss? Estimate the standard deviation of total loss.
+
+\item A company calculates that its VaR (95\%) for workers' compensation losses
+  is \$450,000. Using the Northland Manufacturing case as a model, explain in
+  plain English what this means and what it does \emph{not} tell you.
+
+\item Referring to the Midtown Outfitters case (Section~\ref{sec:midtown-outfitters}),
+  the company is deciding whether to increase its general liability insurance
+  deductible from \$10,000 to \$25,000 per occurrence. Using the slip-and-fall
+  data, what factors should inform this decision?
+\end{shortanswerquestions}
+
+% -----------------------------------------------------------------------
+\begin{discussionquestions}
+\item Explain why organizations cannot rely solely on managerial intuition for
+  risk assessment. What problems does systematic risk quantification address?
+
+\item Distinguish between risk quantification and risk qualification. When is
+  each approach most appropriate? Provide a concrete example of a risk that
+  would be best assessed primarily through qualitative methods.
+
+\item A retailer's historical slip-and-fall claims show mean severity of
+  \$12,000 and median severity of \$3,500. What does this tell you about the
+  shape of the loss distribution? What does it imply for how the company should
+  budget for, insure, and manage this risk?
+
+\item In the Precision Parts case (Section~\ref{sec:precision-parts}), the risk
+  manager noted positive correlation between equipment breakdowns and product
+  defects. Explain why this correlation might exist and what it implies for risk
+  management strategy.
+
+\item Value at Risk is widely used but has significant limitations. Using the
+  LTCM case as a reference, describe three important limitations of VaR and
+  explain how risk managers should address each.
+
+\item How does the Moneyball story illustrate the principles of risk
+  quantification? What is the analogous challenge facing managers who rely on
+  traditional qualitative judgment rather than systematic measurement?
+
+\item Explain how quantitative risk measures (expected loss, VaR,
+  frequency/severity statistics) integrate with qualitative risk assessment
+  (scenarios, expert judgment, risk matrices) in a comprehensive ERM system.
+
+\item A manufacturing company has never experienced a catastrophic fire at its
+  main production facility but recognizes this as a significant potential risk.
+  Why is quantitative analysis alone insufficient for assessing this risk? What
+  qualitative approaches would complement limited quantitative data?
+
+\item Choose a non-financial industry of your choice. Describe how the
+  frequency-severity framework might be applied to a major risk that industry
+  faces. What data would you collect? What decisions would the analysis inform?
+  What limitations would you face?
+\end{discussionquestions}
+
+% -----------------------------------------------------------------------
+\begin{minicase}{Workers' Compensation Risk Analysis: Northland Manufacturing}
+
+Using the data described in Section~\ref{sec:northland-var} (Northland
+Manufacturing), complete the following analysis in Excel.
+
+\textbf{Part 1: Basic Calculations.} Create a spreadsheet with annual data for
+Years~1--10 (columns for year, employees, work hours, injuries, and total
+annual cost). Calculate total injuries and work hours over ten years, average
+injuries per year, and average cost per year. Then compute frequency metrics:
+injuries per 200,000 work hours; injuries per employee per year; and expected
+injuries for a current workforce of 400 employees.
+
+\textbf{Part 2: Severity Analysis.} Create a table showing the claim size
+distribution (minor, moderate, and serious categories with counts, percentages,
+and average costs). Calculate mean severity across all 138 claims and median
+severity. Verify that the weighted average of your category means equals the
+overall mean.
+
+\textbf{Part 3: Expected Loss.} Calculate expected annual loss two ways:
+(1) the mean of the historical annual cost column; and (2) frequency times
+average severity. The two values should be very close---if they differ
+substantially, check your frequency and severity calculations.
+
+\textbf{Part 4: Value at Risk.} Sort annual losses from smallest to largest.
+Calculate VaR (90\%) using
+\excelcode{=PERCENTILE.INC(annual\_losses, 0.90)} and VaR (95\%) using
+\excelcode{=PERCENTILE.INC(annual\_losses, 0.95)}. Identify which historical
+year(s) exceeded each threshold. Create a histogram of annual losses with VaR
+thresholds marked.
+
+\textbf{Part 5: Interpretation.} In a text box or separate sheet, write
+2--3 paragraphs addressing: What is the expected annual workers' compensation
+cost for Northland? With 95\% confidence, what is the maximum annual cost the
+company should budget for? If Northland wants to retain losses up to \$175,000
+and insure above that amount, what percentage of historical years would have
+triggered insurance coverage? What recommendations would you make to management
+about insurance purchasing, safety programs, and budgeting?
+
+\medskip
+\textbf{Deliverable:} Submit your Excel workbook with clear labels, formulas
+(not hard-coded values), and interpretation text.
+
+\medskip
+\textbf{Bonus Challenge (Optional):} Implement a simple Monte Carlo simulation.
+Use \excelcode{RAND()} and a lookup table to simulate 1,000 years of losses.
+For each simulated year, randomly determine the number of injuries (using the
+historical rate) and randomly assign severities (using the empirical
+distribution). Calculate VaR from your simulated distribution and compare to
+VaR calculated from the ten-year historical data. Why might the two estimates
+differ? Which do you trust more?
+
+\end{minicase}
+
+% -----------------------------------------------------------------------
+\section*{References}
+\addcontentsline{toc}{section}{References}
+\begingroup
+\sloppy
+
+\begin{hangparas}{1.5em}{1}
+
+Basel Committee on Banking Supervision. (2011). \emph{Basel~III: A global
+regulatory framework for more resilient banks and banking systems.} Bank for
+International Settlements. \url{https://www.bis.org/publ/bcbs189.pdf}
+
+Centers for Disease Control and Prevention. (2023). \emph{National Healthcare
+Safety Network (NHSN) overview.} U.S.\ Department of Health and Human
+Services. \url{https://www.cdc.gov/nhsn/}
+
+Centers for Medicare \& Medicaid Services. (2022). \emph{Hospital Readmissions
+Reduction Program (HRRP).} U.S.\ Department of Health and Human Services.
+\url{https://www.cms.gov/medicare/quality/value-based-programs/hrrp}
+
+Lewis, M. (2003). \emph{Moneyball: The art of winning an unfair game.}
+W.\,W.\ Norton \& Company.
+
+Lowenstein, R. (2000). \emph{When genius failed: The rise and fall of
+Long-Term Capital Management.} Random House.
+
+\end{hangparas}
+
+\endgroup
+\end{document}

@@ -1,0 +1,36 @@
+On a hot July afternoon, the Collins house looked like every other two‑story in the subdivision—vinyl siding, a small porch, a swing in the backyard. Inside, the air conditioning hummed, the television murmured, and behind the walls, the wiring carried twenty years of changes: a do‑it‑yourself ceiling fan, an extra outlet in the garage, holiday lights that had once pushed a circuit harder than the builder intended.
+
+The lights still worked. The breakers hadn’t tripped in months. If you had asked Mark Collins about fire risk, he would have pointed to the grill on the deck or the gas water heater. The wires in the walls felt like background, part of the house the way bones are part of a body: unseen, assumed sound.
+
+At Crestline Mutual, his home insurer, those same houses showed up in a very different way. On the company’s loss reports, electrical fires in single‑family homes were a stubborn line: not the most frequent cause of loss, but disproportionately severe when they appeared. Photos from claims told the story more starkly than any spreadsheet—rooms where only the metal frame of a bed or a refrigerator survived, charred studs where an outlet used to be. 
+For years, Crestline had managed the risk the usual ways. Underwriters charged more for older homes and certain construction types. Agents offered discounts for smoke alarms and monitored security systems. Occasionally, a risk‑control inspector would walk through a high‑value home with a clipboard, noting extension cords under rugs and overloaded power strips.
+
+Then a small technology vendor came with a different pitch. Instead of pricing around electrical‑fire risk, what if Crestline could help prevent the fires?
+
+The device they offered was simple to look at—a box about the size of a night‑light that plugged into an ordinary outlet. Once connected to Wi‑Fi, it “listened” to the home’s electrical system, analyzing subtle patterns in current and voltage that can signal arcing, loose connections, or failing equipment before visible signs appear. When it saw something worrisome, it would send an alert to the homeowner and a remote support team, who could help figure out whether the problem was a bad outlet, a dying appliance, or something deeper in the wiring. 
+
+The actuarial team asked for data. In a large multi‑year pilot with other carriers, the devices had flagged hundreds of anomalies and led electricians to dozens of serious faults—overheating outlets, failing HVAC compressors, degrading main panels—that likely would have become fires if left alone. Across more than a million “home‑years” of experience, homes in the program had fewer electrical‑fire claims than a matched control group, enough to show up in the statistics even after controlling for normal noise. 
+
+It was not a magic shield. But it was one of the few loss‑control ideas that came to the table with measured reductions in both the probability of a loss and, in some cases, the size of losses when fires still occurred. After a round of internal debate about cost, participation, and privacy optics, Crestline decided to run its own program in several states where electrical‑fire severity was particularly high.
+
+Mark and his wife received the offer by email: a free “smart fire‑prevention” benefit for loyal customers. The pitch emphasized safety and convenience more than actuarial curves. They shrugged and accepted. A few weeks later, Mark plugged the device into an outlet in the upstairs hallway, scanned a QR code, and went back to his day.
+
+For months, nothing happened. The device sat silently, sampling waveforms and sending encrypted data to servers. At Crestline’s headquarters, a small team watched early program metrics and waited to see whether their own loss data would begin to separate the way the vendor’s case studies suggested.
+
+One Sunday evening in October, Mark’s phone buzzed. The notification was polite but firm: the system had detected repeated arcing events on a circuit that appeared to feed the garage and part of the first floor. It recommended unplugging portable devices on that circuit and scheduling an electrician as soon as possible.
+
+The lights weren’t flickering. The breakers were fine. It was easy to think “spam” and ignore it. But the follow‑up call from the monitoring service was specific enough to feel serious. They had seen this pattern before, the technician said, in homes where a loose outlet, a damaged cord, or a failing appliance was creating heat and carbon tracks inside a box.
+
+Two days later, a local electrician stood in the Collins’ garage tracing circuits. At one outlet behind the workbench, he stopped. The faceplate was slightly discolored. When he pulled the receptacle free, one terminal was charred and the plastic around it cracked. Years earlier, someone had back‑stabbed the wires into the outlet; the connection had loosened over time. The copper showed clear evidence of arcing, and the wood in the box was darkened.
+
+“This,” he said, holding up the outlet, “is the kind of thing that smolders for a while before it lights something up.”
+
+He replaced the outlet, re‑terminated the wires properly, and checked the rest of the circuit. The visit took less than an hour. Crestline covered part of the bill as part of the program.
+
+For the Collins family, the episode became a story to tell neighbors: the gadget the insurance company sent, the unexpected alert, the electrician who found a problem hiding in the wall. For Crestline, it was one more data point in a growing sample. In the months that followed, similar stories accumulated in claims notes and program logs—faulty well pumps in rural homes, aging pool equipment on old wiring, overloaded outlets in converted home offices.
+
+When the company’s analysts compared early loss experience between participating homes and a control group, the divergence they had hoped for began to emerge. Electrical‑fire claims still happened—randomness had not disappeared—but they were less frequent in houses with the devices, and a higher share of fires were contained to a room or single appliance instead of consuming the entire structure. The shape of the loss distribution was changing, not because Crestline had written different words in a policy form, but because the underlying risk in thousands of homes was slightly, but measurably, safer. 
+
+In Crestline’s annual planning meetings, the program eventually showed up as a line item in a slide deck: an investment in technology and service, a modest shift in expected loss costs, a case study in how changing controls could nudge both the probability of loss and the typical size of losses down. On any given night in neighborhoods like the Collins’, it looked like something quieter: a small device glowing in a hallway outlet, listening to electricity that most people never think about, and occasionally catching the moment when a hidden fault can still be fixed with a screwdriver and a new outlet instead of a fire truck and an adjuster.
+
+source: [iii](https://www.iii.org/white-paper/the-efficacy-and-return-on-investment-of-loss-prevention-programs-background-methods-and-results-072425) [whiskerlabs](https://www.whiskerlabs.com/how-effective-are-loss-prevention-programs-for-insurers/)

@@ -1,0 +1,42 @@
+# Private Test Bank
+test_creation/
+
+# Large binaries (Reference papers / books / compiled PDFs / Office documents)
+*.pdf
+*.docx
+*.rtf
+
+# LaTeX Build/Auxiliary Files
+*.aux
+*.log
+*.out
+*.synctex.gz
+*.toc
+*.nav
+*.snm
+*.idx
+*.ilg
+*.ind
+*.lof
+*.lot
+*.fls
+*.fdb_latexmk
+
+# Python cache & compiler output
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# R Environment & Workspace Files
+.Rhistory
+.RData
+.Ruserdata
+
+# System & OS Files
+.DS_Store
+Thumbs.db
+
+# IDE settings
+.vscode/
+.idea/

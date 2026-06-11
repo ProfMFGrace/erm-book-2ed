@@ -1,0 +1,417 @@
+% !TeX root = Chapter_09_Slides.tex
+% Chapter 9 lecture slides — Corporate Risk Governance
+% Instructor-resource series; model deck: Chapter_01_Slides.tex
+\documentclass[11pt, aspectratio=169]{beamer}
+\usepackage{tikz}
+\makeatletter
+\def\input@path{{./}{../slides/}}
+\makeatother
+\usepackage{erm_beamer_theme}
+\usepackage{amsmath,amssymb}
+
+\title[ERM Ch.\,9]{Corporate Risk Governance}
+\subtitle{Enterprise Risk Management, Second Edition --- Chapter 9}
+\author{Martin F.\ Grace}
+\institute{University of Iowa\\[2pt] Tippie College of Business\\[2pt] Vaughan Institute of Risk Management}
+\date{June 2026}
+
+\begin{document}
+
+\begin{frame}[plain]
+\titlepage
+\end{frame}
+
+\begin{frame}{Learning Objectives}
+\begin{itemize}
+  \item Explain the \alert{Three Lines of Defense} and assign risk responsibilities across business units, risk functions, and internal audit.
+  \item Describe the board's oversight role: the fiduciary \alert{duty to monitor}, risk committee design, and the competencies oversight requires.
+  \item Define the \alert{CRO} role with appropriate reporting lines, authority, and resources.
+  \item Build policy hierarchies, operational risk limits, and exception processes.
+  \item Design risk dashboards and escalation protocols that move bad news upward intact.
+  \item Assess \alert{risk culture} --- tone at the top, incentive alignment, behavioral metrics --- and explain why culture decides whether structures work.
+  \item Analyze governance failures and recommend structural remedies.
+\end{itemize}
+\end{frame}
+
+\section{Opening Case: The Quota That Ate the Bank}
+
+\begin{frame}{The Gr-eight Machine}
+\begin{itemize}
+  \item Every morning, before the first customer, Wells Fargo branch managers reviewed yesterday's sales against today's goals --- at some branches, counts ran multiple times a day.
+  \item ``Gr-eight'': sell each customer \alert{eight financial products}. Leadership embraced it publicly; analysts rewarded the cross-sell model with a premium valuation.
+  \item By the mid-2000s Wells Fargo was one of America's most admired banks --- it sailed through 2008 while peers collapsed.
+  \item Inside the branches: employees facing daily quotas and termination for missing them discovered the fastest path to the numbers --- \alert{accounts customers never asked for}. ``Sandbagging.'' ``Pinning.'' Nearly routine where pressure was highest.
+\end{itemize}
+\end{frame}
+
+\begin{frame}{The Signals Nobody Aggregated}
+\begin{itemize}
+  \item Ethics hotline complaints describing pressure to open unauthorized accounts: \alert{from 2005}.
+  \item The bank's own Community Bank Risk group identified the problem in internal reports.
+  \item 2013: \emph{Los Angeles Times} investigation documents the practices --- daily pressure, management retaliation.
+  \item 2015: the City of Los Angeles sues.
+  \item Thousands of junior employees terminated over the years --- a termination rate that, aggregated and shown to independent directors, would have been a flashing light.
+  \item Throughout: the board's Risk Committee \alert{met regularly}. The reports it received did not convey scope, depth, or trend.
+\end{itemize}
+\end{frame}
+
+\begin{frame}{The Reckoning}
+\begin{itemize}
+  \item September 2016: CFPB, OCC, and Los Angeles announce a \$185M settlement; $\sim$2 million unauthorized accounts disclosed --- later revised to \alert{3.5 million}.
+  \item CEO Stumpf resigns after blaming ``bad employees'' before Congress; Tolstedt's \$125M package partially clawed back after congressional outrage.
+  \item February 2018: the Federal Reserve formally finds the \alert{board failed in its oversight} and imposes an \alert{asset cap} --- not lifted until mid-2025. Eight directors depart.
+  \item The employees who opened fake accounts had no trading desks, no structured products --- just tellers responding rationally to an incentive system that paid for volume and never asked how it was generated.
+\end{itemize}
+\medskip
+\begin{block}{The decision problem}
+Wells Fargo had policies, committees, risk functions, hotlines, and a board that met on schedule. If you had been an independent director in 2013, what would you have needed to see --- and what would have made you ask for it?
+\end{block}
+\end{frame}
+
+\section{Governance Makes ERM Systematic}
+
+\begin{frame}{The Governance Imperative}
+Technical capability creates the \emph{potential} for value; governance converts it into practice by answering what the models cannot:
+\begin{itemize}
+  \item \textbf{Who decides} which risks to accept, reduce, or transfer?
+  \item \textbf{Who monitors} whether risk-taking stays within appetite?
+  \item \textbf{Who escalates} when limits are breached?
+  \item \textbf{Who is accountable} for risk outcomes?
+\end{itemize}
+\medskip
+\begin{block}{Oversight versus management}
+The board \alert{oversees}: sets appetite, monitors, holds accountable, obtains assurance. Management \alert{executes}: decides within appetite, reports accurately, escalates. Confusion is corrosive in both directions --- micromanaging boards lose independence; filtering management leaves the board responsible for risks it cannot see. Wells Fargo's sanitized reports are the canonical second failure.
+\end{block}
+\end{frame}
+
+\begin{frame}{Regulation as Scar Tissue}
+Each wave of governance rules traces to a specific failure:
+\begin{itemize}
+  \item \textbf{Post-2008}: Dodd-Frank \S\,165(h) board risk committees for large banks; Regulation YY independent CROs; CCAR/DFAST stress testing on board agendas.
+  \item \textbf{Insurance}: NAIC ORSA and Solvency II require board-approved appetite and documented governance; rating agencies score ERM quality directly.
+  \item \textbf{Public companies}: SOX \S\,404 control attestation; \S\,302 puts CEO/CFO signatures --- and personal liability --- on certifications.
+  \item \textbf{Directors}: Delaware's \emph{Caremark} doctrine; derivative suits after BP and the 737 MAX routinely allege oversight failure; the Fed's 2018 Wells Fargo order showed a regulator will publicly find a board deficient and \alert{cap the firm's growth} until governance is fixed.
+\end{itemize}
+\end{frame}
+
+\section{The Three Lines of Defense}
+
+\begin{frame}{The Model}
+\begin{block}{Who does what}
+\textbf{First line} --- business operations \alert{own and manage} risk day-to-day. \quad
+\textbf{Second line} --- risk and compliance functions \alert{oversee and challenge}. \quad
+\textbf{Third line} --- internal audit provides \alert{independent assurance} to the board.
+\end{block}
+\medskip
+\begin{itemize}
+  \item Formalized by the IIA (2013); restated as the Three Lines Model (2020), emphasizing coordination over rigid separation.
+  \item \textbf{First line}: the plant manager owns safety, quality, and compliance for that plant --- not corporate risk. Ownership \alert{cannot be delegated}: ``risk is corporate's job'' means governance has already failed.
+  \item Wells Fargo's branch and regional managers \emph{were} the first line --- and were the pressure's transmission mechanism, not its check.
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Second and Third Lines: Challenge and Assurance}
+\begin{columns}[T]
+\column{0.48\textwidth}
+\textbf{Second line: oversight \& challenge}
+\begin{itemize}
+  \item Writes policies, translates appetite into limits, aggregates the enterprise view, challenges first-line assessments
+  \item Independence makes challenge credible: report to CRO/CFO/GC --- never to the business overseen; pay not tied to unit results; protected escalation paths
+  \item Wells Fargo's second line flagged the problem from the mid-2000s --- \alert{voice without veto is decoration}
+\end{itemize}
+\column{0.48\textwidth}
+\textbf{Third line: independent assurance}
+\begin{itemize}
+  \item Audits the risk machinery itself: not ``is this risk controlled?'' but ``does the control system work?''
+  \item CAE reports functionally to the audit committee; no operational duties; unrestricted access; protected budget
+  \item Failure modes: first-line abdication, second-line overreach (risk police), audit drafted into monitoring, silos
+\end{itemize}
+\end{columns}
+\medskip
+Coordination: a quarterly three-lines forum, integrated planning, a common taxonomy, and a RACI matrix pinning down who does what.
+\end{frame}
+
+\section{The Board's Risk Oversight Role}
+
+\begin{frame}{The Duty to Monitor}
+\begin{block}{The Delaware trilogy}
+\emph{In re Caremark} (Del.\ Ch.\ 1996): directors must implement information and reporting systems that surface risk and compliance failures. \emph{Stone v.\ Ritter} (Del.\ 2006): liability for utterly failing to implement monitoring, or \alert{consciously ignoring red flags}. \emph{Marchand v.\ Barnhill} (Del.\ 2019): no board-level monitoring of a \alert{mission-critical risk} (food safety, at an ice cream maker) states a claim.
+\end{block}
+\medskip
+\begin{itemize}
+  \item Liability remains rare --- the business judgment rule protects informed, good-faith decisions. But the doctrine defines the floor: build the system, read what it produces, act on red flags.
+  \item Wells Fargo: the signals existed (terminations by the thousand, hotline themes, the \emph{LA Times}, the city lawsuit) --- the oversight system never surfaced them. The Fed's 2018 order made the supervisory version explicit.
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Seven Board Duties}
+\begin{itemize}
+  \item \textbf{Set risk appetite} --- a board decision tied to capital allocation, not a delegated technicality.
+  \item \textbf{Oversee the risk profile} --- quarterly: top risks, emerging threats, exposure versus appetite.
+  \item \textbf{Review risk-adjusted strategy} --- challenge the assumptions, don't admire the upside.
+  \item \textbf{Appoint and evaluate the CRO} --- independence requires board involvement in hiring, pay, and removal.
+  \item \textbf{Approve enterprise risk policies} --- the board-reserved level of the hierarchy.
+  \item \textbf{Evaluate ERM effectiveness} --- audit assurance, stress tests, lessons from incidents.
+  \item \textbf{Ensure culture and tone} --- a board spending 90\% of its time on growth has communicated its appetite, whatever the statement says.
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Risk Committee Design}
+\begin{itemize}
+  \item Small firms: full-board oversight (a standing 30--45 minute quarterly item) or an expanded audit-and-risk committee. Large/complex firms: a dedicated committee --- \alert{mandatory} for large banks under Dodd-Frank \S\,165(h).
+  \item Charter essentials: 3--5 independent directors with at least one genuine risk expert; quarterly minimum; CRO and CFO attend but don't vote; annual appetite review; breach monitoring; CRO evaluation.
+  \item The provisions that matter when things go wrong: \alert{executive sessions without management} and \alert{authority to retain independent advisors} --- what lets a committee test management's story without management in the room.
+\end{itemize}
+\medskip
+\begin{block}{When directors should probe harder}
+Every breach explained as ``technical''; all-green reports quarter after quarter; strategy proposals without risk analysis; risk rushed at the end of agendas; a CRO who rarely speaks; audit findings lingering unremediated.
+\end{block}
+\end{frame}
+
+\section{Senior Management Accountability}
+
+\begin{frame}{The CEO Owns Execution --- Personally}
+\begin{itemize}
+  \item The CEO sets tone, chairs the management risk committee, allocates appetite across units, decides what reaches the board, and empowers the CRO.
+  \item Accountability is increasingly personal:
+  \begin{itemize}
+    \item SOX \S\,302: criminal exposure behind CEO/CFO certifications
+    \item Dodd-Frank \S\,954 / \alert{SEC Rule 10D-1} (effective 2023): mandatory clawback of incentive pay after restatements; well-governed firms extend triggers to risk and conduct failures
+    \item D\&O insurance excludes intentional wrongdoing
+  \end{itemize}
+  \item Stumpf's resignation, the Stumpf/Tolstedt clawbacks, and the OCC's civil charges against former Wells Fargo executives illustrate the full range now in play.
+  \item Consequences must run uphill: Wells Fargo terminated \emph{thousands of juniors} for misconduct the incentive system manufactured while the system's architects collected retention awards --- employees read that fluently.
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Measuring Risk-Adjusted Performance}
+\[
+\text{RAROC} = \frac{\text{Return} - \text{Expected Loss}}{\text{Economic Capital}}
+\]
+\begin{itemize}
+  \item Traditional metrics (revenue, EBITDA, ROE) reward returns without asking what risk produced them. A unit earning high returns on excessive risk shows a \alert{lower} RAROC than one earning modest returns efficiently.
+\end{itemize}
+\begin{exampleblock}{A balanced scorecard for a BU president}
+EBITDA 25\% \,$\cdot$\, RAROC 15\% \,$\cdot$\, safety (TRIR) 15\% \,$\cdot$\, warranty claims 10\% \,$\cdot$\, audit findings 10\% \,$\cdot$\, customer NPS 15\% \,$\cdot$\, turnover 10\% --- financial performance rewarded, but not when achieved by unacceptable risk-taking.
+\end{exampleblock}
+\begin{itemize}
+  \item Consequence ladder: coaching $\rightarrow$ bonus impact $\rightarrow$ career-ending plus clawback for concealment. A firm that can't name one successful leader who faced consequences has answered whether its policies are real.
+\end{itemize}
+\end{frame}
+
+\section{The Chief Risk Officer}
+
+\begin{frame}{Authority, Not Just Responsibility}
+\begin{itemize}
+  \item Post-crisis CRO: enterprise scope across all risk quadrants, culture as well as models, direct board relationships, a seat in strategic planning. Mandatory for large banks (Regulation YY).
+  \item Four authority requirements --- where CRO design succeeds or fails:
+  \begin{itemize}
+    \item \textbf{Unrestricted information access} across all units
+    \item \textbf{Approval and veto rights} over new products, major transactions, limit changes --- forcing escalation to CEO or board when the business disagrees
+    \item \textbf{Direct board access} without CEO filtering
+    \item \textbf{Budget control} independent of the businesses overseen
+  \end{itemize}
+  \item A CRO with responsibilities but no authority is a scapegoat-in-waiting: Wells Fargo's risk function ``raised concerns repeatedly'' for a decade --- \alert{exactly what a function with voice but no veto can do}.
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Reporting Lines and Compensation}
+\begin{columns}[T]
+\column{0.48\textwidth}
+\textbf{Best practice: dual reporting}
+\begin{itemize}
+  \item Solid line to the \alert{CEO} (operational connection) + dotted line to the \alert{board risk committee} (appointment, evaluation, pay)
+  \item Under the CFO: risk discipline loses arguments with quarterly earnings
+  \item Board-only: independent but out of the decision flow
+  \item Dual-hatted CFO/CRO: audits risks of his or her own making
+\end{itemize}
+\column{0.48\textwidth}
+\textbf{Compensation design}
+\begin{itemize}
+  \item Competitive with the C-suite --- or the role attracts second-tier candidates
+  \item 40--60\% deferred over 3--5 years
+  \item Metrics: framework quality, escalation timeliness, culture surveys --- \alert{never} business unit revenue
+  \item Penalizing honestly reported bad outcomes teaches dishonest reporting
+\end{itemize}
+\end{columns}
+\medskip
+Small firms accept structural compromises out of necessity; larger firms that accept them are choosing them.
+\end{frame}
+
+\section{Policies, Limits, and Exceptions}
+
+\begin{frame}{The Policy Hierarchy: Authority Matched to Altitude}
+\begin{itemize}
+  \item \textbf{Level 1 --- ERM policy} (board-approved, 5--15 pages): governance structure, appetite, roles, escalation.
+  \item \textbf{Level 2 --- Risk-specific policies} (CRO/committee-approved): credit, market, operational, cyber --- limits translated from appetite.
+  \item \textbf{Level 3 --- Procedures} (department-approved): approval workflows, incident protocols.
+  \item \textbf{Level 4 --- Work instructions}: one-page checklists and job aids for frontline tasks.
+\end{itemize}
+\medskip
+\begin{block}{The design test}
+Boards approve principles that change rarely; departments own details that change often. A board approving procedures --- or a department rewriting appetite --- means the architecture has failed.
+\end{block}
+\end{frame}
+
+\begin{frame}{Limits and Exceptions}
+\begin{columns}[T]
+\column{0.48\textwidth}
+\textbf{Limit types and thresholds}
+\begin{itemize}
+  \item Concentration (no customer $>$10\% of revenue), position (VaR ceilings), transaction (authority tiers), aggregate (retained risk vs.\ capital)
+  \item \alert{Soft limit} ($\sim$75--80\% of hard): notification and review --- the early-warning conversion
+  \item \alert{Hard limit}: absolute; breach forces same-day remediation and escalation
+\end{itemize}
+\column{0.48\textwidth}
+\textbf{Exception discipline}
+\begin{itemize}
+  \item Written request, risk assessment, mitigation, \alert{hard end date}; tiered approval scaling with risk
+  \item CRO-maintained exception log, reported quarterly; automatic expiry
+  \item Two cultural rules: exceptions are \emph{rare}, and renewal is a red flag --- repeated requests mean the policy is broken
+  \item Aggressive exception requests under business pressure: the polite version of the Wells Fargo dynamic
+\end{itemize}
+\end{columns}
+\end{frame}
+
+\section{Risk Reporting and Escalation}
+
+\begin{frame}{Dashboards Exist to Carry Bad News Upward Intact}
+Five design principles: \alert{audience-appropriate}, \alert{visually clear} (RAG status, one page first), \alert{trended} (a level without a trend is half a fact), \alert{contextualized} (``VaR \$8.2M against \$10M limit --- 82\%''), \alert{actionable} (breaches flagged, owners named).
+\medskip
+\begin{itemize}
+  \item A board dashboard's six elements: appetite summary with RAG and trend; top-ten heat map; emerging risks watchlist; incidents and near-misses; \alert{every limit breach} since last meeting; mitigation action status.
+  \item An empty breach section in a complex business deserves a question, not relief.
+  \item Wells Fargo's board received regular, professional, sanitized reports --- each layer of summarization shaved off severity until what arrived was technically accurate and substantively misleading. Dashboard design is partly typography and mostly \alert{incentives}.
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Escalation Protocols}
+\begin{center}\small
+\begin{tabular}{@{}lll@{}}
+\toprule
+\textbf{Trigger} & \textbf{Notification path} & \textbf{Speed} \\
+\midrule
+Appetite breach & CRO $\rightarrow$ CEO; both committees & Same day \\
+Material incident & CRO + CEO; board within a week & Immediate \\
+Regulatory finding & CEO + board chair & Same day \\
+Soft-limit breach & Second line; next mgmt committee & Same day notice \\
+Emerging risk & Mgmt committee $\rightarrow$ board & Quarterly \\
+\bottomrule
+\end{tabular}
+\end{center}
+\medskip
+\begin{itemize}
+  \item Explicit speed tiers: immediate (hours) for catastrophic events; same-day for appetite and hard-limit breaches; 48 hours for moderate incidents.
+  \item Every escalation lands in a CRO-maintained incident log --- institutional memory plus an audit trail proving the system works.
+  \item Wells Fargo's most damning fact: not that problems existed, but that \alert{a decade of signals never assembled into an escalation} that reached independent directors with its weight intact.
+\end{itemize}
+\end{frame}
+
+\section{Risk Culture and Incentives}
+
+\begin{frame}{Culture Is What You Measure and Pay For}
+\begin{block}{Risk culture (FSB, 2014)}
+The norms, attitudes, and behaviors related to risk awareness, risk taking, and risk management --- harder to measure than structures, and \alert{more decisive}.
+\end{block}
+\medskip
+\begin{itemize}
+  \item Strong culture, behaviorally: concerns escalate without fear; near-misses get reported; violations draw consequences \emph{regardless of seniority}.
+  \item Weak culture: shoot-the-messenger, make-the-quarter pressure, senior exemptions, risk as an obstacle.
+  \item Wells Fargo's formal architecture was unremarkable --- policies, committees, hotlines, an ethics code. The \emph{operative} culture was the one the quotas built: volume was what leadership counted, so volume was what employees produced, by whatever means the counting could not see.
+  \item Tone travels through three channels employees read fluently: \alert{words, actions, budgets}.
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Incentive Alignment}
+\begin{itemize}
+  \item \textbf{Balance horizons} --- roughly 40--50\% current cash, 30--40\% deferred over 3--5 years, 10--20\% long-term vehicles. Heavy annual cash purchases short-term optimization.
+  \item \textbf{Weight risk in scorecards} --- 15--25\% explicit risk weight alongside financial metrics.
+  \item \textbf{Malus and clawback} --- \alert{malus} cancels unvested deferrals when failures surface; \alert{clawback} recovers paid compensation (SEC Rule 10D-1 mandates restatement clawbacks; extend triggers to conduct).
+  \item \textbf{Audit for perverse structures} --- uncapped volume commissions, production bonuses without safety counterweights, equity cashable before risk matures.
+\end{itemize}
+\medskip
+\begin{block}{The hour never scheduled}
+The Wells Fargo quota plan would not have survived an honest hour of ``what behavior does this plan purchase?'' The compensation committee is where that hour belongs.
+\end{block}
+\end{frame}
+
+\begin{frame}{Behavioral Indicators: Culture Is Observable Before Losses}
+\begin{columns}[T]
+\column{0.48\textwidth}
+\textbf{Positive signals}
+\begin{itemize}
+  \item Near-miss reporting trending \emph{up} --- rising reporting usually means rising trust, not rising risk
+  \item Declining exception requests
+  \item Hotline tips investigated and closed with feedback
+  \item Exit interviews free of fear themes
+\end{itemize}
+\column{0.48\textwidth}
+\textbf{Warning signals}
+\begin{itemize}
+  \item Reporting rates falling
+  \item Repeat violations by the same units, no consequence
+  \item Exceptions arriving with business pressure attached
+  \item Hotline retaliation; turnover spiking in risk and compliance roles
+\end{itemize}
+\end{columns}
+\medskip
+Track these as standing metrics --- several belong on the board dashboard. Wells Fargo's employees used the hotlines until observed retaliation taught them the channel was a career hazard: \alert{a system that punishes its own sensors goes blind where it most needs sight}.
+\end{frame}
+
+\section{Governance Failures: Three Autopsies}
+
+\begin{frame}{Wells Fargo Through the Governance Lens}
+Map the case onto the chapter's architecture: \alert{every layer failed in sequence}, and any one functioning might have contained the damage.
+\begin{itemize}
+  \item \textbf{Incentives} (root cause) --- volume quotas with no quality or consent counterweight made misconduct the rational response.
+  \item \textbf{First line} --- branch and regional managers transmitted the pressure; their metrics depended on not knowing officially.
+  \item \textbf{Second line} --- identified the problem repeatedly; lacked authority to halt a profitable practice. Voice without veto.
+  \item \textbf{Reporting} --- a decade of signals never aggregated; the board's dashboard was green.
+  \item \textbf{Board} --- didn't connect the dots it had or demand the dots it lacked; the Fed's asset cap lasted over seven years.
+  \item \textbf{Tone} --- the CEO blamed bad employees; consequences flowed downhill exclusively.
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Boeing 737 MAX and the 2008 Cohort}
+\begin{columns}[T]
+\column{0.48\textwidth}
+\textbf{Boeing 737 MAX}
+\begin{itemize}
+  \item 346 deaths; \$20B+; criminal charges. Proximate cause: MCAS on a single sensor, downplayed to pilots
+  \item Schedule beat engineering; hazard analyses underrated MCAS; dissent was overruled
+  \item A board heavy on finance and politics, light on aerospace --- it \alert{lacked the expertise to know which questions to ask}
+  \item Self-administered certification (ODA) weakened the external check
+\end{itemize}
+\column{0.48\textwidth}
+\textbf{2008 financial crisis}
+\begin{itemize}
+  \item Boards without derivatives expertise; oversight nominal because it could not be substantive
+  \item CROs under CFOs, overruled by revenue producers
+  \item Asymmetric pay: annual bonuses on positions whose losses arrived later
+  \item Models trusted, not challenged; stress tests gentle
+  \item Reforms map one-to-one: \S\,165(h), Reg YY, CCAR, deferral/malus/clawback
+\end{itemize}
+\end{columns}
+\medskip
+Every future failure will be new in its facts and familiar in its anatomy.
+\end{frame}
+
+\begin{frame}{The Complete Cycle}
+\begin{itemize}
+  \item Chapters 1--8 built the machinery: frictions, frameworks, identification, quantification, appetite, aggregation, loss control, financing. \alert{Governance is what makes the cycle run more than once.}
+  \item The recurring lesson: machinery is necessary and not sufficient. Wells Fargo had committees; Boeing had safety processes; Lehman had a risk function.
+  \item What each lacked was the behavioral layer: information traveling upward intact, challengers who can lose arguments and still be heard, incentives that don't quietly purchase the disaster, and boards that probe what they're shown --- and notice what they're not.
+  \item Risk governance, done honestly, is the discipline of building an organization that can \alert{hear bad news early and act on it while it is still cheap}.
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Discussion Questions}
+\begin{enumerate}
+  \item What is the fiduciary duty to monitor? Explain \emph{Caremark}, \emph{Stone v.\ Ritter}, and \emph{Marchand v.\ Barnhill}. Why does director liability remain rare --- and what does the Fed's 2018 Wells Fargo order add to the accountability picture?
+  \item Identify the three governance failures you consider most causally important to the Wells Fargo scandal, defend the ranking, and specify a structural remedy for each. Which single reform, implemented in 2005, would most likely have prevented the outcome?
+  \item Why should the CRO report to the CEO rather than the CFO? What does the dotted line to the board risk committee add, and when might direct board reporting be worth its costs?
+  \item A company shows: near-miss reporting down 40\% over two years; CEO pay 95\% short-term cash; a leader promoted after two policy violations because the unit beat targets; 30-minute quarterly board risk discussions. Diagnose each indicator, explain how they interact, and prescribe remedies in priority order.
+\end{enumerate}
+\end{frame}
+
+\end{document}

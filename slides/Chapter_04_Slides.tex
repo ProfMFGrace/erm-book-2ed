@@ -1,0 +1,408 @@
+% !TeX root = Chapter_04_Slides.tex
+% Chapter 4 lecture slides — Risk Quantification and Qualification
+% Instructor-resource series.
+\documentclass[11pt, aspectratio=169]{beamer}
+\usepackage{tikz}
+\makeatletter
+\def\input@path{{./}{../slides/}}
+\makeatother
+\usepackage{erm_beamer_theme}
+\usepackage{amsmath,amssymb}
+
+\title[ERM Ch.\,4]{Risk Quantification and Qualification}
+\subtitle{Enterprise Risk Management, Second Edition --- Chapter 4}
+\author{Martin F.\ Grace}
+\institute{University of Iowa\\[2pt] Tippie College of Business\\[2pt] Vaughan Institute of Risk Management}
+\date{June 2026}
+
+\begin{document}
+
+\begin{frame}[plain]
+\titlepage
+\end{frame}
+
+\begin{frame}{Learning Objectives}
+\begin{itemize}
+  \item Distinguish \alert{quantitative} from \alert{qualitative} risk assessment and explain when each is appropriate.
+  \item Compute and interpret frequency, severity, expected loss, variance, and standard deviation from sample data.
+  \item Recognize normal versus \alert{right-skewed} loss distributions and the concept of tail risk.
+  \item Build an empirical loss distribution in Excel and calculate a \alert{Value at Risk (VaR)} measure.
+  \item Explain why VaR is useful but incomplete --- and why qualitative judgment remains essential.
+\end{itemize}
+\end{frame}
+
+\section{Opening Case: Long-Term Capital Management}
+
+\begin{frame}{The Smartest Fund on Wall Street}
+\begin{itemize}
+  \item Founded 1994 by John Meriwether; team included Nobel laureates Myron Scholes and Robert Merton.
+  \item Strategy: \alert{relative-value arbitrage} --- buy the cheap bond, short the expensive twin, wait for convergence.
+  \item Tiny profits per trade, multiplied by \alert{enormous leverage}.
+  \item Models estimated spread volatilities and correlations from historical data --- early VaR: ``on 99 of 100 days, losses won't exceed \$X.''
+  \item 1994--1997: very high returns, remarkably low reported volatility. Quantification, apparently, done right.
+\end{itemize}
+\end{frame}
+
+\begin{frame}{1998: The Real World Refuses to Cooperate}
+\begin{itemize}
+  \item Russia defaults; investors flee to quality. Riskier assets sold \emph{indiscriminately}.
+  \item Spreads that ``had to'' converge blew out. Supposedly offsetting positions all lost at once.
+  \item Correlations that were low or negative in the data spiked toward one. Liquidity vanished.
+  \item Loss: $\sim$\$4.6 billion in a few months --- roughly 90\% of capital.
+  \item ``Six-sigma'' scenarios the models called virtually impossible happened. The NY Fed organized a private rescue.
+\end{itemize}
+\end{frame}
+
+\begin{frame}{The Lesson}
+\begin{itemize}
+  \item LTCM did not fail to quantify risk --- it quantified extensively.
+  \item The failure was in the \alert{assumptions}: past predicts future, stable distributions, diversification holds, liquid exits.
+  \item Leverage magnified the error: sizing positions on optimistic estimates is betting the firm on the model being right.
+  \item \alert{Model risk} became the central risk factor.
+\end{itemize}
+\medskip
+\begin{block}{The decision problem}
+Your VaR model says a catastrophic loss is a 1-in-10{,}000 event. How much would \emph{you} borrow against that number --- and what would you want to know about how it was computed?
+\end{block}
+\end{frame}
+
+\section{Why Quantify and Qualify Risk?}
+
+\begin{frame}{The Limits of Intuition}
+\begin{itemize}
+  \item \textbf{Systematic biases}: people overweight vivid, recent, emotionally salient events; overconfidence and anchoring distort estimates.
+  \item \textbf{No common scale}: one manager's ``high'' risk vs.\ another's ``moderate'' --- resources flow to the loudest advocate, not the largest exposure.
+  \item \textbf{Stakeholders expect rigor}: boards, regulators, rating agencies, and lenders demand data-driven assessment. Basel III and risk-based capital rules \emph{mandate} it.
+\end{itemize}
+\medskip
+\begin{block}{What quantification buys}
+Capital allocation, pricing and reserving, insurance/retention decisions, regulatory compliance, and early-warning KRIs --- all require measuring frequency and severity, not guessing.
+\end{block}
+\end{frame}
+
+\begin{frame}{Quantification Beyond Finance: Moneyball and Hospitals}
+\begin{columns}[T]
+\column{0.48\textwidth}
+\textbf{Oakland A's, 2002}
+\begin{itemize}
+  \item Lost three stars; payroll a third of the Yankees'.
+  \item Measured what predicted runs (\alert{on-base percentage}), not what scouts admired.
+  \item Bought undervalued, predictable production --- won 103 games.
+\end{itemize}
+\column{0.48\textwidth}
+\textbf{Hospitals and airlines}
+\begin{itemize}
+  \item Infections per 1{,}000 catheter-days vs.\ national benchmarks; readmission rates with Medicare penalties attached.
+  \item Dispatch reliability per 1{,}000 departures drives maintenance investment.
+\end{itemize}
+\end{columns}
+\medskip
+None of this required Monte Carlo. It required an \alert{exposure base}, consistent measurement, and a benchmark --- applied with discipline.
+\end{frame}
+
+\begin{frame}{Why Qualitative Assessment Still Matters}
+\begin{itemize}
+  \item \textbf{Sparse data}: 20 years without a catastrophic failure is not evidence the risk is negligible.
+  \item \textbf{Emerging risks}: cyber, regulatory change, strategic disruption --- the past is a poor guide.
+  \item \textbf{Interdependencies}: correlations among risks are hard to estimate; scenario workshops reveal what statistics miss.
+  \item \textbf{Communication}: heat maps and narratives reach boards better than distribution tables.
+\end{itemize}
+\medskip
+The goal is \emph{informed} risk assessment, not mathematical precision for its own sake.
+\end{frame}
+
+\section{Basic Statistical Tools}
+
+\begin{frame}{Frequency, Severity, Expected Loss}
+\[
+\text{Expected Loss} = \text{Frequency} \times \text{Average Severity}
+\]
+\begin{itemize}
+  \item \alert{Frequency}: events per unit of exposure per period (accidents per 100 employees per year, defects per 10{,}000 units).
+  \item \alert{Severity}: magnitude of loss when an event occurs.
+\end{itemize}
+\medskip
+\begin{exampleblock}{Example: slip-and-fall}
+\begin{itemize}
+  \item 15 incidents across 50 stores last year $\Rightarrow$ frequency $= 0.30$ per store per year.
+  \item Average incident costs \$10{,}000 $\Rightarrow$ expected loss $= 0.30 \times \$10{,}000 = \$3{,}000$ per store; \$150{,}000 for the chain.
+\end{itemize}
+\end{exampleblock}
+\end{frame}
+
+\begin{frame}{Mean, Median, and Dispersion}
+\begin{itemize}
+  \item \textbf{Mean}: intuitive, but pulled upward by a few large losses.
+  \item \textbf{Median}: the middle value --- often far below the mean for loss data. 100 warranty claims: median \$800, mean \$2{,}000.
+  \item \textbf{Maximum observed} $\neq$ maximum possible. Larger losses than history can and do occur.
+  \item \textbf{Standard deviation}: dispersion around the mean, in original units. If normal: $\sim$68\% within 1 s.d., 95\% within 2.
+\end{itemize}
+\medskip
+\begin{block}{Mean $>$ median is a diagnostic}
+When mean severity is well above median severity, the loss distribution is \alert{right-skewed} --- and the tail, not the typical loss, is where the danger lives.
+\end{block}
+\end{frame}
+
+\begin{frame}{Correlation and Diversification}
+\begin{itemize}
+  \item Total \emph{expected} loss is always the sum. Total \emph{volatility} depends on \alert{correlation}.
+\end{itemize}
+\begin{exampleblock}{Two risks, each: expected loss \$1M, standard deviation \$500{,}000}
+\begin{itemize}
+  \item Perfectly positively correlated: total s.d.\ $= \$1{,}000{,}000$
+  \item Independent: total s.d.\ $= \sqrt{500^2 + 500^2} \approx \$707{,}000$
+  \item Perfectly negatively correlated: total s.d.\ $= \$0$
+\end{itemize}
+\end{exampleblock}
+\begin{itemize}
+  \item Diversification is the insurer's business model --- pooling independent risks.
+  \item Caution: correlations estimated in calm markets can \alert{spike toward one in a crisis}. Ask LTCM.
+\end{itemize}
+\end{frame}
+
+\section{Case: Midtown Outfitters (Retailer)}
+
+\begin{frame}{Midtown Outfitters: The Risk Landscape}
+\begin{itemize}
+  \item 45 clothing stores in three Midwest states; \$180M revenue; 1{,}200 employees.
+  \item \textbf{Hazard}: property damage, slip-and-fall liability, employee injuries.
+  \item \textbf{Operational}: inventory shrinkage, supply chain, POS failures.
+  \item \textbf{Financial}: chargebacks, currency, interest rates. \textbf{Strategic}: e-commerce competition, mall leases.
+  \item Risk manager assembles five years of incident reports, broker \alert{loss runs}, inventory counts, and industry benchmarks.
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Worked Example: Slip-and-Fall}
+\begin{exampleblock}{Five years, 68 incidents, 215 store-years}
+\begin{itemize}
+  \item \textbf{Frequency}: $68 / 215 = 0.316$ per store per year $\Rightarrow$ $45 \times 0.316 \approx 14$ expected incidents per year.
+  \item \textbf{Severity}: 52 no-claim (\$300 avg.), 12 small claims (\$4{,}500 avg.), 4 large (\$15K--\$48K). Total \$189{,}600; mean $= \$2{,}788$; median $= \$300$.
+  \item \textbf{Expected loss}: $0.316 \times \$2{,}788 = \$881$ per store $\Rightarrow$ $\approx \$39{,}600$ for 45 stores.
+  \item \textbf{Variability}: annual totals \$18K--\$62K; s.d.\ $\approx$ \$16{,}000 --- driven by whether a large claim hits.
+\end{itemize}
+\end{exampleblock}
+Mean nearly $10\times$ the median: a textbook right-skewed loss distribution.
+\end{frame}
+
+\begin{frame}{Shrinkage vs.\ Property Damage: Two Different Animals}
+\begin{columns}[T]
+\column{0.48\textwidth}
+\textbf{Inventory shrinkage}
+\begin{itemize}
+  \item Averages 2.02\% of sales $\Rightarrow$ \$3.64M per year.
+  \item Highly predictable (s.d.\ of annual rate: 0.19 points) --- many small incidents, no clustering.
+  \item Manage with prevention: even 2.02\% $\to$ 1.75\% saves $\sim$\$500K/year.
+\end{itemize}
+\column{0.48\textwidth}
+\textbf{Property damage}
+\begin{itemize}
+  \item 85 minor (\$1{,}200 avg.), 8 moderate (\$8{,}500 avg.), 1 tornado: \$180{,}000.
+  \item The single tornado exceeded \emph{all other incidents combined} over five years.
+  \item Heavily right-skewed: retain the small stuff, insure the tail.
+\end{itemize}
+\end{columns}
+\medskip
+\begin{block}{Management decisions}
+\$25K liability retention, \$10K property deductible --- retain predictable frequency, transfer severe tail. Monitor quarterly; investigate deviations.
+\end{block}
+\end{frame}
+
+\section{Case: Precision Parts (Manufacturer)}
+
+\begin{frame}{Worked Example: Equipment Downtime}
+Precision Parts: metal components for auto/aerospace; two plants, 650 workers, \$120M revenue.
+\begin{exampleblock}{Three years of maintenance logs: 72 failures ($\approx$ 24/year)}
+\[
+\text{Avg.\ downtime} = \frac{(48 \times 4) + (18 \times 16) + (6 \times 72)}{72} = 12.67 \text{ hours per failure}
+\]
+\begin{itemize}
+  \item Expected annual downtime: $24 \times 12.67 = 304$ hours.
+  \item At \$1{,}200 per hour: expected annual cost $\approx$ \alert{\$364{,}800}.
+\end{itemize}
+\end{exampleblock}
+Timing matters: downtime in peak demand, or on equipment with no backup, costs far more than the average suggests.
+\end{frame}
+
+\begin{frame}{Defects, Warranty Claims, and Injuries}
+\begin{itemize}
+  \item \textbf{Quality}: 0.60\% internal defect rate (\$720K/yr scrap); 0.04\% customer returns; warranty claims average \$177K/yr.
+  \item The 4 major warranty claims = 5\% of claim count but \alert{34\% of warranty cost} --- right-skew again.
+  \item \textbf{Safety}: OSHA rate $(48/3{,}900{,}000) \times 200{,}000 = 2.46$ per 200{,}000 hours --- below the industry's $\sim$3.5.
+  \item Direct injury cost \$185K/yr; indirect costs roughly double it to $\sim$\$370K.
+\end{itemize}
+\end{frame}
+
+\begin{frame}{When Risks Travel Together}
+\begin{itemize}
+  \item Rushed production $\Rightarrow$ equipment runs hot and long, quality pressure rises, overtime fatigue builds.
+  \item Measured correlation between breakdowns and defect rates: $\approx +0.35$ --- common causes, not coincidence.
+  \item Adding the three expected losses ($\approx$ \$1.79M) \alert{understates} total risk: bad outcomes cluster in stress periods.
+\end{itemize}
+\medskip
+\begin{block}{The managerial response}
+Attack the common cause: preventive maintenance scheduling, capacity buffers, quality gates that halt production --- plus qualitative tools (scenario analysis for the single-source steel supplier, expert elicitation for the custom press).
+\end{block}
+\end{frame}
+
+\section{Loss Distributions and Skewness}
+
+\begin{frame}{Normal vs.\ Right-Skewed}
+\begin{columns}[T]
+\column{0.48\textwidth}
+\textbf{Normal (bell curve)}
+\begin{itemize}
+  \item Symmetric; mean $=$ median $=$ mode.
+  \item Extreme outcomes vanishingly rare: $>$3 s.d.\ has probability 0.13\%.
+  \item Arises when many small independent factors combine (central limit theorem).
+\end{itemize}
+\column{0.48\textwidth}
+\textbf{Right-skewed}
+\begin{itemize}
+  \item Most losses small; occasional large ones create a long right tail.
+  \item Mean $>$ median; max observed does \emph{not} bound the future.
+  \item Typical of property, liability, recalls, operational losses.
+\end{itemize}
+\end{columns}
+\medskip
+\alert{Kurtosis} adds a second warning: fat-tailed distributions produce extremes far more often than the normal model predicts --- as financial returns repeatedly demonstrate.
+\end{frame}
+
+\begin{frame}{Why Skewness Matters}
+\begin{itemize}
+  \item \textbf{Assume normal, get burned}: normal assumptions severely understate large-loss probability. LTCM's ``impossible'' events were exactly this error.
+  \item \textbf{Mean overstates the typical year}: budgets set at the mean run rich most years, then catastrophically short.
+  \item \textbf{Tails dominate totals}: Midtown's tornado --- 1\% of incidents, 51\% of property losses.
+  \item \textbf{Insurance value lives in the tail}: retain the predictable part, transfer the catastrophic part.
+\end{itemize}
+\end{frame}
+
+\section{Excel Case: Northland Manufacturing VaR}
+
+\begin{frame}{Northland Manufacturing: The Data}
+Metal fabrication, 400 workers, ten years of OSHA-mandated injury records: \alert{138 injuries, \$1{,}899{,}700 total cost}.
+\medskip
+\begin{center}
+\small
+\begin{tabular}{lccc}
+\toprule
+Claim type & Count (share) & Range & Mean \\
+\midrule
+Minor (medical only) & 98 (71\%) & \$800--\$5{,}000 & \$2{,}400 \\
+Moderate (lost time) & 32 (23\%) & \$6{,}000--\$20{,}000 & \$11{,}500 \\
+Serious (extended) & 8 (6\%) & \$25{,}000--\$75{,}000 & \$42{,}000 \\
+\bottomrule
+\end{tabular}
+\end{center}
+\medskip
+Annual totals range from \$115{,}800 (Year 8) to \$283{,}700 (Year 7). Goal: quantify workers' compensation risk for insurance, budgeting, and safety decisions.
+\end{frame}
+
+\begin{frame}{Steps 1--3: Frequency, Severity, Expected Loss}
+\begin{exampleblock}{Building the baseline}
+\begin{itemize}
+  \item \textbf{Frequency}: $\dfrac{138}{7{,}950{,}000} \times 200{,}000 = 3.47$ injuries per 200{,}000 hours $\Rightarrow$ $\approx 14$ expected injuries/year for 400 employees.
+  \item \textbf{Severity}: mean $= \$1{,}899{,}700 / 138 = \$13{,}765$; median $\approx \$2{,}800$. Mean $\approx 5\times$ median --- right-skewed.
+  \item \textbf{Expected annual loss}: $14 \times \$13{,}765 = \$192{,}710$ --- consistent with the historical mean of \$189{,}970 (s.d.\ $\approx$ \$53{,}000).
+\end{itemize}
+\end{exampleblock}
+In Excel: \texttt{AVERAGE}, \texttt{MEDIAN}, and frequency from \texttt{COUNT}/\texttt{SUM} over the loss-run data.
+\end{frame}
+
+\begin{frame}{Step 4: Empirical-Percentile VaR}
+\alert{Value at Risk (VaR)}: the loss threshold exceeded with only small probability --- ``how bad is a bad year?''
+\begin{exampleblock}{Sort the ten annual losses, take percentiles}
+\begin{itemize}
+  \item Sorted: \$115.8K, \$128.9K, \$142.8K, \$172.3K, \$187.5K, \$189.2K, \$198.6K, \$224.5K, \$256.4K, \$283.7K.
+  \item \textbf{VaR (90\%)}: \texttt{=PERCENTILE.INC(losses, 0.90)} $\approx$ \alert{\$256{,}400}.
+  \item \textbf{VaR (95\%)}: interpolated $\approx$ \$270{,}000.
+  \item \textbf{VaR (99\%)}: not observed in ten years --- requires a fitted distribution (lognormal/gamma): perhaps \$400K--\$500K.
+\end{itemize}
+\end{exampleblock}
+Alternative: Monte Carlo --- draw Poisson injury counts and empirical severities 10{,}000 times.
+\end{frame}
+
+\begin{frame}{Interpreting and Using the VaR}
+\begin{itemize}
+  \item \textbf{Reserving}: to be 95\% confident of covering a bad year, hold $\approx$ \$270{,}000 in reserves or coverage --- most years it goes unspent.
+  \item \textbf{Deductible selection}: retain losses to \$150{,}000 (below the 90\% VaR) $\Rightarrow$ self-fund in $>$90\% of years; insurance picks up the once-in-6-to-10-years excess.
+  \item \textbf{Comparison}: injury VaR (95\%) of \$270K vs.\ property VaR (95\%) of \$150K $\Rightarrow$ injuries are the bigger tail risk.
+\end{itemize}
+\medskip
+\begin{block}{The fine print}
+``With 90\% confidence, losses won't exceed \$256{,}400'' --- \emph{assuming the future resembles the past}. That clause carries all the model risk.
+\end{block}
+\end{frame}
+
+\section{VaR: Usefulness and Limitations}
+
+\begin{frame}{Why VaR Is Everywhere --- and What It Hides}
+\begin{columns}[T]
+\column{0.48\textwidth}
+\textbf{The appeal}
+\begin{itemize}
+  \item One number, plain English --- boards understand it.
+  \item Common language across risks, units, and firms.
+  \item Downside-focused, forward-looking.
+  \item Regulators require it (Basel market risk).
+\end{itemize}
+\column{0.48\textwidth}
+\textbf{The blind spots}
+\begin{itemize}
+  \item Silent about losses \emph{beyond} the threshold --- two portfolios, same VaR, wildly different worst cases.
+  \item Model- and assumption-dependent; data-starved at 99\%+.
+  \item Correlations estimated in calm times fail in crises.
+  \item Invites gaming: pile risk just past the threshold.
+\end{itemize}
+\end{columns}
+\end{frame}
+
+\begin{frame}{Complementary Measures}
+\begin{itemize}
+  \item \alert{Expected Shortfall (CVaR)}: average loss \emph{given} VaR is exceeded. Northland: ES(90\%) $= (\$256{,}400 + \$283{,}700)/2 = \$270{,}050$ --- a modest step past the threshold, so this tail isn't extreme.
+  \item \alert{Stress testing}: ``what if a fire destroys the main facility?'' --- specific threats history hasn't shown you.
+  \item \alert{Sensitivity analysis}: if VaR swings with small assumption changes, trust the point estimate less.
+  \item \alert{Back-testing}: a 95\% VaR exceeded 15\% of the time is a mis-calibrated model.
+\end{itemize}
+\medskip
+\begin{block}{Rule of use}
+VaR informs decisions; it does not make them. Use it for comparisons and trends, then ask what the number rests on.
+\end{block}
+\end{frame}
+
+\section{Integrating Quantitative and Qualitative Assessment}
+
+\begin{frame}{When Each Approach Earns Its Keep}
+\begin{columns}[T]
+\column{0.48\textwidth}
+\textbf{Quantification works when}
+\begin{itemize}
+  \item Frequent, homogeneous events generate data.
+  \item Processes are stable --- the past informs the future.
+  \item Losses are measurable in dollars.
+  \item Stakeholders require numbers.
+\end{itemize}
+\column{0.48\textwidth}
+\textbf{Qualitative is essential for}
+\begin{itemize}
+  \item Rare, unprecedented, emerging risks.
+  \item Interconnected risks that defy modeling.
+  \item Reputation and other intangibles.
+  \item \alert{Black swans} --- LTCM never asked what happens if all liquidity evaporates at once.
+\end{itemize}
+\end{columns}
+\medskip
+\begin{block}{The Moneyball coda}
+The A's didn't fire the scouts. They used numbers to discipline what the scouts looked for --- and kept judgment for what models can't capture. So should risk managers.
+\end{block}
+\end{frame}
+
+\begin{frame}{Discussion Questions}
+\begin{enumerate}
+  \item A retailer's slip-and-fall claims show mean severity \$12{,}000 and median \$3{,}500. What does this say about the loss distribution --- and about how to budget, insure, and manage the risk?
+  \item Using LTCM, describe three important limitations of VaR and how a risk manager should address each.
+  \item Precision Parts found a $+0.35$ correlation between equipment breakdowns and product defects. Why might that exist, and what does it imply for risk management strategy?
+  \item Pick a non-financial industry. How would you apply the frequency--severity framework to one of its major risks? What data would you collect, and what decisions would the analysis inform?
+\end{enumerate}
+\end{frame}
+
+\end{document}

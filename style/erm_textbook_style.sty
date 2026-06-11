@@ -1,0 +1,296 @@
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{erm_textbook_style}[2026/05/19 ERM textbook style]
+
+% Core packages
+\RequirePackage[T1]{fontenc}
+\RequirePackage{lmodern}
+\RequirePackage{microtype}
+\RequirePackage{xcolor}
+\RequirePackage{geometry}
+\RequirePackage{setspace}
+\RequirePackage{titlesec}
+\RequirePackage{enumitem}
+\RequirePackage{booktabs}
+\RequirePackage{tabularx}
+\RequirePackage{array}
+\RequirePackage{caption}
+\RequirePackage{fancyhdr}
+\RequirePackage{tcolorbox}
+\RequirePackage{etoolbox}
+\RequirePackage{xparse}
+\RequirePackage{hyperref}
+
+\tcbuselibrary{breakable, skins}
+
+% Page and paragraph settings
+\geometry{
+  letterpaper,
+  inner=1.15in,
+  outer=1.0in,
+  top=1.0in,
+  bottom=1.0in,
+  headheight=22pt
+}
+
+\setlength{\parindent}{1.2em}
+\setlength{\parskip}{0pt}
+\linespread{1.04}
+\clubpenalty=10000
+\widowpenalty=10000
+\displaywidowpenalty=10000
+
+% University of Iowa-inspired palette.
+% Official gold is best as an accent; dark gold is safer for lines and text.
+\definecolor{ERMIowaBlack}{HTML}{000000}
+\definecolor{ERMIowaGold}{HTML}{FFCD00}
+\definecolor{ERMDarkGold}{HTML}{B38600}
+\definecolor{ERMDarkGray}{HTML}{3C3C3C}
+\definecolor{ERMMidGray}{HTML}{777777}
+\definecolor{ERMLightGray}{HTML}{E6E6E6}
+\definecolor{ERMBackground}{HTML}{FBFAF5}
+\definecolor{ERMBoxGold}{HTML}{FFF3BF}
+\definecolor{ERMBoxGray}{HTML}{F2F2F2}
+\definecolor{ERMBoxBlue}{HTML}{EAF2F8}
+\definecolor{ERMBoxGreen}{HTML}{EAF6EA}
+\definecolor{ERMBoxRed}{HTML}{F9EAEA}
+
+% Hyperlinks
+\hypersetup{
+  colorlinks=true,
+  linkcolor=ERMIowaBlack,
+  citecolor=ERMDarkGold,
+  urlcolor=ERMDarkGold,
+  pdfborder={0 0 0}
+}
+
+% Running heads
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[LE]{\small\color{ERMDarkGray}\thepage\quad\leftmark}
+\fancyhead[RO]{\small\color{ERMDarkGray}\rightmark\quad\thepage}
+\renewcommand{\headrulewidth}{0.25pt}
+\renewcommand{\headrule}{\hbox to\headwidth{\color{ERMLightGray}\leaders\hrule height \headrulewidth\hfill}}
+
+% Heading hierarchy
+\titleformat{\chapter}[display]
+  {\normalfont\bfseries\color{ERMIowaBlack}}
+  {\Large Chapter \thechapter}
+  {0.5ex}
+  {\Huge}
+  [\vspace{0.5ex}{\color{ERMIowaGold}\titlerule[2pt]}]
+
+\titlespacing*{\chapter}{0pt}{-0.5\baselineskip}{2.0\baselineskip}
+
+\titleformat{\section}
+  {\normalfont\Large\bfseries\color{ERMIowaBlack}}
+  {\thesection}
+  {0.75em}
+  {}
+
+\titleformat{\subsection}
+  {\normalfont\large\bfseries\color{ERMDarkGray}}
+  {\thesubsection}
+  {0.75em}
+  {}
+
+\titleformat{\subsubsection}
+  {\normalfont\normalsize\bfseries\color{ERMDarkGray}}
+  {\thesubsubsection}
+  {0.75em}
+  {}
+
+\titlespacing*{\section}{0pt}{1.6\baselineskip}{0.6\baselineskip}
+\titlespacing*{\subsection}{0pt}{1.2\baselineskip}{0.4\baselineskip}
+\titlespacing*{\subsubsection}{0pt}{1.0\baselineskip}{0.25\baselineskip}
+
+% Lists
+\setlist[itemize]{
+  leftmargin=1.5em,
+  itemsep=0.25em,
+  topsep=0.35em,
+  parsep=0pt,
+  label=\textcolor{ERMDarkGold}{\textbullet}
+}
+
+\setlist[enumerate]{
+  leftmargin=1.7em,
+  itemsep=0.25em,
+  topsep=0.35em,
+  parsep=0pt,
+  label=\textcolor{ERMDarkGold}{\arabic*.}
+}
+
+% Captions, tables, and exhibits
+\captionsetup{
+  labelfont={bf,color=ERMIowaBlack},
+  textfont={small,color=ERMDarkGray},
+  justification=raggedright,
+  singlelinecheck=false,
+  skip=6pt
+}
+
+\newcolumntype{Y}{>{\raggedright\arraybackslash}X}
+\renewcommand{\arraystretch}{1.15}
+
+\NewDocumentEnvironment{ermtable}{m O{}}
+  {\begin{table}[htbp]\centering\caption{#1}\ifstrempty{#2}{}{\label{#2}}\small}
+  {\end{table}}
+
+\NewDocumentCommand{\tablenote}{m}{%
+  \par\vspace{0.25em}{\footnotesize\color{ERMMidGray}\textit{Note.} #1}
+}
+
+% Chapter-opening elements
+\NewDocumentCommand{\chapteroverview}{+m}{%
+  \begin{tcolorbox}[
+    enhanced,
+    breakable,
+    colback=ERMBackground,
+    colframe=ERMIowaBlack,
+    boxrule=0.6pt,
+    leftrule=3pt,
+    left=8pt,
+    right=8pt,
+    top=7pt,
+    bottom=7pt,
+    title={Chapter Overview},
+    fonttitle=\bfseries,
+    colbacktitle=ERMIowaBlack,
+    coltitle=white
+  ]
+  #1
+  \end{tcolorbox}
+}
+
+\NewDocumentEnvironment{learningobjectives}{}
+  {\begin{tcolorbox}[
+    enhanced,
+    breakable,
+    colback=ERMBoxGold,
+    colframe=ERMDarkGold,
+    boxrule=0.5pt,
+    title={Learning Objectives},
+    fonttitle=\bfseries,
+    colbacktitle=ERMBoxGold,
+    coltitle=ERMIowaBlack
+  ]\begin{enumerate}}
+  {\end{enumerate}\end{tcolorbox}}
+
+\NewDocumentCommand{\keyterm}{m}{\textbf{#1}}
+
+% Shared box machinery
+\newcommand{\ermboxtitle}[2]{#1\ifstrempty{#2}{}{: #2}}
+
+\tcbset{
+  erm box/.style={
+    enhanced,
+    breakable,
+    boxrule=0.5pt,
+    arc=1.5pt,
+    left=8pt,
+    right=8pt,
+    top=7pt,
+    bottom=7pt,
+    before skip=0.9\baselineskip,
+    after skip=0.9\baselineskip,
+    fonttitle=\bfseries,
+    colbacktitle=ERMIowaBlack,
+    coltitle=white
+  }
+}
+
+\newtcolorbox[auto counter, number within=chapter]{workedexample}[1][]{
+  erm box,
+  colback=ERMBoxGold,
+  colframe=ERMDarkGold,
+  title={\ermboxtitle{Worked Example~\thetcbcounter}{#1}}
+}
+
+\newtcolorbox[auto counter, number within=chapter]{corporateexample}[1][]{
+  erm box,
+  colback=ERMBoxBlue,
+  colframe=ERMDarkGray,
+  title={\ermboxtitle{Corporate Example~\thetcbcounter}{#1}}
+}
+
+\newtcolorbox[auto counter, number within=chapter]{managerialinsight}[1][]{
+  erm box,
+  colback=ERMBackground,
+  colframe=ERMIowaBlack,
+  leftrule=3pt,
+  title={\ermboxtitle{Managerial Insight~\thetcbcounter}{#1}}
+}
+
+\newtcolorbox[auto counter, number within=chapter]{regulatorynote}[1][]{
+  erm box,
+  colback=ERMBoxGray,
+  colframe=ERMMidGray,
+  title={\ermboxtitle{Regulatory Note~\thetcbcounter}{#1}}
+}
+
+\newtcolorbox[auto counter, number within=chapter]{commonpitfall}[1][]{
+  erm box,
+  colback=ERMBoxRed,
+  colframe=ERMDarkGray,
+  title={\ermboxtitle{Common Pitfall~\thetcbcounter}{#1}}
+}
+
+\newtcolorbox[auto counter, number within=chapter]{whythismatters}[1][]{
+  erm box,
+  colback=ERMBackground,
+  colframe=ERMDarkGold,
+  leftrule=3pt,
+  title={\ermboxtitle{Why This Matters~\thetcbcounter}{#1}}
+}
+
+\newtcolorbox[auto counter, number within=chapter]{boardroomquestion}[1][]{
+  erm box,
+  colback=ERMBoxGold,
+  colframe=ERMIowaBlack,
+  title={\ermboxtitle{Boardroom Question~\thetcbcounter}{#1}}
+}
+
+\NewDocumentEnvironment{checklist}{O{Checklist}}
+  {\begin{tcolorbox}[
+    erm box,
+    colback=ERMBoxGreen,
+    colframe=ERMDarkGray,
+    title={#1}
+  ]\begin{itemize}[label=\textcolor{ERMDarkGold}{$\square$}]}
+  {\end{itemize}\end{tcolorbox}}
+
+% End-of-chapter material
+\NewDocumentEnvironment{keytakeaways}{}
+  {\section*{Key Takeaways}\addcontentsline{toc}{section}{Key Takeaways}\begin{itemize}}
+  {\end{itemize}}
+
+\NewDocumentEnvironment{keyterms}{}
+  {\section*{Key Terms}\addcontentsline{toc}{section}{Key Terms}\begin{description}[leftmargin=1.4in,style=nextline]}
+  {\end{description}}
+
+\NewDocumentEnvironment{shortanswerquestions}{}
+  {\section*{Short-Answer Questions}\addcontentsline{toc}{section}{Short-Answer Questions}\begin{enumerate}}
+  {\end{enumerate}}
+
+\NewDocumentEnvironment{discussionquestions}{}
+  {\section*{Discussion Questions}\addcontentsline{toc}{section}{Discussion Questions}\begin{enumerate}}
+  {\end{enumerate}}
+
+\NewDocumentEnvironment{minicase}{m}
+  {\section*{Mini-Case: #1}\addcontentsline{toc}{section}{Mini-Case: #1}}
+  {}
+
+\NewDocumentEnvironment{furtherreading}{}
+  {\section*{Further Reading}\addcontentsline{toc}{section}{Further Reading}\begin{itemize}}
+  {\end{itemize}}
+
+% Figure and exhibit helpers
+\NewDocumentCommand{\figurenote}{m}{%
+  \par\vspace{0.25em}{\footnotesize\color{ERMMidGray}\textit{Note.} #1}
+}
+
+\NewDocumentCommand{\source}{m}{%
+  \par\vspace{0.25em}{\footnotesize\color{ERMMidGray}\textit{Source.} #1}
+}
+
+\endinput

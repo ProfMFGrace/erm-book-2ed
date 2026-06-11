@@ -1,0 +1,546 @@
+# Revised ERM Book Outline
+
+## Proposed Outline v2
+
+This revised outline reorganizes the existing material into a clearer progression from foundations, to assessment, to treatment, to governance and implementation. It also adds two substantive topics that were previously underdeveloped: (1) financial risk management using derivatives and options to manage simple financial risks, and (2) AI as a source of enterprise risk affecting strategy, operations, hazard exposures, finances, and governance.
+
+## Part I: Foundations and Context
+
+## Chapter 1: Why Risk Management Matters
+
+- The paradox of risk management
+- Risk management irrelevance in perfect markets
+  - Modigliani-Miller propositions
+  - CAPM
+  - Why risk management would not matter under perfect market assumptions
+- Assumptions behind CAPM and MM irrelevance
+  - CAPM assumptions
+  - Modigliani-Miller assumptions
+  - What irrelevance means in corporate finance
+- Real-world frictions that make risk management valuable
+  - Taxes and tax convexity
+  - Costly financial distress and bankruptcy
+  - Investment distortions and underinvestment
+  - Principal-agent problems and managerial incentives
+  - Information asymmetry and signaling
+  - Contracting and stakeholder relationships
+  - Regulatory and rating-agency constraints
+- Cost of risk and the objective of corporate risk management
+  - Defining the cost of risk
+  - Risk management as value-preserving corporate finance
+- Roadmap for the rest of the book
+
+## Chapter 2: Enterprise Risk Management: Evolution, Frameworks, and Institutional Context
+
+- Evolution of corporate risk management
+  - Shift from functional risk management to enterprise risk management
+  - Sarbanes-Oxley and the regulatory push toward ERM
+- Risk management process frameworks
+  - COSO ERM framework
+  - COSO components and principles
+  - ISO 31000 principles, framework, and process
+  - Comparison of COSO and ISO 31000
+  - Practical ERM implementation issues
+- Institutional context for ERM
+  - Financial services regulation and supervision
+  - Banking, insurance, securities, and derivatives regulators
+  - Professional associations and standards bodies
+  - Credit rating agencies and investors
+- Cross-reference themes for the rest of the book
+  - How frameworks connect to identification, assessment, response, and governance
+  - Why institutional context matters for financial risk, AI risk, and board oversight
+
+## Part II: Identification and Assessment
+
+## Chapter 3: Risk Identification: Categorizing and Discovering Enterprise Risks
+
+- Four quadrants of risk
+  - Hazard risks
+  - Financial risks
+  - Operational risks
+  - Strategic risks, including governance, regulatory, reputational, and technology-related risks
+  - Risk interdependencies and the limits of categorization
+- Sources of risk and risk identification methods
+  - Internal sources of risk information
+  - External sources of risk information
+  - Risk identification techniques
+  - Integration of risk identification into organizational processes
+- SEC Form 10-K risk factor disclosure
+  - Regulatory background and requirements
+  - Regulation S-K Item 105
+  - Structure and content of risk factor disclosures
+  - Use of risk factors for risk identification and analysis
+  - Limitations and critiques
+  - Sector examples and comparative analysis
+- Strategic risk and scenario planning
+  - Using scenarios to identify emerging strategic risks
+  - Regulatory change, technology disruption, and market structure change
+  - Linking strategic planning to ERM identification processes
+- Cross-reference to later chapters
+  - Risk identification as the foundation for quantification, appetite, control, financing, and governance
+
+## Chapter 4: Risk Quantification and Qualification
+
+- Why quantify and qualify risk?
+  - Limits of intuition and informal assessment
+  - Value of quantitative risk measurement
+  - Continuing role of qualitative assessment
+- Basic statistical tools for risk measurement
+  - Frequency, severity, and expected loss
+  - Mean, median, range, variance, and standard deviation
+  - Correlation and risk aggregation
+  - Probability distributions and loss distributions
+- Retail case study: Midtown Outfitters
+  - Risk landscape and data organization
+  - Slip-and-fall incidents
+  - Inventory shrinkage
+  - Property damage
+  - Risk matrix and prioritization
+- Manufacturing case study: Precision Parts Inc.
+  - Equipment breakdown and downtime
+  - Product defects and warranty claims
+  - Workplace injury risk
+  - Correlations and compounding effects
+  - Qualitative assessment for manufacturing
+- Loss distributions and skewness
+  - Normal distribution
+  - Right-skewed distributions and tail risk
+  - Why skewness matters
+- Workers' compensation case: estimating Value at Risk
+  - Data description
+  - Excel-based analysis
+  - VaR calculation and interpretation
+- Usefulness and limitations of VaR
+  - Appeal of VaR
+  - Limits of VaR
+  - Complementary risk measures
+- From measurement to decisions
+  - How measurement informs prioritization and response
+  - Why quantification should not displace managerial judgment
+- Integrating quantitative and qualitative assessment
+
+## Chapter 5: Risk Appetite and the ERM Process
+
+- Why risk appetite matters
+  - Risk appetite as strategic choice
+  - Consequences of unclear risk appetite
+  - Risk appetite and value creation
+- Risk appetite and related concepts
+  - Risk appetite
+  - Risk capacity
+  - Risk tolerance
+  - Risk limits
+  - Hierarchy of capacity, appetite, tolerance, and limits
+- Risk appetite in the ERM cycle
+  - Strategy and objective-setting
+  - Risk identification
+  - Risk assessment priorities
+  - Risk response decisions
+  - Monitoring and review
+- Translating risk appetite into limits, tolerances, and metrics
+  - Cascading process
+  - Effective limits
+  - Common limit structures
+  - Key risk indicators
+- Qualitative articulation of risk appetite
+  - Narrative statements
+  - Components of effective statements
+  - Risk taxonomies, matrices, and heat maps
+- Quantitative articulation of risk appetite
+  - Financial metrics
+  - VaR
+  - Economic capital and capital adequacy
+  - Concentration limits
+  - Scenario analysis and reverse stress testing
+- Applying appetite to major risk responses
+  - Limits for insurance retention and transfer
+  - Limits for derivative hedging programs
+  - Limits for operational and cyber exposures
+  - Escalation thresholds for emerging AI-related risks
+- Risk appetite mini-cases
+  - High-growth technology company
+  - Property and casualty insurer
+  - Utility company
+- Governance, culture, and communication
+  - Board and senior management roles
+  - Incentives and compensation
+  - Risk culture
+  - Communication
+- Common pitfalls and failures
+  - Vagueness
+  - Internal inconsistency
+  - Disconnect from limits and decisions
+  - Failure to update
+  - Overreliance on one metric
+  - Stated versus revealed appetite
+  - 2008 financial crisis example
+
+## Chapter 6: Examining the Firm's Risk Portfolio
+
+- From individual risks to a portfolio perspective
+  - Limits of individual risk analysis
+  - Portfolio thinking from finance
+  - What changes when risks are viewed together
+- Defining the risk portfolio
+  - Risk categories
+  - Materiality and portfolio inclusion
+- Why risk aggregation matters
+  - Economic capital and capital allocation
+  - Risk appetite compliance
+  - Strategic decisions and portfolio analysis
+- Mapping and inventorying the risk portfolio
+  - Risk register
+  - Risk mapping process
+  - Common pitfalls
+- Risk correlations and dependencies
+  - Correlation definition and interpretation
+  - Portfolio effects of correlation
+  - Correlation matrices
+  - Estimating correlations in practice
+  - Tail dependence and correlation breakdown
+- Quantitative risk aggregation techniques
+  - Simple summation
+  - Variance-covariance aggregation
+  - Monte Carlo simulation
+  - Copula-based aggregation
+- Aggregate loss distribution
+  - Interpretation and management use
+  - Individual versus aggregate distributions
+  - Key metrics
+- Diversification benefits and limits
+  - Quantifying diversification
+  - Factors affecting diversification
+  - Strategic implications
+- Stress testing and scenario analysis
+  - Designing portfolio stress tests
+  - Portfolio stress test example
+  - Governance integration
+- Data, models, and model risk
+  - Internal and external data sources
+  - Data quality and governance
+  - Model risk and validation
+  - Back-testing, challenge, and sensitivity analysis
+  - Communicating model limits to decision-makers
+- Integration with risk appetite
+  - Portfolio metrics
+  - Incremental portfolio impact of new risks
+  - Capital allocation
+- Practical implementation
+  - Data challenges
+  - Organizational and cultural challenges
+  - Technology and tools
+- Case study: Global Manufacturing Co.
+
+## Part III: Risk Treatment and Financing
+
+## Chapter 7: Loss Control and Risk Reduction
+
+- From risk identification to risk reduction
+  - Loss control imperative
+  - Loss control in the ERM framework
+- Economics of loss control
+  - Total cost of risk
+  - Loss control return on investment
+  - Diminishing returns and optimal investment
+- Frequency reduction techniques
+  - Engineering controls
+  - Procedural and administrative controls
+  - Training and competency development
+- Severity control strategies
+  - Property damage severity control
+  - Injury severity control
+  - Business interruption severity control
+- Engineering controls and physical safeguards
+  - Machine guarding
+  - Electrical safety
+  - Fall protection
+- Administrative controls and behavioral interventions
+  - Safety culture and leadership
+  - Behavioral safety programs
+  - Leading and lagging indicators
+- Hierarchy of controls
+  - NIOSH hierarchy
+  - Practical application
+  - Economic considerations
+- Industry applications
+  - Manufacturing
+  - Retail
+  - Construction
+  - Healthcare
+- Operational and cyber loss control
+  - Information security controls as operational risk reduction
+  - Incident response and resilience planning
+  - Human factors, training, and process discipline
+- Measuring loss control effectiveness
+  - Standard safety metrics
+  - Leading indicators
+  - Benchmarking
+- Risk financing versus risk reduction tradeoffs
+  - Total cost of risk optimization
+  - Deductibles and loss control
+  - Self-insurance and captive insurance considerations
+- Workers' compensation case study
+  - Improvement program
+  - Intervention costs
+  - Post-control results
+  - Financial analysis
+
+## Chapter 8: Financial Risk Management and Derivatives
+
+- Why financial risk management belongs inside ERM
+  - Financial risk as one quadrant of enterprise risk
+  - Interaction of financial risk with operations, strategy, and financing decisions
+  - Hedging as value preservation rather than speculation
+- Core financial risks faced by firms
+  - Interest rate risk
+  - Foreign exchange risk
+  - Commodity price risk
+  - Market price and basis risk
+  - Liquidity implications of financial risk management programs
+- Measuring simple financial risks
+  - Exposure identification and mapping
+  - Sensitivity analysis
+  - Earnings-at-risk and cash-flow-at-risk concepts
+  - Scenario and stress analysis
+- Derivative instruments used for risk management
+  - Forwards and futures
+  - Swaps
+  - Options, caps, and floors
+  - Plain-language comparison of linear and non-linear hedging tools
+- Using derivatives to manage simple financial risks
+  - FX forwards for receivables and payables
+  - Interest rate swaps for floating-rate debt
+  - Caps and floors for borrowing cost protection
+  - Commodity futures and options for input cost management
+  - Basic examples showing gains, losses, and residual risk
+- Benefits, costs, and limitations of hedging
+  - Transaction costs
+  - Basis risk
+  - Counterparty credit risk
+  - Margin and collateral demands
+  - Over-hedging and under-hedging
+- Governance of derivatives programs
+  - Hedging policy statements
+  - Authorized instruments and counterparties
+  - Position limits and approval authority
+  - Separation of hedging from speculation
+  - Board oversight and reporting
+- Accounting, disclosure, and implementation issues
+  - Why accounting treatment matters for managers
+  - High-level introduction to hedge accounting issues
+  - Disclosure and control considerations
+- Cross-reference to other chapters
+  - Linking derivative limits to Chapter 5 risk appetite
+  - Linking portfolio effects to Chapter 6 aggregation
+  - Contrasting derivatives with insurance and ART in Chapter 9
+- Cases and applications
+  - Exporter managing FX risk
+  - Manufacturer hedging commodity inputs
+  - Leveraged firm managing floating-rate exposure
+
+## Chapter 9: Risk Finance, Insurance, and Alternative Risk Transfer
+
+- Risk financing follows risk control
+  - ERM sequence from identification to financing
+  - Risk financing decision framework
+  - Risk financing and organizational value creation
+- Risk financing spectrum
+  - Retention to transfer continuum
+  - Cost-volatility tradeoff
+  - Factors influencing retention and transfer choices
+- Retention versus transfer
+  - Fundamental cost equation
+  - Optimal retention level
+  - Decision rules and heuristics
+- Traditional risk financing: commercial insurance
+  - Insurance value proposition
+  - Major commercial insurance lines
+  - Insurance pricing mechanics
+  - Hard and soft insurance markets
+- Self-insurance and retention programs
+  - Self-insurance fundamentals
+  - When self-insurance makes economic sense
+  - Program structure
+  - Regulatory requirements
+- Captive insurance companies
+  - Captive concept
+  - Types of captive structures
+  - Domicile selection
+  - Tax considerations
+- Alternative risk transfer instruments
+  - ART development
+  - Finite risk insurance and reinsurance
+  - Multi-trigger and integrated risk programs
+  - Risk retention groups
+- Risk securitization
+  - Insurance-linked securities
+  - Catastrophe bonds
+  - Trigger mechanisms
+  - Other ILS instruments
+  - Advantages and limitations
+- Total cost of risk optimization
+  - TCOR framework
+  - Benchmarking and targets
+  - Optimization model
+  - Sensitivity analysis and decision tables
+  - Multi-line TCOR optimization
+- Positioning risk finance within the broader ERM toolkit
+  - When insurance is preferable to derivatives
+  - When derivatives are preferable to insurance
+  - Layering control, retention, insurance, and capital-markets tools
+- Risk financing case studies
+  - Fortune 500 manufacturer using high retention
+  - Regional hospital system using a group captive
+  - Coastal property owner using catastrophe bonds and traditional reinsurance
+
+## Part IV: Emerging Risks, Governance, and Implementation
+
+## Chapter 10: AI as an Enterprise Risk
+
+- Why AI should be treated as an enterprise risk issue
+  - AI as a strategic, operational, hazard, financial, legal, and governance challenge
+  - AI risk arising both from internal adoption and from external market use of AI
+  - Why AI risk should not be confined to IT alone
+- AI as strategic risk
+  - Competitive disruption and business model change
+  - Pricing, underwriting, and market selection consequences in AI-enabled markets
+  - Reputational effects from failed or controversial AI deployment
+  - Dependence on external AI vendors and platforms
+- AI as operational risk
+  - Model error and system failure
+  - Data quality and data lineage problems
+  - Process breakdowns caused by automation
+  - Cybersecurity and adversarial manipulation
+  - Third-party and fourth-party dependencies
+- AI as hazard and people risk
+  - Workplace safety implications in automated environments
+  - Human-machine interaction failures
+  - Product liability and physical harm scenarios involving AI-enabled systems
+- AI as financial risk
+  - Earnings volatility from failed deployment or flawed decisions
+  - Balance sheet exposure from litigation, remediation, and stranded investments
+  - Capital market and financing implications
+  - Insurance availability, exclusions, and pricing consequences
+- AI as legal and regulatory risk
+  - Privacy, discrimination, consumer protection, and intellectual property issues
+  - Disclosure and governance expectations
+  - Cross-border compliance complexity
+- Identifying and assessing AI risk in ERM
+  - Mapping AI use cases and dependencies
+  - Risk taxonomy for AI-related exposures
+  - Scenario analysis for low-frequency, high-severity AI events
+  - Indicators for monitoring emerging AI risk
+- Governing AI risk
+  - Board oversight responsibilities
+  - Management accountability and cross-functional governance
+  - Policy design, escalation, and documentation
+  - Linking AI oversight to enterprise risk appetite and limits
+- Case studies and teaching applications
+  - Biased decision model creating regulatory and reputational harm
+  - AI-enabled operational disruption from third-party failure
+  - Physical injury or product failure involving AI-assisted systems
+
+## Chapter 11: Corporate Risk Governance
+
+- Governance as the system that makes ERM systematic
+  - Governance imperative
+  - Governance versus management
+  - Regulatory and market drivers
+- Three lines of defense model
+  - Origins and adoption
+  - First line: risk owners
+  - Second line: oversight and challenge
+  - Third line: independent assurance
+  - Coordination across lines
+  - Industry and firm-size variations
+- Board risk oversight
+  - Fiduciary duty and duty to monitor
+  - Core board responsibilities
+  - Full board versus risk committee oversight
+  - Risk committee charter elements
+  - Board risk competency and training
+  - Board oversight of emerging risks, including AI and derivatives programs
+- Senior management accountability
+  - CEO as ultimate risk owner
+  - C-suite risk roles
+  - Enterprise risk management committee
+  - Business unit accountability
+- Chief Risk Officer and ERM function design
+  - CRO role and evolution
+  - Responsibilities and authority
+  - Reporting lines and independence
+  - Compensation and incentive alignment
+  - ERM staffing and structure
+  - CRO qualifications
+- Risk committees and subcommittees
+  - Board risk committee
+  - Audit and risk committee coordination
+  - Compensation committee and risk alignment
+  - Management risk committee
+  - Specialized oversight for treasury, technology, cyber, and AI risk where appropriate
+- Risk policies, standards, and limits
+  - Policy hierarchy
+  - Risk limits and tolerances
+  - Policy exception process
+  - Policy lifecycle management
+- Risk reporting and escalation
+  - Dashboard design
+  - Board risk dashboard elements
+  - Escalation protocols
+- Risk culture and behavioral governance
+  - Defining risk culture
+  - Tone at the top
+  - Incentive alignment
+  - Behavioral risk indicators
+  - Building and sustaining risk culture
+- Third-party risk governance
+  - Third-party risk challenge
+  - TPRM framework
+  - Fourth-party risk
+  - TPRM governance structure
+- Regulatory compliance and external accountability
+  - Regulatory requirements
+  - Rating agency ERM assessment
+  - Shareholder and stakeholder accountability
+- Governance failure case studies
+  - Wells Fargo unauthorized accounts scandal
+  - Boeing 737 MAX crashes
+  - 2008 financial crisis governance gaps
+  - AI-related governance failures as an emerging category
+
+## Chapter 12: Implementing ERM in Practice
+
+- From framework to execution
+  - Why implementation is difficult
+  - ERM maturity as a staged process
+  - Minimum viable ERM for smaller firms
+- Building an ERM program
+  - Governance structure
+  - Risk taxonomy and register
+  - Assessment methods
+  - Reporting routines and dashboards
+- Integrating ERM with management processes
+  - Strategic planning
+  - Budgeting and capital allocation
+  - Internal control and compliance
+  - Performance management and incentives
+- Implementation challenges
+  - Data limitations
+  - Organizational resistance
+  - Siloed decision-making
+  - Resource constraints
+- Ethics, incentives, and risk taking
+  - Incentives as drivers of risk behavior
+  - Ethical culture and escalation
+  - Stated versus revealed priorities
+- Capstone integrative case
+  - A firm facing operational, financial, hazard, strategic, and AI-related risks
+  - Identification, assessment, appetite, treatment, financing, and governance decisions
+
+## Editorial Notes on the Reorganization
+
+- The revised structure strengthens the logic of progression: why risk management matters, how ERM is structured, how risk is identified and measured, how firms choose responses, and how governance and implementation make ERM durable.
+- Financial risk management is now explicit rather than implied within general financial risk discussions or risk financing material.
+- AI risk is presented as an enterprise-wide exposure, not merely a technology topic, and is tied directly to strategy, operations, financial outcomes, and governance.
+- Cross-references have been built into several chapters so students can see how concepts such as risk appetite, portfolio thinking, derivatives, insurance, and governance interact.
+- The final implementation chapter creates a clearer capstone for upper-level undergraduate readers and helps convert concepts into institutional design.

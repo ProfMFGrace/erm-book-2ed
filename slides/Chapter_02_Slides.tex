@@ -1,0 +1,275 @@
+% !TeX root = Chapter_02_Slides.tex
+% Chapter 2 lecture slides — Enterprise Risk Management: Evolution, Frameworks, and Institutional Context
+% Instructor-resource series.
+\documentclass[11pt, aspectratio=169]{beamer}
+\usepackage{tikz}
+\makeatletter
+\def\input@path{{./}{../slides/}}
+\makeatother
+\usepackage{erm_beamer_theme}
+\usepackage{amsmath,amssymb}
+
+\title[ERM Ch.\,2]{Enterprise Risk Management: Evolution, Frameworks, and Institutional Context}
+\subtitle{Enterprise Risk Management, Second Edition --- Chapter 2}
+\author{Martin F.\ Grace}
+\institute{University of Iowa\\[2pt] Tippie College of Business\\[2pt] Vaughan Institute of Risk Management}
+\date{June 2026}
+
+\begin{document}
+
+\begin{frame}[plain]
+\titlepage
+\end{frame}
+
+\begin{frame}{Learning Objectives}
+\begin{itemize}
+  \item Trace the arc of corporate risk management from \alert{insurance purchasing} to enterprise-wide strategy.
+  \item Explain how Sarbanes-Oxley and major corporate failures created the impetus for ERM.
+  \item Describe the structure and core logic of the \alert{2017 COSO ERM Framework}.
+  \item Compare COSO and ISO~31000 --- origin, emphasis, practical application.
+  \item Identify the institutions that shape ERM practice in financial and non-financial sectors.
+  \item Outline a realistic phased approach to ERM implementation.
+\end{itemize}
+\end{frame}
+
+\section{Opening Case: The GM Ignition Switch Crisis}
+
+\begin{frame}{It Began with a Small Spring}
+\begin{itemize}
+  \item A coiled spring in the Chevrolet Cobalt's ignition switch was supposed to hold the key in ``run'' --- engineers knew \emph{before launch} that it was too weak.
+  \item A heavy keychain, a knee, a rough road: the switch slips, the engine cuts out, power steering goes --- and the \alert{airbags don't deploy}.
+  \item GM first documented the problem in \textbf{2001}. The Cobalt went on sale in 2004.
+  \item The recall came in \textbf{February 2014} --- thirteen years later.
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Thirteen Years of Not Connecting the Dots}
+\begin{itemize}
+  \item Engineers analyzed stalling complaints. Service bulletins went to dealers. Customers reported cars dying on the highway.
+  \item Lawyers settled wrongful-death claims where airbags inexplicably failed. Safety committees filed reports with NHTSA.
+  \item Each group worked its lane --- and saw only the slice that landed on its desk.
+  \item The question \emph{``Is this a single enterprise-level safety risk requiring a decision at the top?''} belonged to \alert{no one}. So it went unasked.
+\end{itemize}
+\medskip
+The toll: 100+ deaths linked to the defect, a \$900M DOJ settlement, a \$2.5B victim compensation fund, congressional hearings.
+\end{frame}
+
+\begin{frame}{The Valukas Verdict}
+\begin{itemize}
+  \item The independent investigation (Valukas Report, 2014) found no single villain who knew everything and stayed silent.
+  \item Instead: many competent people each managing a \emph{piece} of a serious risk, no one responsible for the \emph{whole} --- and the institution drifted for a decade while people died.
+  \item Not a shortage of smart people or activity. A shortage of \alert{integration}.
+\end{itemize}
+\medskip
+\begin{block}{The structural question}
+The information existed. The expertise existed. What structure would have forced the scattered pieces into one picture --- and who at GM should have owned the enterprise-level question?
+\end{block}
+\end{frame}
+
+\section{The Evolution of Corporate Risk Management}
+
+\begin{frame}{From Insurance Buying to Integration}
+\begin{itemize}
+  \item Most of the 20th century: risk management = \alert{insurance management}. Identify insurable exposures, buy coverage.
+  \item Risk treated as a cost to minimize, not a strategic consideration --- the function sat well below the executive suite.
+  \item 1970s--80s: captives and self-insurance --- financial innovations that cut the cost of risk transfer, but strategy still happened in a different room.
+  \item ERM is the response to a recurring failure mode: risks managed in \alert{silos}, with no one integrating the enterprise-level view.
+\end{itemize}
+\end{frame}
+
+\begin{frame}{The 1990s: Object Lessons in Siloed Finance}
+\begin{itemize}
+  \item \textbf{Barings Bank} (1995): one trader in Singapore, $\sim$\$1.4B in unauthorized derivatives positions nobody at the top understood or monitored.
+  \item \textbf{Orange County} (1994): \$1.6B+ lost on leveraged interest-rate bets the treasurer wasn't authorized to make.
+  \item \textbf{Metallgesellschaft} (1993): long-term supply contracts vs.\ short-term hedges --- a cash crisis the supervisory board never saw coming.
+\end{itemize}
+\medskip
+\begin{block}{The common thread}
+None of these risks was exotic or unforeseeable in principle. They were \alert{invisible to the people with authority to act} because no one was assigned to look across the whole picture.
+\end{block}
+\end{frame}
+
+\begin{frame}{The Early 2000s: Governance Scandals}
+\begin{itemize}
+  \item \textbf{Enron} (2001): accounting fraud, off-balance-sheet structures concealing exposure, a culture that rewarded aggressive engineering and suppressed dissent.
+  \item \textbf{WorldCom} (2002): $\sim$\$11B in accounting fraud.
+  \item Both had internal audit functions, board audit committees, and external auditors --- \emph{none of it stopped the bleeding}.
+  \item The governance structures were inadequate to the risks the companies were actually running.
+\end{itemize}
+\end{frame}
+
+\section{The Sarbanes-Oxley Inflection}
+
+\begin{frame}{SOX (2002): The Two Provisions That Matter}
+\begin{itemize}
+  \item \textbf{Section 302}: CEO and CFO personally certify, every quarter, that financial statements fairly present the company's condition and that they own internal controls. \alert{Criminal penalties} for false certification --- executive ignorance became legally dangerous.
+  \item \textbf{Section 404}: management must assess internal control effectiveness annually; external auditors must attest. Documentation, control testing, remediation.
+  \item SOX did \emph{not} mandate ERM --- but it built the infrastructure (executive accountability, control assessment, board oversight) that made ERM feasible and expected.
+\end{itemize}
+\end{frame}
+
+\begin{frame}{From Disclosure to Prescription}
+\begin{itemize}
+  \item Pre-SOX philosophy: require disclosure, trust market discipline to reward good governance and punish bad.
+  \item 2001--02 showed disclosure fails when information is too complex to parse, auditors are conflicted, and boards oversee in name only.
+  \item SOX moved toward \alert{prescription}: define what controls must look like, hold executives personally responsible, subject auditors to independent oversight (PCAOB).
+\end{itemize}
+\medskip
+\begin{block}{The spillover}
+If boards must rigorously oversee financial reporting controls, it's a short step to asking what \emph{other} significant risks are being managed --- and how. COSO's ERM framework (2004) arrived at exactly that moment.
+\end{block}
+\end{frame}
+
+\section{The COSO ERM Framework}
+
+\begin{frame}{COSO 2017: Integrating with Strategy and Performance}
+\begin{itemize}
+  \item COSO: joint initiative of five U.S.\ accounting and internal-audit associations; its 1992 \emph{Internal Control} framework became the SOX~404 benchmark.
+  \item ERM framework released 2004; updated 2017 as \emph{Enterprise Risk Management: Integrating with Strategy and Performance}.
+  \item Core argument: organizations exist to \alert{create value}; ERM gives structure to deciding which risks to accept in pursuit of strategy --- deliberately, consistently, with oversight.
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Five Components, Twenty Principles}
+\begin{enumerate}
+  \item \textbf{Governance and Culture} --- the foundation. Board oversight, operating structures, tone at the top. If executives don't actually \emph{use} risk information, the apparatus adds little.
+  \item \textbf{Strategy and Objective-Setting} --- \alert{risk appetite} is a strategic choice, not a compliance parameter. Are accepted risks deliberate and consistent with what the board will absorb?
+  \item \textbf{Performance} --- the operational work: identify, assess severity (likelihood $\times$ impact), prioritize, respond (accept / avoid / reduce / share), build a \alert{portfolio view}.
+  \item \textbf{Review and Revision} --- the risk profile changes as strategy and conditions change.
+  \item \textbf{Information, Communication, and Reporting} --- the right information, to the right people, in usable form; communication flows up \emph{and} down.
+\end{enumerate}
+\medskip
+The 20 principles are an interconnected system, not a checklist.
+\end{frame}
+
+\begin{frame}{What 2017 Changed}
+\begin{itemize}
+  \item Earlier treatments framed risk management as protection against downside.
+  \item The 2017 update is explicit:
+  \begin{itemize}
+    \item Value creation \emph{requires} accepting risk.
+    \item Risk appetite is a \alert{positive choice} about which uncertainties to embrace.
+    \item ERM should help organizations take more \emph{deliberate} risk --- not simply less risk.
+  \end{itemize}
+  \item That reframing changes how risk officers talk to boards and CEOs about what they do.
+\end{itemize}
+\end{frame}
+
+\section{The ISO 31000 Standard}
+
+\begin{frame}{ISO 31000 (2009, rev.\ 2018)}
+\begin{itemize}
+  \item International standard, deliberately generic --- works for a multinational bank, a municipality, a hospital, or a small manufacturer.
+  \item Defines risk as \alert{``the effect of uncertainty on objectives''} --- neutral by design; upside and downside both warrant attention.
+  \item Three layers:
+  \begin{itemize}
+    \item \textbf{Principles} --- what effective risk management looks like (integrated, customized, inclusive, dynamic, improvement-oriented).
+    \item \textbf{Framework} --- how it embeds in governance, strategy, operations, reporting.
+    \item \textbf{Process} --- the step-by-step method: scope and criteria; identify; analyze; evaluate; treat; monitor; communicate throughout.
+  \end{itemize}
+  \item The \alert{process model} is its most useful contribution --- more explicit about assessment methodology than COSO.
+\end{itemize}
+\end{frame}
+
+\begin{frame}{COSO vs.\ ISO 31000}
+\begin{columns}[T]
+\column{0.48\textwidth}
+\textbf{COSO ERM 2017}
+\begin{itemize}
+  \item Origin: U.S.\ accounting profession, internal-control tradition
+  \item More prescriptive, governance-oriented
+  \item Aligned with U.S.\ boards and SOX-era regulators
+  \item Tells you \emph{what must be in place} organizationally
+\end{itemize}
+\column{0.48\textwidth}
+\textbf{ISO 31000:2018}
+\begin{itemize}
+  \item Origin: international standards body
+  \item More flexible, process-focused
+  \item Usable across sectors and countries
+  \item Tells you \emph{how to run the work} of a risk assessment
+\end{itemize}
+\end{columns}
+\medskip
+\begin{block}{In practice: complements, not competitors}
+Many organizations structure the program around COSO's five components and run individual risk evaluations with ISO's process. The underlying logic is identical.
+\end{block}
+\end{frame}
+
+\begin{frame}{A Caveat on Evidence}
+\begin{itemize}
+  \item Neither framework offers rigorous empirical evidence that following its prescriptions improves performance.
+  \item Some supportive findings: Hoyt and Liebenberg (2011) find ERM adoption positively related to Tobin's $q$ for insurers --- but identification is hard and results are not definitive.
+  \item Treat the frameworks as \alert{practical guidance}, not validated science. That's a reason for judgment, not for ignoring them.
+\end{itemize}
+\end{frame}
+
+\section{The Institutional Landscape}
+
+\begin{frame}{Financial Services: Regulation as the Driver}
+\begin{itemize}
+  \item Banks and insurers were early adopters --- largely because they had no choice.
+  \item \textbf{Banks}: Basel~I (1988) minimum capital; Basel~II (2004) three pillars + explicit risk management systems; Basel~III (2010--11) stronger capital and liquidity after 2008. U.S.\ implementation via Fed/OCC/FDIC, plus Dodd-Frank \alert{stress tests}.
+  \item \textbf{Insurers}: NAIC \alert{ORSA} (2012) --- forward-looking own-risk and solvency assessments filed annually; EU \alert{Solvency~II} imposes analogous quantitative and governance requirements.
+  \item The pattern: risk-calibrated capital, mandatory infrastructure, board-level expectations, stress testing. ERM in financial services is \emph{not optional}.
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Non-Financial Corporations: Voluntary but Not Casual}
+\begin{itemize}
+  \item No regulation requires a manufacturer or hospital to run a COSO-aligned program. Pressure converges from several directions instead:
+  \begin{itemize}
+    \item \textbf{RIMS} --- professional home for risk managers since 1950; the Risk Maturity Model benchmarks programs across seven attributes and five maturity levels.
+    \item \textbf{IIA Three Lines Model} (2020) --- operations (first line), risk and compliance functions (second), internal audit as \alert{independent assurance} (third).
+    \item \textbf{Rating agencies} --- S\&P, Moody's, Fitch assess ERM in rating methodologies; credible programs support stronger ratings.
+    \item \textbf{Investors and proxy advisors} --- ISS and Glass Lewis grade directors partly on board risk oversight.
+  \end{itemize}
+  \item Boards have fiduciary reasons, auditors professional reasons, raters economic reasons, investors governance reasons --- all pointing the same way.
+\end{itemize}
+\end{frame}
+
+\section{Implementing ERM}
+
+\begin{frame}{Five Phases --- Not All at Once}
+\begin{itemize}
+  \item Implementing everything at once produces \alert{compliance theater}: documents that satisfy a checklist but don't change decisions.
+\end{itemize}
+\medskip
+\begin{enumerate}
+  \item \textbf{Foundation} --- oversight responsibilities, a coordinating executive, a policy, a common \alert{risk taxonomy} (without shared language, workshops devolve into definitional arguments).
+  \item \textbf{Initial risk assessment} --- facilitated workshops; output is the \alert{risk register}. Qualitative is fine at this stage.
+  \item \textbf{Ownership and responses} --- a named owner per risk; accept / avoid / reduce / share, guided by board-approved appetite.
+  \item \textbf{Integration} --- embed in planning, capital allocation, performance management; quarterly board reporting.
+  \item \textbf{Advancing sophistication} --- quantification, stress tests, scenarios, correlations.
+\end{enumerate}
+\medskip
+Phases 1--4 produce most of the value. Don't start at Phase 5.
+\end{frame}
+
+\begin{frame}{Structure Matters Less Than Role Clarity}
+\begin{itemize}
+  \item Centralized CRO vs.\ distributed vs.\ hybrid: less important than clarity about who is responsible for what.
+  \item Four roles must be explicit regardless of structure:
+  \begin{itemize}
+    \item \textbf{Risk owner} --- primary management accountability per risk
+    \item \textbf{Risk coordinator} --- CRO/risk function: methodology and oversight
+    \item \textbf{Independent assurer} --- internal audit (third line)
+    \item \textbf{Governance body} --- board or board risk committee
+  \end{itemize}
+\end{itemize}
+\medskip
+\begin{block}{Back to GM}
+Ambiguity about any of these roles creates exactly the shared-responsibility gap the ignition switch case illustrates --- in painful detail.
+\end{block}
+\end{frame}
+
+\begin{frame}{Discussion Questions}
+\begin{enumerate}
+  \item GM had engineers, lawyers, safety staff, and auditors all touching the ignition switch problem. Which COSO component failed most fundamentally --- and would ISO~31000's process have caught it?
+  \item SOX never mentions enterprise risk management. Make the case that it did more for ERM adoption than any framework document --- then make the case against.
+  \item A mid-size manufacturer asks whether to build its program on COSO or ISO~31000. What would you ask before answering, and what would you likely recommend?
+  \item Why is ERM mandatory in banking and insurance but voluntary nearly everywhere else? Is that distinction defensible on economic grounds?
+\end{enumerate}
+\end{frame}
+
+\end{document}

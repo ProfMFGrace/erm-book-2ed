@@ -1,0 +1,260 @@
+% !TeX root = erm_book.tex
+% =======================================================================
+% Enterprise Risk Management — Second Edition — Martin F. Grace
+% Integrated book build.
+%
+% Build sequence (run from this folder):
+%   pdflatex -interaction=nonstopmode erm_book.tex
+%   pdflatex -interaction=nonstopmode erm_book.tex
+%   makeindex erm_book.idx
+%   pdflatex -interaction=nonstopmode erm_book.tex
+%
+% The chapter .tex files remain standalone-compilable; the docmute package
+% strips their individual preambles when they are \input here.
+% =======================================================================
+\documentclass[11pt,openany]{book}
+\usepackage{graphicx}
+\usepackage{amsmath,amssymb}
+\usepackage{hanging}
+\usepackage{imakeidx}            % must load before hyperref (pulled in by the style)
+\makeatletter
+\def\input@path{{../style/}}
+\makeatother
+\usepackage{erm_textbook_style}
+\usepackage{docmute}             % mutes the preambles of \input'd standalone chapters
+\usepackage{tikz}
+\graphicspath{{./}{../rscripts/chapter1/jnj_tylenol/}{../rscripts/chapter6/}{../rscripts/chapter8/}}
+
+\providecommand{\tightlist}{\setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\emergencystretch=2em
+
+% Chapter 4 preamble definitions (chapter preambles are muted in this build,
+% so chapter-specific commands are collected here).
+\newcommand{\excelcode}[1]{{\small\ttfamily #1}}
+\newenvironment{excelblock}%
+  {\begin{quote}\small\ttfamily\setlength{\parskip}{2pt}}%
+  {\end{quote}}
+
+% Book metadata
+\hypersetup{
+  pdftitle={Enterprise Risk Management, Second Edition},
+  pdfauthor={Martin F. Grace},
+  pdfsubject={Enterprise Risk Management}
+}
+
+\setcounter{tocdepth}{1}
+
+\makeindex[intoc, title=Index]
+
+\begin{document}
+
+% No page anchors on the cover/title/copyright pages: their page numbers
+% repeat later, which makes hyperref emit duplicate-destination warnings.
+\hypersetup{pageanchor=false}
+
+% =======================================================================
+% COVER
+% =======================================================================
+\begin{titlepage}
+\pagecolor{black}
+\thispagestyle{empty}
+\begin{tikzpicture}[remember picture, overlay]
+  % Artwork anchored to the bottom of the page; blends into the black field.
+  \node[anchor=south, inner sep=0pt] at (current page.south)
+    {\includegraphics[width=\paperwidth]{erm_cover_art.png}};
+  % Title block in the clean upper field.
+  \node[anchor=north, align=center, text=ERMIowaGold]
+    at ([yshift=-1.45in]current page.north)
+    {\fontsize{38}{46}\selectfont\bfseries Enterprise Risk\\[2pt]
+     \fontsize{38}{46}\selectfont\bfseries Management};
+  \draw[ERMIowaGold, line width=1.2pt]
+    ([yshift=-2.95in]current page.north west) ++(2.4in,0) --
+    ([yshift=-2.95in,xshift=-2.4in]current page.north east);
+  \node[anchor=north, align=center, text=white]
+    at ([yshift=-3.15in]current page.north)
+    {\fontsize{16}{20}\selectfont\scshape Second Edition};
+  \node[anchor=north, align=center, text=white]
+    at ([yshift=-4.05in]current page.north)
+    {\fontsize{17}{22}\selectfont Martin F.\ Grace};
+  \node[anchor=north, align=center, text=ERMLightGray]
+    at ([yshift=-4.45in]current page.north)
+    {\fontsize{11}{14}\selectfont University of Iowa};
+\end{tikzpicture}
+\null
+\end{titlepage}
+\nopagecolor
+
+\frontmatter
+
+% =======================================================================
+% TITLE PAGE
+% =======================================================================
+\begin{titlepage}
+\thispagestyle{empty}
+\begin{center}
+\vspace*{1.6in}
+{\fontsize{30}{38}\selectfont\bfseries Enterprise Risk Management\par}
+\vspace{0.35in}
+{\color{ERMIowaGold}\rule{3.2in}{2pt}\par}
+\vspace{0.35in}
+{\Large\scshape Second Edition\par}
+\vspace{1.4in}
+{\LARGE Martin F.\ Grace\par}
+\vspace{0.15in}
+{\large\color{ERMDarkGray} University of Iowa\par}
+\vfill
+{\large 2026\par}
+\vspace*{0.6in}
+\end{center}
+\end{titlepage}
+
+% =======================================================================
+% COPYRIGHT PAGE (placeholder)
+% =======================================================================
+\thispagestyle{empty}
+\null\vfill
+\begin{flushleft}\small
+\textit{Enterprise Risk Management}, Second Edition\\[4pt]
+Copyright \copyright{} 2026 Martin F.\ Grace. All rights reserved.\\[10pt]
+
+\section*{License}
+
+Except where otherwise indicated, this work is licensed under the
+\textbf{Creative Commons Attribution--NonCommercial--ShareAlike
+4.0 International License (CC BY--NC--SA 4.0)}.\footnote{Full
+license text available at
+\url{https://creativecommons.org/licenses/by-nc-sa/4.0/}.}
+
+By applying this license, the author grants to every reader the
+following permissions:
+
+\begin{itemize}
+  \item You may copy and redistribute the material in any medium or format.
+  \item You may remix, transform, and build upon the material.
+\end{itemize}
+
+These permissions are granted only under the conditions below:
+
+\begin{description}
+  \item[Attribution.] You must give appropriate credit to the
+  author, provide a link to the license, and indicate if changes
+  were made, in a reasonable manner that does not suggest the
+  author endorses you or your use.
+
+  \item[NonCommercial.] You may not use the material for
+  commercial purposes, meaning uses primarily intended for or
+  directed toward commercial advantage or monetary compensation.
+
+  \item[ShareAlike.] If you remix, transform, or build upon the
+  material, you must distribute your contributions under the
+  same license (CC BY--NC--SA 4.0).
+\end{description}
+
+No additional legal terms or technological measures may be
+applied that restrict others from doing anything the license
+permits. This summary is for explanatory purposes only; the
+binding terms are those of the Creative Commons
+Attribution--NonCommercial--ShareAlike 4.0 International
+License as published by Creative Commons. \\[10pt]
+% PLACEHOLDER: publisher, ISBN, edition history, and credits to be added.
+Second edition published 2026.\\[10pt]
+Cover design: abstract network and loss-distribution motif.\\
+Typeset in Latin Modern with \LaTeX.
+\end{flushleft}
+\vspace*{0.4in}
+\clearpage
+
+% =======================================================================
+% PREFACE
+% =======================================================================
+\hypersetup{pageanchor=true}
+\chapter*{Preface}
+\phantomsection
+\addcontentsline{toc}{chapter}{Preface}
+\markboth{Preface}{Preface}
+
+\begin{center}
+%{\large\textit{Preface: About How This Book Was Written}}
+\end{center}
+%\vspace{1\baselineskip}
+\doublespacing
+
+There is a tradition in academic publishing where the author's preface thanks a long list of colleagues, graduate assistants, and family members who suffered through early drafts. That tradition implies a certain picture: the scholar alone at a desk, surrounded by journal articles and cold coffee or warm diet root beer, laboring through the night to produce sentences that are both technically rigorous and, on a good day, readable.
+
+That picture is not entirely accurate for this book.
+
+This book was written with the help of AI---specifically, Perplexity for help with the cases and Claude 4.6 Sonnet for drafting. I want to be transparent about that, partly because academic honesty requires it and partly because pretending otherwise would be implausible to anyone who has met me and knows how long it normally takes me to finish a paragraph.
+
+Here is how it actually worked. I would open a conversation, describe what I needed---a section on catastrophe bonds, a framework for the Three Lines of Defense, an explanation of why captive insurance companies exist---and within seconds receive a draft that was, on average, better organized than anything I would have produced on the first attempt. I would then do what I am actually trained to do: read it critically, catch the errors, fix the economic reasoning, add the regulatory nuance, replace the generic examples with real ones, and argue with the AI about word choice in a way that my students probably found unproductive when directed at them.
+
+The AI was tireless. It never complained that I had changed my mind about the structure of Chapter~6 for the fourth time. It never sent me a passive-aggressive email at 11~p.m.\ asking whether the deadline had ``moved again.'' It did not require acknowledgment in the footnotes or a letter of recommendation. It simply produced another draft and waited.
+
+It also made things up, with great confidence and elegant prose. Early in the process, I asked for a citation to support a claim about the historical expense ratios of commercial property-casualty insurance. The citation came back formatted perfectly with a journal name, volume, issue, page numbers, the works. The article did not exist. The journal existed. The authors, real scholars in the field, had never written that paper. The AI had constructed a citation the way a student constructs a bibliography at midnight before a deadline: plausibly, fluently, and incorrectly. I had to verify everything. This is, I would note, also good advice for reading textbooks written by humans.
+
+Perplexity handled some of the background research by pulling current data, tracking developments, and finding cases I had half-remembered from somewhere. It was, in that role, a remarkably good research assistant, faster than any graduate student and with a sometimes better memory for where things had been published. It did not, however, have opinions. It did, however, refuse to use real companies for examples, as it wanted to give me a better made-up case. When I asked it whether a particular risk governance structure was actually effective or merely compliance theater, it gave me both sides with cheerful neutrality. Forming the opinion was still my job. 
+
+The cases that open each chapter---the ones written in a narrative style---were the most iterative part of the process. Getting the AI to write a story rather than a memo required persistent instruction. The first drafts frequently ended with sentences like ``This case illustrates the importance of enterprise risk management frameworks, which will be explored in greater depth throughout this chapter''---a sentence that is technically true and completely deadly. We spent considerable time removing those sentences. I developed a style guide. The style guide helped. The AI learned, or at least behaved as if it had.
+
+What I found, over the course of writing this book, is that the collaboration worked best when I was clearest about what I actually knew and what I actually wanted. The AI could draft; it could not set the intellectual agenda. It could organize; it could not decide what was important. It could write fluently in any direction I pointed it; it could not tell me which direction was right. The economics, the regulatory analysis, the judgments about what business school juniors and seniors actually need to understand about risk management remained, stubbornly and appropriately, mine.
+
+My students, who have been subjected to draft chapters of this book, asked whether using AI to help write a textbook about risk was itself risky. I think the answer is yes, in the sense that it allowed me to move faster, produce more drafts, and spend my limited time on the parts of the work that actually required a person with a Ph.D.\ and thirty years of experience. Whether it was optimal risk transfer or reckless retention of the quality-control risk is a question I leave to the reader, and to the commenters.
+
+The errors in this book are mine. The well-organized paragraphs are at least partly the AI's. The distinction between the two will be left as an exercise for the student.
+
+\vspace{2\baselineskip}
+
+\begin{flushright}
+\textit{Martin F. Grace}\\
+June 2026 \\
+Iowa City, Iowa and Lakeland, Florida USA
+\end{flushright}
+
+\singlespacing
+\clearpage
+
+% =======================================================================
+% TABLE OF CONTENTS
+% =======================================================================
+\tableofcontents
+
+\mainmatter
+
+% =======================================================================
+% CHAPTERS
+% =======================================================================
+\input{"../chapter 1/chapter_01_why_risk_management_matters.tex"}
+\input{"../chapter 2/Chapter_02_Enterprise_Risk_Management.tex"}
+\input{"../chapter 3/Chapter_03_Risk_Identification.tex"}
+\input{"../chapter 4/Chapter_04_Risk_Quantification_Qualification.tex"}
+\input{"../Chapter 5/Chapter_05_Risk_Appetite_ERM_Process.tex"}
+\input{"../chapter 6/Chapter_06_Risk_Portfolio.tex"}
+\input{"../chapter 7/Chapter_07_Loss_Control_Risk_Reduction.tex"}
+\input{"../chapter 8/Chapter_08_Risk_Finance_ART.tex"}
+\input{"../Chapter 9/Chapter_09_Corporate_Risk_Governance.tex"}
+
+\backmatter
+
+% =======================================================================
+% CONSOLIDATED BIBLIOGRAPHY
+% =======================================================================
+\chapter*{Bibliography}
+\phantomsection
+\addcontentsline{toc}{chapter}{Bibliography}
+\markboth{Bibliography}{Bibliography}
+
+\noindent This bibliography consolidates the references cited across all
+chapters. Chapter-specific reference lists appear at the end of each
+chapter.
+
+\medskip
+\begingroup
+\sloppy\small
+\input{consolidated_bibliography.tex}
+\endgroup
+
+% =======================================================================
+% INDEX
+% =======================================================================
+\printindex
+
+\end{document}
