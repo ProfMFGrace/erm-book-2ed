@@ -4,6 +4,7 @@ test_creation/
 # Large binaries (Reference papers / books / compiled PDFs / Office documents)
 *.pdf
 !book/erm_book.pdf
+!Perplexity_text_book_report.pdf
 *.docx
 *.rtf
 

@@ -1,0 +1,307 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+\documentclass[
+  11pt,
+]{article}
+\usepackage{xcolor}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amssymb}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math} % this also loads fontspec
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+\usepackage{lmodern}
+\ifPDFTeX\else
+  % xetex/luatex font selection
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\usepackage{bookmark}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\urlstyle{same}
+\hypersetup{
+  pdftitle={Writing AI-Assisted Textbooks},
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+
+\title{Writing AI-Assisted Textbooks}
+\author{}
+\date{}
+
+\begin{document}
+\maketitle
+
+\section{is there a paper about how to write an AI assisted textbooks}\label{is-there-a-paper-about-how-to-write-an-ai-assisted-textbooks}
+
+There isn't (yet) a definitive ``how to write an academic textbook with AI'' manual, but there is emerging practice from textbook authors and AI users that's mature enough to turn into a workable workflow.\footnote{https://www.youtube.com/watch?v=DFeP863BaPM}\footnote{https://community.openai.com/t/technique-for-writing-entire-books/705519}\footnote{https://blog.taaonline.net/2023/11/textbook-and-academic-authors-share-how-they-use-generative-ai/}\footnote{https://www.reddit.com/r/OpenAI/comments/1cgxtdd/using\_ai\_to\_write\_a\_book/}
+
+Below is a concrete, academically-defensible way to use AI as a coauthoring tool rather than a ghostwriter.
+
+\subsection{Overall workflow}\label{overall-workflow}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Define the book and constraints yourself
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Specify course, level, pre-reqs, learning objectives, and your distinctive angle; this is human work, not AI.
+  \item
+    Treat AI as an assistant that operates inside those constraints (like a smart RA), not as the source of the intellectual contribution.\footnote{https://community.openai.com/t/technique-for-writing-entire-books/705519}\footnote{https://blog.taaonline.net/2023/11/textbook-and-academic-authors-share-how-they-use-generative-ai/}
+  \end{itemize}
+\item
+  Work chapter-by-chapter in small chunks
+
+  \begin{itemize}
+  \tightlist
+  \item
+    A common pattern is: you design the outline, then have AI help generate or refine sections, examples, and exercises one at a time.\footnote{https://www.reddit.com/r/OpenAI/comments/1cgxtdd/using\_ai\_to\_write\_a\_book/}\footnote{https://community.openai.com/t/technique-for-writing-entire-books/705519}
+  \item
+    Avoid ``write the whole textbook'' prompts; they give shallow, repetitive prose and raise originality/plagiarism concerns.\footnote{https://community.openai.com/t/technique-for-writing-entire-books/705519}\footnote{https://www.reddit.com/r/OpenAI/comments/1cgxtdd/using\_ai\_to\_write\_a\_book/}
+  \end{itemize}
+\item
+  Keep a human‑curated backbone
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Maintain a master outline, style guide, and list of key references that you update as you go; feed these repeatedly into the model so it stays on-pitch.\footnote{https://www.reddit.com/r/OpenAI/comments/1cgxtdd/using\_ai\_to\_write\_a\_book/}\footnote{https://community.openai.com/t/technique-for-writing-entire-books/705519}
+  \item
+    Think of this as your ``corpus'' that the model is conditioned on, not something the model invents.
+  \end{itemize}
+\end{enumerate}
+
+\subsection{Where AI is most useful for textbook writing}\label{where-ai-is-most-useful-for-textbook-writing}
+
+Based on what textbook authors report actually using generative models for, plus what general ``AI book writing'' workflows emphasize, the sweet spots are:\footnote{https://blog.taaonline.net/2023/11/textbook-and-academic-authors-share-how-they-use-generative-ai/}\footnote{https://community.openai.com/t/technique-for-writing-entire-books/705519}\footnote{https://www.reddit.com/r/OpenAI/comments/1cgxtdd/using\_ai\_to\_write\_a\_book/}
+
+\begin{itemize}
+\tightlist
+\item
+  Brainstorming and refining structure
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Ask for alternative chapter organizations, prerequisite maps, and concept progressions once you've given it your first-pass outline.\footnote{https://community.openai.com/t/technique-for-writing-entire-books/705519}\footnote{https://www.reddit.com/r/OpenAI/comments/1cgxtdd/using\_ai\_to\_write\_a\_book/}
+  \item
+    Use it to identify missing topics or perspectives in a draft TOC: ``Given this outline for an insurance regulation text, what major regulatory issues might be missing?''\footnote{https://blog.taaonline.net/2023/11/textbook-and-academic-authors-share-how-they-use-generative-ai/}
+  \end{itemize}
+\item
+  Drafting neutral, expository prose from your notes
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Many authors dictate or rough-draft a section, then feed transcripts/notes to AI to turn into a clean first draft, which they then edit heavily.\footnote{https://www.youtube.com/watch?v=DFeP863BaPM}\footnote{https://www.reddit.com/r/OpenAI/comments/1cgxtdd/using\_ai\_to\_write\_a\_book/}
+  \item
+    You can keep control of all definitions, notation, and key arguments but offload smoothing, clarification, and example elaboration.
+  \end{itemize}
+\item
+  Generating pedagogical scaffolding
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Authors report using AI to propose learning objectives, key terms, chapter summaries, and discussion questions based on an existing chapter draft.\footnote{https://blog.taaonline.net/2023/11/textbook-and-academic-authors-share-how-they-use-generative-ai/}
+  \item
+    You then vet these for correctness, level, and alignment with your course.
+  \end{itemize}
+\item
+  Language polishing and consistency
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Many academics use AI for grammar, simplification, and style uniformity across chapters, especially in multi-author volumes.\footnote{https://blog.taaonline.net/2023/11/textbook-and-academic-authors-share-how-they-use-generative-ai/}
+  \item
+    You can also use it to enforce a consistent voice or complexity level by giving it your style guide and one or two ``gold standard'' passages.
+  \end{itemize}
+\item
+  Marketing and ancillaries
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Authors are using AI to help with book proposals, blurbs, slide outlines, and even marketing copy for the text.\footnote{https://blog.taaonline.net/2023/11/textbook-and-academic-authors-share-how-they-use-generative-ai/}
+  \end{itemize}
+\end{itemize}
+
+\subsection{A concrete AI‑assisted textbook workflow}\label{a-concrete-aiassisted-textbook-workflow}
+
+Here is a practical pipeline you could use for, say, a graduate insurance regulation text.
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Design the intellectual skeleton (human)
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Write a 1--2 page concept note: target readers, core thesis of the book, course use cases, and what's distinctive about your approach.
+  \item
+    Draft a detailed TOC: parts, chapters, and 3--7 bullet points per chapter.
+  \end{itemize}
+\item
+  Use AI to stress‑test and refine the outline
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Prompt: ``Here is my outline for a graduate textbook on insurance regulation in the US and EU. Identify gaps, redundancies, and alternative structures, but do not invent new doctrinal claims.''
+  \item
+    Integrate only those suggestions that fit your own understanding; do not adopt legal or regulatory claims without checking them.
+  \end{itemize}
+\item
+  Create a living style and pedagogy guide
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Decide on: notation, citation style, voice (first/third person), depth of math, typical chapter structure (e.g., intro, conceptual exposition, case, exercises).
+  \item
+    Feed this plus one fully human‑written sample section (e.g., your best lecture notes turned into prose) and tell the model: ``This is the target style. When drafting or editing, match this.''
+  \end{itemize}
+\item
+  Drafting chapters using ``notes → AI draft → human'' loops For each major section:
+
+  \begin{itemize}
+  \tightlist
+  \item
+    You write structured notes, bullet lists, and references (including specific statutes, cases, or empirical papers).
+  \item
+    AI step: ``Turn these notes into a clear, 1500-word expository section for graduate students, preserving all technical details and citations, avoiding invented cases or laws.''
+  \item
+    You then:
+
+    \begin{itemize}
+    \tightlist
+    \item
+      Check every legal, regulatory, and empirical claim against primary sources.
+    \item
+      Rewrite where nuance or originality is crucial (e.g., your own empirical findings or doctrinal argument).
+    \end{itemize}
+  \end{itemize}
+\item
+  Generating exercises and ancillaries
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Use AI to propose end-of-chapter questions, short problems, and ``what if'' policy scenarios based on your draft.\footnote{https://blog.taaonline.net/2023/11/textbook-and-academic-authors-share-how-they-use-generative-ai/}
+  \item
+    You filter for correctness and difficulty, and make sure any data or statutes are real and properly dated.
+  \item
+    For slides and lecture outlines, you can feed a chapter and ask for a 20-slide outline with key diagrams and examples; then you reconstruct the actual slides yourself.
+  \end{itemize}
+\item
+  Managing long context and coherence
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Some authors build tools where the AI always sees a JSON-like tree of Book → Chapter → Section, and content is generated per node, not all at once.\footnote{https://community.openai.com/t/technique-for-writing-entire-books/705519}
+  \item
+    Even without custom tools, you can do something similar by:
+
+    \begin{itemize}
+    \tightlist
+    \item
+      Keeping per-chapter summaries that you paste into new prompts.
+    \item
+      Periodically asking the model: ``Given chapter summaries 1--4, draft a 2-page overview that shows how they fit together'' to detect coherence issues.
+    \end{itemize}
+  \end{itemize}
+\end{enumerate}
+
+\subsection{Guardrails: academic integrity and quality}\label{guardrails-academic-integrity-and-quality}
+
+\begin{itemize}
+\tightlist
+\item
+  No AI‑only doctrinal statements or citations
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Treat any legal citation, numeric claim, or literature reference from AI as a lead to be verified, never as authoritative.
+  \item
+    Maintain your own BibTeX / reference list built from actual databases; use AI at most to format or group them.
+  \end{itemize}
+\item
+  Transparency and authorship
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Many textbook authors now disclose in their prefaces that they used generative tools for drafting, editing, or ancillary materials, while emphasizing that all intellectual content and responsibility remain with them.\footnote{https://blog.taaonline.net/2023/11/textbook-and-academic-authors-share-how-they-use-generative-ai/}
+  \item
+    This also mitigates concerns from publishers and adopters.
+  \end{itemize}
+\item
+  Copyright and originality
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Avoid asking the model to mimic particular proprietary textbooks or to ``rewrite chapter 3 of X.''
+  \item
+    Work from your own notes, slides, and articles; AI then helps reorganize and phrase, which is far less likely to generate infringing or derivative text.
+  \end{itemize}
+\item
+  Data and privacy
+
+  \begin{itemize}
+  \tightlist
+  \item
+    If you include proprietary data or in-progress empirical results, use a deployment that your institution approves for research data (or keep those sections human-written and only use AI for surrounding explanation).
+  \end{itemize}
+\end{itemize}
+
+\subsection{Tools and setups people actually use}\label{tools-and-setups-people-actually-use}
+
+\begin{itemize}
+\tightlist
+\item
+  General-purpose models (like this one) for brainstorming, outlining, editing, and question generation --- usually via chat interfaces.\footnote{https://www.reddit.com/r/OpenAI/comments/1cgxtdd/using\_ai\_to\_write\_a\_book/}\footnote{https://blog.taaonline.net/2023/11/textbook-and-academic-authors-share-how-they-use-generative-ai/}
+\item
+  Note‑to‑draft workflows where authors record themselves talking through a chapter, transcribe, and then have AI convert the transcript to prose.\footnote{https://www.reddit.com/r/OpenAI/comments/1cgxtdd/using\_ai\_to\_write\_a\_book/}
+\item
+  Author‑built apps that represent the book as a tree and generate content per node, often using retrieval-augmented generation to keep previous chapters in view.\footnote{https://community.openai.com/t/technique-for-writing-entire-books/705519}
+\item
+  Off-the-shelf ``AI book writer'' tools exist, but most are tuned for trade books and speed, not scholarly rigor; they're best avoided or used only for very preliminary brainstorming.\footnote{https://www.inkfluenceai.com/ai-book-writer}\footnote{https://www.youtube.com/watch?v=DFeP863BaPM}
+\end{itemize}
+
+If you tell me the specific course you have in mind (e.g., grad insurance regulation vs ERM for MBAs), I can sketch an AI‑integrated project plan tailored to that book, including sample prompts for one concrete chapter.
+
+\end{document}
