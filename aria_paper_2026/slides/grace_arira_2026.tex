@@ -1,0 +1,543 @@
+% grace_arira_2026.tex
+% AI-Assisted Development of Materials for Enterprise Risk Management
+% Martin F. Grace --- ARIA 2026
+% All slide content drawn from aria_paper.tex (revised version)
+% =======================================================================
+\documentclass[aspectratio=169]{beamer}
+\usepackage{tikz}
+\usepackage{booktabs}
+\usepackage{erm_beamer_theme}
+
+\title{AI-Assisted Development of\\Course Materials for Enterprise Risk Management}
+\subtitle{A Field Report}
+\author{Martin F.\ Grace}
+\institute{%
+  Hanson Family Chair \& Professor of Finance\\
+  Faculty Director, Vaughan Institute of Risk Management \& Insurance\\
+  Tippie College of Business, University of Iowa}
+\date{ARIA --- August 2026}
+
+\begin{document}
+
+% -----------------------------------------------------------------------
+\begin{frame}[plain]
+  \titlepage
+\end{frame}
+
+% -----------------------------------------------------------------------
+\section{Overview}
+% -----------------------------------------------------------------------
+
+\begin{frame}{Three Guiding Ideas}
+
+\begin{itemize}\setlength\itemsep{1em}
+  \item The work was \textbf{genuinely collaborative}: the LLMs performed
+        substantial drafting and formatting, but they did not set the
+        intellectual agenda.
+  \item The bottleneck shifted from \textbf{producing a chapter} to
+        \textbf{verifying the text and writing style}---with implications
+        for how we think about authors' responsibilities.
+  \item The project produced \textbf{infrastructure} (style guides, R figure
+        themes, a GitHub distribution) that will outlast any single LLM
+        version.
+\end{itemize}
+
+\bigskip
+\textit{Whether that infrastructure was worth the time is left to the
+reader, and to my chair or dean.}
+
+\end{frame}
+
+% -----------------------------------------------------------------------
+\begin{frame}{Road Map}
+
+\begin{enumerate}\setlength\itemsep{0.8em}
+  \item Why this textbook?
+  \item The collaboration architecture
+  \item Building a consistent style system
+  \item Chapter-by-chapter production
+  \item From chapters to book
+  \item Quality control
+  \item Implications for academic authorship
+\end{enumerate}
+
+\end{frame}
+
+% -----------------------------------------------------------------------
+\section{Why This Textbook?}
+% -----------------------------------------------------------------------
+
+\begin{frame}{The Market Gap}
+
+Traditional undergraduate risk management texts suffer from a particular
+defect stemming from the relatively small size of our market.
+
+\bigskip
+To sell at scale, a book has to be usable in multiple classes. That means
+authors tend to put:
+
+\begin{itemize}\setlength\itemsep{0.5em}
+  \item chapters on life and health insurance,
+  \item detailed chapters on auto and commercial property,
+  \item a few chapters on risk management, and
+  \item maybe one chapter that mentions ERM almost in passing.
+\end{itemize}
+
+\bigskip
+\textit{ERM} has nine chapters and they are all \textbf{integrated} into
+the ERM framework.
+
+\end{frame}
+
+% -----------------------------------------------------------------------
+\begin{frame}{What the Second Edition Needed}
+
+The first edition was usable. It was also, in places,
+\begin{itemize}\setlength\itemsep{0.5em}
+  \item structurally repetitive,
+  \item visually sparse, and
+  \item more enthusiastic about lists than about exposition.
+\end{itemize}
+
+\bigskip
+Two gaps needed filling:
+\begin{itemize}\setlength\itemsep{0.5em}
+  \item \textbf{Financial risk management with derivatives}---previously
+        implied rather than taught.
+  \item \textbf{AI as an enterprise-wide risk category}---not a technology
+        sidebar.
+\end{itemize}
+
+\bigskip
+Nine fully revised chapters, cross-references tightened so that appetite,
+portfolio correlation, financing, and governance read as \emph{one
+conversation}.
+
+\end{frame}
+
+% -----------------------------------------------------------------------
+\section{Collaboration Architecture}
+% -----------------------------------------------------------------------
+
+\begin{frame}{The Software Stack}
+
+\small
+\begin{tabular}{@{}lp{0.62\linewidth}@{}}
+\toprule
+\textbf{Category} & \textbf{Software} \\
+\midrule
+\textbf{AI authoring} &
+  Claude 4.6 Sonnet (drafting, conversion, math); Claude 5 Fable
+  (prose and pedagogy); Perplexity (case research);
+  Cursor Composer (assembly, slides, plotting) \\[0.4em]
+\textbf{Environment} &
+  Cursor (project editor); Git / GitHub; Windows 10 \\[0.4em]
+\textbf{Conversion} &
+  Python (Word/RTF $\to$ Markdown);
+  Pandoc (Markdown $\to$ \LaTeX{} / PowerPoint);
+  MS Excel (figure data) \\[0.4em]
+\textbf{Typesetting} &
+  MiKTeX 26.x; \LaTeX{} to PDF and Beamer slides \\[0.4em]
+\textbf{Figures} & R 4.6 \\
+\bottomrule
+\end{tabular}
+
+\bigskip
+\small
+Total AI expenditure: approximately \$70--\$90 for $\sim$100 hours of
+author time.
+
+\end{frame}
+
+% -----------------------------------------------------------------------
+\begin{frame}{The Workflow --- Per Chapter}
+
+\begin{enumerate}\setlength\itemsep{0.7em}
+  \item Author supplied prior manuscript chapter, an introduction case draft
+        (Perplexity as search engine), and pointers to the style guide.
+  \item Model proposed questions \emph{before} large rewrites.
+  \item Model produced a revised Markdown chapter \texttt{*.md}, then a
+        matching \LaTeX{} \texttt{.tex} file.
+  \item Author compiled with \texttt{pdflatex}, inspected the PDF, and sent
+        targeted correction requests (math, tone, structure).
+  \item Model updated the style guide to capture anything new.
+\end{enumerate}
+
+\end{frame}
+
+% -----------------------------------------------------------------------
+\begin{frame}{Typical Prompts}
+
+\textbf{For a chapter opening case:}
+\begin{quote}\small
+``Can you suggest a real-world company example that illustrates how a
+company might change its risk portfolio? I want a real example, not a
+made-up one. It should be a U.S.\ company.\ Please make it no longer than
+a page and a half.''
+\end{quote}
+
+\medskip
+\textbf{For a chapter revision:}
+\begin{quote}\small
+``Can you suggest any box items that might take up half a page for class
+discussion? I then want a \LaTeX{} file after the new Markdown file is
+created. Before you do any of this, please think about the task and ask me
+any questions you may have.''
+\end{quote}
+
+\end{frame}
+
+% -----------------------------------------------------------------------
+\begin{frame}{Division of Labor}
+
+\begin{center}
+\small
+\begin{tabular}{@{}p{0.44\linewidth}p{0.44\linewidth}@{}}
+\toprule
+\textbf{AI assistant} & \textbf{Author} \\
+\midrule
+First-draft exposition and section organization
+  & Outline, learning objectives, emphasis \\[0.5em]
+Converting Markdown to consistent \LaTeX{}
+  & Economic reasoning and regulatory nuance \\[0.5em]
+Applying style environments (boxes, colors)
+  & Choosing real cases and verifying facts \\[0.5em]
+Generating Beamer slide skeletons
+  & Lecture pacing and institution-specific framing \\[0.5em]
+Flagging structural repetition
+  & Deciding what to cut \\[0.5em]
+Patiently regenerating after the author changes his mind
+  & Explaining why the third COSO rewrite still reads like a memo \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\bigskip
+\small
+Models excel at \emph{structure} and \emph{fluency};
+humans retain \emph{judgment} and \emph{accountability}.
+
+\end{frame}
+
+% -----------------------------------------------------------------------
+\section{Building a Style System}
+% -----------------------------------------------------------------------
+
+\begin{frame}{The Style Infrastructure}
+
+A textbook that looks like nine different books teaches students that ERM
+integration is optional.
+
+\bigskip
+Deliverables accumulated chapter by chapter:
+
+\begin{itemize}\setlength\itemsep{0.6em}
+  \item \texttt{erm\_textbook\_style.sty} --- colors, box environments,
+        running heads, chapter opening layout
+  \item \texttt{erm\_textbook\_style\_guide.md/.tex} --- parallel human- and
+        machine-readable specifications
+  \item \texttt{erm\_textbook\_style.r} --- ggplot theme matching the print
+        palette
+  \item \texttt{intro case style guide v2.md} --- narrative rules for opening
+        cases
+  \item \texttt{textbook\_style\_manual.md} --- voice rules, including a
+        prohibition on one-sentence paragraphs
+\end{itemize}
+
+\end{frame}
+
+% -----------------------------------------------------------------------
+\begin{frame}{Style Guides as Prompt Engineering}
+
+\begin{block}{The key insight}
+Instead of re-explaining box conventions in every session, writing
+``follow \texttt{erm\_textbook\_style\_guide.md}'' produced structurally
+consistent output.
+\end{block}
+
+\bigskip
+When the model drifted---for example, labeling Chapter~2 as Chapter~1---the
+fix was usually a one-line correction, documented so it would not recur.
+
+\bigskip
+\textit{This infrastructure is the part of the project most likely to
+survive the next model upgrade. The prose will age, but the \texttt{.sty}
+files will still be useful.}
+
+\end{frame}
+
+% -----------------------------------------------------------------------
+\section{Chapter-by-Chapter Production}
+% -----------------------------------------------------------------------
+
+\begin{frame}{Chapter Highlights}
+
+\begin{description}\setlength\itemsep{0.5em}
+  \item[Ch.~2 (Frameworks)] COSO boxed, ISO~31000 in comparative prose,
+        GM ignition narrative up front; style guide born.
+  \item[Ch.~3 (Identification)] Enterprise-vs.-silo distinction explicit
+        before the four-quadrant taxonomy; 10-K risk-factor discussion added.
+  \item[Ch.~4 \& 5 (Measurement, Appetite)] LTCM/\textit{Moneyball} boxes;
+        Adidas risk-appetite case; the pedagogical tension clarified.
+  \item[Ch.~7 (Loss Control)] Technical appendix merged in; the
+        ``crazy rounding'' incident---numbers corrected in both Markdown
+        and \LaTeX{}.
+  \item[Ch.~8 (Risk Finance)] Three legacy sub-chapters merged into one.
+  \item[Ch.~9 (Governance)] Wells Fargo, Boeing 737 MAX, and financial
+        crisis-era failures integrated.
+\end{description}
+
+\end{frame}
+
+% -----------------------------------------------------------------------
+\begin{frame}{Opening Cases: The Hardest Editorial Problem}
+
+Each chapter opens with a narrative case in a blue box.
+
+\bigskip
+Getting the AI to write a \emph{story} rather than a memo required
+persistent instruction. Early drafts ended with:
+
+\begin{quote}
+``This case illustrates the importance of enterprise risk management
+frameworks, which will be explored in greater depth throughout this
+chapter.''
+\end{quote}
+
+Technically true. Boring.
+
+\bigskip
+I removed those sentences aggressively. The intro-case style guide exists
+because telling the model ``be engaging'' is not operational.
+
+\end{frame}
+
+% -----------------------------------------------------------------------
+\begin{frame}{What ``More Engaging'' Actually Meant}
+
+\begin{itemize}\setlength\itemsep{0.8em}
+  \item \textbf{Narrative before taxonomy.}
+        Open with a firm in trouble or tension, not a definition list.
+  \item \textbf{Boxes for dense material.}
+        Frameworks (COSO, ISO), regulatory notes, and pitfalls break up
+        long exposition.
+  \item \textbf{Cross-chapter callbacks.}
+        Appetite in Chapter~5 should echo identification in Chapter~3 and
+        portfolio thinking in Chapter~6.
+  \item \textbf{Fewer throat-clearing transitions.}
+        ``This will be explored in greater depth'' was banned.
+  \item \textbf{Concrete numbers with caveats.}
+        Stylized examples stay, with warnings not to treat them as literal
+        policy advice.
+\end{itemize}
+
+\end{frame}
+
+% -----------------------------------------------------------------------
+\section{From Chapters to Book}
+% -----------------------------------------------------------------------
+
+\begin{frame}{Integration}
+
+The master file \texttt{erm\_book.tex} uses \texttt{docmute} to include
+standalone chapter preambles without duplication, and adds:
+
+\begin{itemize}\setlength\itemsep{0.6em}
+  \item Cover art, title and copyright pages
+  \item Preface (written by the author, with honest AI disclosure)
+  \item Table of contents
+  \item Consolidated bibliography
+  \item Index (\texttt{makeindex})
+\end{itemize}
+
+\bigskip
+Claude 5 Fable handled this phase. Some human troubleshooting was required.
+At one point I asked whether the agent was stuck; it was, in fact, still
+running in circles.
+
+\bigskip
+\textit{Patience is a human virtue, which I do not have enough of,
+especially when it comes to software.}
+
+\end{frame}
+
+% -----------------------------------------------------------------------
+\begin{frame}{Lecture Slides and Figures}
+
+\textbf{Beamer vs.\ PowerPoint}
+
+\smallskip
+Beamer writes slides as a structured document compiled into PDF---especially
+well-suited when the chapter includes equations, technical notation, or
+carefully organized prose.
+
+\bigskip
+Nine chapter slide decks were generated in parallel using a custom
+\texttt{erm\_beamer\_theme.sty} matching the textbook palette: consistent
+fonts, gold accents, and institute lines for the University of Iowa.
+
+\bigskip
+\textbf{Figures}
+
+\smallskip
+R scripts in \texttt{rscripts/} (e.g., J\&J/Tylenol market-share plot,
+aggregate loss distributions, financing spectrum). The R theme aligns
+ggplot output with \LaTeX{} colors so charts do not look like they wandered
+in from a different world.
+
+\end{frame}
+
+% -----------------------------------------------------------------------
+\section{Quality Control}
+% -----------------------------------------------------------------------
+
+\begin{frame}{Where the Human Stayed in the Loop}
+
+\begin{block}{Facts and citations}
+The AI gave a strong, concise explanation of insurance expense ratios and
+included a citation: journal, volume, pages, authors---everything except
+reality. The fix is verification, not prompt prettiness.
+
+Introductory cases were constrained to verifiable public sources: 10-Ks,
+securities filings, major press, or business sources.
+\end{block}
+
+\bigskip
+\begin{block}{Mathematics}
+Chapter~7's appendix required checking inequalities, present-value
+expressions, and worked examples. Students expect to be able to work it
+out and follow the math. AI does not think that is so important. This
+creates emails: ``Something doesn't add up! The book seems wrong.''
+\end{block}
+
+\end{frame}
+
+% -----------------------------------------------------------------------
+\begin{frame}{Voice and Pedagogy}
+
+\begin{itemize}\setlength\itemsep{0.8em}
+  \item Rules prohibiting one-sentence paragraphs and AI-ish
+        throat-clearing were added to the style guide.
+  \item The textbook uses second person; introductory cases use
+        third-person narrative---a deliberate split the style guides enforce.
+  \item When the model slipped into pedantic ``landscape of risk'' or
+        ``your risk management journey'' language, I deleted it.
+  \item When it produced competent but generic examples, I substituted
+        firms and episodes I could actually teach about.
+\end{itemize}
+
+\bigskip
+\textit{I should have spent time reading and learning what engaging writing
+actually is. I still have a copy of Strunk and White on my bookshelf. I
+probably have not looked at it since college.}
+
+\end{frame}
+
+% -----------------------------------------------------------------------
+\section{Implications for Academic Authorship}
+% -----------------------------------------------------------------------
+
+\begin{frame}{Speed, Scope, and Accountability}
+
+\textbf{Speed and scope}
+
+\smallskip
+The nine-chapter revision cycle compressed work that would otherwise have
+spanned many months into about a week for the first draft, a semester
+teaching with it, and a week to revise. That is a real productivity gain.
+
+\bigskip
+\textbf{Accountability}
+
+\smallskip
+Disclosing AI assistance is necessary; treating the model as a co-author
+is not. The model has no reputation to lose when the Boeing case dates are
+wrong or the present-value calculation is wrong. I remain the author; the
+AI is infrastructure.
+
+\bigskip
+\textit{When it starts to demand royalties, we can talk.}
+
+\end{frame}
+
+% -----------------------------------------------------------------------
+\begin{frame}{Limits of AI Collaboration}
+
+The AI did not reliably:
+
+\begin{itemize}\setlength\itemsep{0.7em}
+  \item choose what belongs in a nine-chapter undergraduate treatment;
+  \item resist generating plausible nonsense citations;
+  \item know Iowa institutional formatting preferences without being told;
+  \item finish long integration jobs without monitoring---someone must still
+        ask ``are you stuck?'';
+  \item stay neutral on topics with a political overtone---it would gush
+        about the virtues of ESG. I had to push back to ensure neutrality.
+\end{itemize}
+
+\end{frame}
+
+% -----------------------------------------------------------------------
+\begin{frame}{A Modest Proposal for Departments}
+
+If business schools desire faculty to produce original, on-point textbooks,
+three policies would help:
+
+\begin{enumerate}\setlength\itemsep{0.8em}
+  \item Count verified open texts toward teaching/service portfolios when
+        they include reusable assets (slides, code, style packages).
+  \item Treat AI disclosure in syllabi and prefaces as standard academic
+        practice rather than a confession.
+  \item Fund \textbf{verification time}---copy editing, fact checking, and
+        student piloting.
+\end{enumerate}
+
+\bigskip
+\textit{The marginal cost of draft prose has collapsed while the marginal
+cost of editing and verifying has not.}
+
+\end{frame}
+
+% -----------------------------------------------------------------------
+\begin{frame}{Conclusion}
+
+This edition of \textit{Enterprise Risk Management} exists because large
+language models made first drafts cheap and a human author made the more
+expensive final judgments. This makes sense.
+
+\bigskip
+For those considering similar work:
+
+\begin{itemize}\setlength\itemsep{0.6em}
+  \item Invest early in style guides and repository structure.
+  \item Treat assertions and citations as false until verified.
+  \item Box the boring framework sections.
+  \item Write the preface yourself.
+\end{itemize}
+
+\bigskip
+The book is openly available at:\\
+\texttt{github.com/ProfMFGrace/erm-book-2ed}\\
+(CC BY-NC 4.0)
+
+\end{frame}
+
+% -----------------------------------------------------------------------
+\begin{frame}[plain]
+  \begin{tikzpicture}[remember picture, overlay]
+    \fill[ERMIowaBlack] (current page.south west)
+                         rectangle (current page.north east);
+    \node[align=center, text=ERMIowaGold,
+          font={\usebeamerfont{title}}]
+      at (current page.center) {Thank You};
+    \draw[ERMIowaGold, line width=1.2pt]
+      ([yshift=-0.8cm, xshift= 2.5cm]current page.center) --
+      ([yshift=-0.8cm, xshift=-2.5cm]current page.center);
+    \node[align=center, text=white,
+          font={\usebeamerfont{subtitle}}]
+      at ([yshift=-1.6cm]current page.center)
+      {\texttt{mfgrace@uiowa.edu}};
+  \end{tikzpicture}
+\end{frame}
+
+\end{document}
